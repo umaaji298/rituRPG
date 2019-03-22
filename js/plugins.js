@@ -3,6 +3,6 @@
 var $plugins =
 [
 {"name":"Community_Basic","status":true,"description":"基本的なパラメーターを設定するプラグインです。","parameters":{"cacheLimit":"20","screenWidth":"816","screenHeight":"624","changeWindowWidthTo":"","changeWindowHeightTo":"","renderingMode":"auto","alwaysDash":"off"}},
-{"name":"PictureAnimation","status":true,"description":"ピクチャのアニメーションプラグイン","parameters":{"最初のセルに戻る":"true"}},
-{"name":"PictureSpriteSheet","status":true,"description":"ピクチャのスプライトシート化プラグイン","parameters":{}}
+{"name":"PictureSpriteSheet","status":true,"description":"ピクチャのスプライトシート化プラグイン","parameters":{}},
+{"name":"DTextPicture","status":true,"description":"動的文字列ピクチャ生成プラグイン","parameters":{}}
 ];
