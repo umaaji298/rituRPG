@@ -1,0 +1,7 @@
+[
+null,
+{"id":1,"battlerName":"Actor1_1","characterIndex":0,"characterName":"Actor1","classId":1,"equips":[1,1,2,3,0],"faceIndex":0,"faceName":"Actor1","traits":[],"initialLevel":1,"maxLevel":99,"name":"ハロルド","nickname":"","note":"","profile":""},
+{"id":2,"battlerName":"Actor1_1f","characterIndex":0,"characterName":"Actor1f","classId":2,"equips":[0,0,0,0,0],"faceIndex":0,"faceName":"Actor1f","traits":[],"initialLevel":1,"maxLevel":99,"name":"としあき","nickname":"無念","note":"","profile":"としあき"},
+{"id":3,"battlerName":"","characterIndex":0,"characterName":"","classId":1,"equips":[0,0,0,0,0],"faceIndex":0,"faceName":"","traits":[],"initialLevel":1,"maxLevel":99,"name":"","nickname":"","note":"","profile":""},
+{"id":4,"battlerName":"","characterIndex":0,"characterName":"","classId":1,"equips":[0,0,0,0,0],"faceIndex":0,"faceName":"","traits":[],"initialLevel":1,"maxLevel":99,"name":"","nickname":"","note":"","profile":""}
+]
