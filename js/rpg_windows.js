@@ -2039,7 +2039,7 @@ Window_ItemCategory.prototype.windowWidth = function() {
 
 Window_ItemCategory.prototype.maxCols = function() {
   // return 4;
-  return 2
+  return 2;
 }
 
 Window_ItemCategory.prototype.update = function() {
@@ -2051,9 +2051,9 @@ Window_ItemCategory.prototype.update = function() {
 
 Window_ItemCategory.prototype.makeCommandList = function() {
   // this.addCommand(TextManager.item,    'item');
-  // this.addCommand(TextManager.weapon,  'weapon');
   // this.addCommand(TextManager.armor,   'armor');
-  this.addCommand(TextManager.keyItem, 'keyItem')
+  this.addCommand(TextManager.keyItem, 'keyItem');
+  this.addCommand(TextManager.weapon,  'weapon');
 }
 
 Window_ItemCategory.prototype.setItemWindow = function(itemWindow) {
