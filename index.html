@@ -1,86 +1,66 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <meta name="viewport" content="user-scalable=no" />
-  <link rel="icon" href="icon/icon.png" type="image/png" />
-  <link rel="apple-touch-icon" href="icon/icon.png" />
-  <link rel="stylesheet" type="text/css" href="fonts/gamefont.css" />
-  <title>りつねぇ！RPG</title>
-  <style type="text/css">
-    h1,
-    p {
-      color: #bbbbbb;
-    }
-
-    body {
-      text-align: center;
-    }
-  </style>
-</head>
-
-<body style="background-color: black">
-  <h1>■ りつねぇ！RPG</h1>
-  <div>
-    <button id="fullscreenSwitch" onclick="goFS()">
-      フルスクリーンにする
-    </button>
-  </div>
-  <div>
-    <iframe class="GamePlayerCore" scrolling="no" allowfullscreen src="https://umaaji298.github.io/rituRPG/game.html"
-      frameborder="0" title="ゲーム画面" name="umami298のゲーム画面"
-      sandbox="allow-scripts allow-same-origin allow-pointer-lock allow-orientation-lock"
-      allow="accelerometer; ambient-light-sensor; autoplay; camera; encrypted-media; fullscreen; geolocation; gyroscope; magnetometer; microphone; midi; speaker; vibrate; vr"
-      style="width: 816px; height: 624px;"></iframe>
-  </div>
-  <ul>
-    <li>2019/03/23 ver 1.0</li>
-  </ul>
-  <p>素材画像の権利は画像制作者(手書きあき）に帰属します。</p>
-  <p><a href=http://www.2chan.net>ふたば★ちゃんねる </a> </p> <script>
-      var target = document.getElementsByClassName('GamePlayerCore')[0]
-      var btn = document.getElementById('fullscreenSwitch')
-
-      /*フルスクリーン実行用ファンクション*/
-      function goFS() {
-      if (target.webkitRequestFullscreen) {
-      target.webkitRequestFullscreen() //Chrome15+, Safari5.1+, Opera15+
-      } else if (target.mozRequestFullScreen) {
-      target.mozRequestFullScreen() //FF10+
-      } else if (target.msRequestFullscreen) {
-      target.msRequestFullscreen() //IE11+
-      } else if (target.requestFullscreen) {
-      target.requestFullscreen() // HTML5 Fullscreen API仕様
-      } else {
-      alert('ご利用のブラウザはフルスクリーン操作に対応していません')
-      return
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="viewport" content="user-scalable=no" />
+    <link rel="icon" href="icon/icon.png" type="image/png" />
+    <link rel="apple-touch-icon" href="icon/icon.png" />
+    <link rel="stylesheet" type="text/css" href="fonts/gamefont.css" />
+    <title>りつねぇ！RPG</title>
+    <style type="text/css">
+      h1,
+      p {
+        color: #bbbbbb;
       }
-      /*フルスクリーン終了用ファンクションボタンに切り替える*/
-      // btn.onclick = endFS
-      // btn.innerText = 'フルスクリーンを終了する'
+
+      body {
+        text-align: center;
       }
-      // /*フルスクリーン終了用ファンクション*/
-      // function endFS() {
-      // if (document.webkitCancelFullScreen) {
-      // document.webkitCancelFullScreen() //Chrome15+, Safari5.1+, Opera15+
-      // } else if (document.mozCancelFullScreen) {
-      // document.mozCancelFullScreen() //FF10+
-      // } else if (document.msExitFullscreen) {
-      // document.msExitFullscreen() //IE11+
-      // } else if (document.cancelFullScreen) {
-      // document.cancelFullScreen() //Gecko:FullScreenAPI仕様
-      // } else if (document.exitFullscreen) {
-      // document.exitFullscreen() // HTML5 Fullscreen API仕様
-      // }
-      // /*フルスクリーン実行用ファンクションボタンに切り替える*/
-      // btn.onclick = goFS
-      // btn.innerText = 'フルスクリーンにする'
-      // }
-      /*サポートしていないIE10以下とスマフォではフルスクリーンボタンを非表示*/
-      // if (
-      // typeof window.orientation != 'undefined' ||
-      // (document.uniqueID && document.documentMode < 11) // ) { // btn.style.display='none' // } </script> </body>
-        </html>
+    </style>
+  </head>
+
+  <body style="background-color: black">
+    <div onclick>
+      <h1>■ りつねぇ！RPG</h1>
+      <div>
+        <button id="fullscreenSwitch" onclick="goFS()">
+          フルスクリーンにする
+        </button>
+      </div>
+      <div>
+        <iframe id="ifr" class="GamePlayerCore" scrolling="no" allowfullscreen
+          src="https://umaaji298.github.io/rituRPG/game.html" frameborder="0" title="ゲーム画面" name="umami298のゲーム画面"
+          sandbox="allow-scripts allow-same-origin allow-pointer-lock allow-orientation-lock"
+          allow="accelerometer; ambient-light-sensor; autoplay; camera; encrypted-media; fullscreen; geolocation; gyroscope; magnetometer; microphone; midi; speaker; vibrate; vr"
+          style="width: 816px; height: 624px;"></iframe>
+      </div>
+      <ul>
+        <li>2019/03/23 ver 1.0</li>
+      </ul>
+      <div>
+        <p>素材画像の権利は画像制作者(手書きあき）に帰属します。</p>
+        <p><a href=http://www.2chan.net>ふたば★ちゃんねる </a> </p> </div> <script>
+            var target = document.getElementsByClassName('GamePlayerCore')[0]
+            var btn = document.getElementById('fullscreenSwitch')
+
+            /*フルスクリーン実行用ファンクション*/
+            function goFS() {
+            if (target.webkitRequestFullscreen) {
+            target.webkitRequestFullscreen() //Chrome15+, Safari5.1+, Opera15+
+            } else if (target.mozRequestFullScreen) {
+            target.mozRequestFullScreen() //FF10+
+            } else if (target.msRequestFullscreen) {
+            target.msRequestFullscreen() //IE11+
+            } else if (target.requestFullscreen) {
+            target.requestFullscreen() // HTML5 Fullscreen API仕様
+            } else {
+            alert('ご利用のブラウザはフルスクリーン操作に対応していません')
+            return
+            } } </script>
+      </div>
+  </body>
+
+</html>
