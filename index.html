@@ -24,24 +24,24 @@
 
 <body style="background-color: black">
   <h1>■ りつねぇ！RPG</h1>
-
-  <button id="fullscreenSwitch" onclick="requestFullscreen()">
-    フルスクリーンにする
-  </button>
-
-  <iframe class="GamePlayerCore" scrolling="no" allowfullscreen src="https://umaaji298.github.io/rituRPG/game.html"
-    frameborder="0" title="ゲーム画面" name="umami298のゲーム画面"
-    sandbox="allow-scripts allow-same-origin allow-pointer-lock allow-orientation-lock"
-    allow="accelerometer; ambient-light-sensor; autoplay; camera; encrypted-media; fullscreen; geolocation; gyroscope; magnetometer; microphone; midi; speaker; vibrate; vr"
-    style="width: 816px; height: 624px;"></iframe>
-
-
+  <div>
+    <button id="fullscreenSwitch" onclick="requestFullscreen()">
+      フルスクリーンにする
+    </button>
+  </div>
+  <div>
+    <iframe class="GamePlayerCore" scrolling="no" allowfullscreen src="https://umaaji298.github.io/rituRPG/game.html"
+      frameborder="0" title="ゲーム画面" name="umami298のゲーム画面"
+      sandbox="allow-scripts allow-same-origin allow-pointer-lock allow-orientation-lock"
+      allow="accelerometer; ambient-light-sensor; autoplay; camera; encrypted-media; fullscreen; geolocation; gyroscope; magnetometer; microphone; midi; speaker; vibrate; vr"
+      style="width: 816px; height: 624px;"></iframe>
+  </div>
 
   <p>素材画像の権利は画像制作者(手書きあき）に帰属します。</p>
 
 
   <script>
-    var target = document.getElementsByClassName('GamePlayerCore')
+    var target = document.getElementsByClassName('GamePlayerCore')[0]
     var btn = document.getElementById('fullscreenSwitch')
     /*フルスクリーン実行用ファンクション*/
     function requestFullscreen() {
