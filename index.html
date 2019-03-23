@@ -14,11 +14,19 @@
     p {
       color: #bbbbbb;
     }
+
+    body {
+      text-align: center;
+    }
   </style>
 </head>
 
 <body style="background-color: black">
-  <p>りつねぇ！RPG</p>
+  <h1>■ りつねぇ！RPG</h1>
+
+  <button id="fullscreenSwitch" onclick="requestFullscreen()">
+    フルスクリーンにする
+  </button>
 
   <iframe class="GamePlayerCore__GamePlayerCore" scrolling="no" allowfullscreen
     src="https://umaaji298.github.io/rituRPG/game.html" frameborder="0" title="ゲーム画面" name="umami298のゲーム画面"
@@ -29,57 +37,54 @@
 
 
   <p>素材画像の権利は画像制作者(手書きあき）に帰属します。</p>
-  <!--     
-    <button id="fullscreenSwitch" onclick="requestFullscreen()">
-      フルスクリーンにする
-    </button>
 
-    <script>
-      var target = document.getElementById('GameCanvas')
-      var btn = document.getElementById('fullscreenSwitch')
-      /*フルスクリーン実行用ファンクション*/
-      function requestFullscreen() {
-        if (target.webkitRequestFullscreen) {
-          target.webkitRequestFullscreen() //Chrome15+, Safari5.1+, Opera15+
-        } else if (target.mozRequestFullScreen) {
-          target.mozRequestFullScreen() //FF10+
-        } else if (target.msRequestFullscreen) {
-          target.msRequestFullscreen() //IE11+
-        } else if (target.requestFullscreen) {
-          target.requestFullscreen() // HTML5 Fullscreen API仕様
-        } else {
-          alert('ご利用のブラウザはフルスクリーン操作に対応していません')
-          return
-        }
-        /*フルスクリーン終了用ファンクションボタンに切り替える*/
-        btn.onclick = exitFullscreen
-        btn.innerText = 'フルスクリーンを終了する'
+
+  <script>
+    var target = document.getElementById('GameCanvas')
+    var btn = document.getElementById('fullscreenSwitch')
+    /*フルスクリーン実行用ファンクション*/
+    function requestFullscreen() {
+      if (target.webkitRequestFullscreen) {
+        target.webkitRequestFullscreen() //Chrome15+, Safari5.1+, Opera15+
+      } else if (target.mozRequestFullScreen) {
+        target.mozRequestFullScreen() //FF10+
+      } else if (target.msRequestFullscreen) {
+        target.msRequestFullscreen() //IE11+
+      } else if (target.requestFullscreen) {
+        target.requestFullscreen() // HTML5 Fullscreen API仕様
+      } else {
+        alert('ご利用のブラウザはフルスクリーン操作に対応していません')
+        return
       }
-      /*フルスクリーン終了用ファンクション*/
-      function exitFullscreen() {
-        if (document.webkitCancelFullScreen) {
-          document.webkitCancelFullScreen() //Chrome15+, Safari5.1+, Opera15+
-        } else if (document.mozCancelFullScreen) {
-          document.mozCancelFullScreen() //FF10+
-        } else if (document.msExitFullscreen) {
-          document.msExitFullscreen() //IE11+
-        } else if (document.cancelFullScreen) {
-          document.cancelFullScreen() //Gecko:FullScreenAPI仕様
-        } else if (document.exitFullscreen) {
-          document.exitFullscreen() // HTML5 Fullscreen API仕様
-        }
-        /*フルスクリーン実行用ファンクションボタンに切り替える*/
-        btn.onclick = requestFullscreen
-        btn.innerText = 'フルスクリーンにする'
+      /*フルスクリーン終了用ファンクションボタンに切り替える*/
+      btn.onclick = exitFullscreen
+      btn.innerText = 'フルスクリーンを終了する'
+    }
+    /*フルスクリーン終了用ファンクション*/
+    function exitFullscreen() {
+      if (document.webkitCancelFullScreen) {
+        document.webkitCancelFullScreen() //Chrome15+, Safari5.1+, Opera15+
+      } else if (document.mozCancelFullScreen) {
+        document.mozCancelFullScreen() //FF10+
+      } else if (document.msExitFullscreen) {
+        document.msExitFullscreen() //IE11+
+      } else if (document.cancelFullScreen) {
+        document.cancelFullScreen() //Gecko:FullScreenAPI仕様
+      } else if (document.exitFullscreen) {
+        document.exitFullscreen() // HTML5 Fullscreen API仕様
       }
-      /*サポートしていないIE10以下とスマフォではフルスクリーンボタンを非表示*/
-      if (
-        typeof window.orientation != 'undefined' ||
-        (document.uniqueID && document.documentMode < 11)
-      ) {
-        btn.style.display = 'none'
-      }
-    </script> -->
+      /*フルスクリーン実行用ファンクションボタンに切り替える*/
+      btn.onclick = requestFullscreen
+      btn.innerText = 'フルスクリーンにする'
+    }
+    /*サポートしていないIE10以下とスマフォではフルスクリーンボタンを非表示*/
+    if (
+      typeof window.orientation != 'undefined' ||
+      (document.uniqueID && document.documentMode < 11)
+    ) {
+      btn.style.display = 'none'
+    }
+  </script>
 </body>
 
 </html>
