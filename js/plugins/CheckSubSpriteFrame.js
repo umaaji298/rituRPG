@@ -22,13 +22,13 @@
     if (command === pluginName) {
 
       chkSpriteFrame($gameVariables.value(1))
-      console.log(
-        'CheckSubSpriteFrame v1,v2,v3,v4',
-        $gameVariables.value(1),
-        $gameVariables.value(2),
-        $gameVariables.value(3),
-        $gameVariables.value(4)
-      )
+      // console.log(
+      //   'CheckSubSpriteFrame v1,v2,v3,v4',
+      //   $gameVariables.value(1),
+      //   $gameVariables.value(2),
+      //   $gameVariables.value(3),
+      //   $gameVariables.value(4)
+      // )
 
     }
   }
