@@ -11,6 +11,7 @@
   <link rel="stylesheet" type="text/css" href="fonts/gamefont.css" />
   <title>りつねぇ！RPG</title>
   <style type="text/css">
+    h1,
     p {
       color: #bbbbbb;
     }
@@ -28,8 +29,8 @@
     フルスクリーンにする
   </button>
 
-  <iframe class="GamePlayerCore__GamePlayerCore" scrolling="no" allowfullscreen
-    src="https://umaaji298.github.io/rituRPG/game.html" frameborder="0" title="ゲーム画面" name="umami298のゲーム画面"
+  <iframe class="GamePlayerCore" scrolling="no" allowfullscreen src="https://umaaji298.github.io/rituRPG/game.html"
+    frameborder="0" title="ゲーム画面" name="umami298のゲーム画面"
     sandbox="allow-scripts allow-same-origin allow-pointer-lock allow-orientation-lock"
     allow="accelerometer; ambient-light-sensor; autoplay; camera; encrypted-media; fullscreen; geolocation; gyroscope; magnetometer; microphone; midi; speaker; vibrate; vr"
     style="width: 816px; height: 624px;"></iframe>
@@ -40,7 +41,7 @@
 
 
   <script>
-    var target = document.getElementById('GameCanvas')
+    var target = document.getElementsByClassName('GamePlayerCore')
     var btn = document.getElementById('fullscreenSwitch')
     /*フルスクリーン実行用ファンクション*/
     function requestFullscreen() {
