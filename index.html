@@ -25,7 +25,7 @@
 <body style="background-color: black">
   <h1>■ りつねぇ！RPG</h1>
   <div>
-    <button id="fullscreenSwitch" onclick="requestFullscreen()">
+    <button id="fullscreenSwitch" onclick="goFS()">
       フルスクリーンにする
     </button>
   </div>
@@ -43,8 +43,9 @@
   <script>
     var target = document.getElementsByClassName('GamePlayerCore')[0]
     var btn = document.getElementById('fullscreenSwitch')
+
     /*フルスクリーン実行用ファンクション*/
-    function requestFullscreen() {
+    function goFS() {
       if (target.webkitRequestFullscreen) {
         target.webkitRequestFullscreen() //Chrome15+, Safari5.1+, Opera15+
       } else if (target.mozRequestFullScreen) {
@@ -58,11 +59,11 @@
         return
       }
       /*フルスクリーン終了用ファンクションボタンに切り替える*/
-      btn.onclick = exitFullscreen
+      btn.onclick = endFS
       btn.innerText = 'フルスクリーンを終了する'
     }
     /*フルスクリーン終了用ファンクション*/
-    function exitFullscreen() {
+    function endFS() {
       if (document.webkitCancelFullScreen) {
         document.webkitCancelFullScreen() //Chrome15+, Safari5.1+, Opera15+
       } else if (document.mozCancelFullScreen) {
@@ -75,7 +76,7 @@
         document.exitFullscreen() // HTML5 Fullscreen API仕様
       }
       /*フルスクリーン実行用ファンクションボタンに切り替える*/
-      btn.onclick = requestFullscreen
+      btn.onclick = goFS
       btn.innerText = 'フルスクリーンにする'
     }
     /*サポートしていないIE10以下とスマフォではフルスクリーンボタンを非表示*/
