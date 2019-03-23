@@ -3,6 +3,7 @@
 var $plugins =
 [
 {"name":"Community_Basic","status":true,"description":"基本的なパラメーターを設定するプラグインです。","parameters":{"cacheLimit":"20","screenWidth":"816","screenHeight":"624","changeWindowWidthTo":"","changeWindowHeightTo":"","renderingMode":"auto","alwaysDash":"off"}},
+{"name":"CheckSubSpriteFrame","status":true,"description":"サブ文字描画用スプライトID設定","parameters":{}},
 {"name":"PictureSpriteSheet","status":true,"description":"ピクチャのスプライトシート化プラグイン","parameters":{}},
 {"name":"DTextPicture","status":true,"description":"動的文字列ピクチャ生成プラグイン","parameters":{}},
 {"name":"OggOnly","status":true,"description":"音声ファイルの再生にoggファイルのみを使用します。","parameters":{"deleteM4a":"false"}},
