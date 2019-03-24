@@ -1,11 +1,10 @@
 rituRPG
 ====
 
-Overview
 りつ姉のゲームです。
 
 ## Description
-りつ姉のゲームです。RPGmaker MVにて制作されています。
+りつ姉のゲームです。RPGmaker MVにて制作されています。  
 PC及びスマートフォン上のブラウザにて動作します。
 
 ## Demo
@@ -17,7 +16,7 @@ TBD
 ## Caution
 Internet Explolerでは動作しません。  
 
--確認済みブラウザ
+- 確認済みブラウザ
   - Chrome
   - Edge
   - Firefox(MacOS)
