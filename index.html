@@ -12,8 +12,13 @@
     <title>りつねぇ！RPG</title>
     <style type="text/css">
       h1,
+        {
+        color: #bbbbbb;
+      }
+
       p,
       li {
+        font-size: 60%;
         color: #bbbbbb;
       }
 
@@ -45,31 +50,39 @@
           allow="accelerometer; ambient-light-sensor; autoplay; camera; encrypted-media; fullscreen; geolocation; gyroscope; magnetometer; microphone; midi; speaker; vibrate; vr"
           style="width: 816px; height: 624px;"></iframe>
       </div>
-      <ul>
-        <li>2019/03/24 ver 1.0 公開 バグってたらすまんなver</li>
-        <li>2019/03/23 ver --</li>
-      </ul>
-      <div>
-        <p>素材画像の権利は画像制作者(手書きあき）に帰属します。</p>
-        <p>link : <a href=http://www.2chan.net>ふたば★ちゃんねる </a> </p> </div> <script>
-            var target = document.getElementsByClassName('GamePlayerCore')[0]
-            var btn = document.getElementById('fullscreenSwitch')
+      <p>Internet Explolerだと動きません。他のブラウザで試してください(Chrome,Edge等)</p>
 
-            /*フルスクリーン実行用ファンクション*/
-            function goFS() {
-            if (target.webkitRequestFullscreen) {
-            target.webkitRequestFullscreen() //Chrome15+, Safari5.1+, Opera15+
-            } else if (target.mozRequestFullScreen) {
-            target.mozRequestFullScreen() //FF10+
-            } else if (target.msRequestFullscreen) {
-            target.msRequestFullscreen() //IE11+
-            } else if (target.requestFullscreen) {
-            target.requestFullscreen() // HTML5 Fullscreen API仕様
-            } else {
-            alert('ご利用のブラウザはフルスクリーン操作に対応していません')
-            return
-            } } </script>
-      </div>
+      <form>
+        <textarea cols=60 rows=3>
+更新
+2019/03/24 ver 1.3 クラスアップ(すぺしゃる）実装
+2019/03/24 ver 1.2 ヒント機能実装
+2019/03/24 ver 1.1 微修正/表示遅延対応
+2019/03/24 ver 1.0 公開 バグってたらすまんなver
+>2019/03/23 ver --
+          </textarea>
+      </form>
+
+      <p>素材画像の権利は画像制作者(手書きあき）に帰属します。</p>
+      <p>link : <a href=http://www.2chan.net>ふたば★ちゃんねる </a> </p> </div> <script>
+          var target = document.getElementsByClassName('GamePlayerCore')[0]
+          var btn = document.getElementById('fullscreenSwitch')
+
+          /*フルスクリーン実行用ファンクション*/
+          function goFS() {
+          if (target.webkitRequestFullscreen) {
+          target.webkitRequestFullscreen() //Chrome15+, Safari5.1+, Opera15+
+          } else if (target.mozRequestFullScreen) {
+          target.mozRequestFullScreen() //FF10+
+          } else if (target.msRequestFullscreen) {
+          target.msRequestFullscreen() //IE11+
+          } else if (target.requestFullscreen) {
+          target.requestFullscreen() // HTML5 Fullscreen API仕様
+          } else {
+          alert('ご利用のブラウザはフルスクリーン操作に対応していません')
+          return
+          } } </script>
+    </div>
   </body>
 
 </html>
