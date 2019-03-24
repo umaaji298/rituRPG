@@ -8,8 +8,9 @@
     <meta name="viewport" content="user-scalable=no" />
     <link rel="icon" href="icon/icon.png" type="image/png" />
     <link rel="apple-touch-icon" href="icon/icon.png" />
+    <link href="css2.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" type="text/css" href="fonts/gamefont.css" />
-    <link href="css/css.css" rel="stylesheet" type="text/css">
+
     <title>りつねぇ！RPG</title>
 
   </head>
@@ -18,6 +19,7 @@
     <header>
       <h1>■ りつねぇ！RPG(BETA)</h1>
     </header>
+
     <div onclick>
       <div>
         <button id="fullscreenSwitch" onclick="goFS()">
@@ -31,35 +33,46 @@
           allow="accelerometer; ambient-light-sensor; autoplay; camera; encrypted-media; fullscreen; geolocation; gyroscope; magnetometer; microphone; midi; speaker; vibrate; vr"
           style="width: 816px; height: 624px;"></iframe>
       </div>
-      <p>Internet Explolerだと動きません。他のブラウザで試してください(Chrome,Edge等)</p>
-      <ul>
-        <li>2019/03/24 ver 1.3 クラスアップ(すぺしゃる）実装</li>
-        <li>2019/03/24 ver 1.2 ヒント機能実装</li>
-        <li>2019/03/24 ver 1.1 微修正/表示遅延対応</li>
-        <li>2019/03/24 ver 1.0 公開 バグってたらすまんなver</li>
-        <li>2019/03/23 ver --</li>
-      </ul>
-      <div>
-        <p>素材画像の権利は画像制作者(手書きあき）に帰属します。</p>
-        <p><a href=http://www.2chan.net>ふたば★ちゃんねる </a> </p> </div> <script>
-            var target = document.getElementsByClassName('GamePlayerCore')[0]
-            var btn = document.getElementById('fullscreenSwitch')
 
-            /*フルスクリーン実行用ファンクション*/
-            function goFS() {
-            if (target.webkitRequestFullscreen) {
-            target.webkitRequestFullscreen() //Chrome15+, Safari5.1+, Opera15+
-            } else if (target.mozRequestFullScreen) {
-            target.mozRequestFullScreen() //FF10+
-            } else if (target.msRequestFullscreen) {
-            target.msRequestFullscreen() //IE11+
-            } else if (target.requestFullscreen) {
-            target.requestFullscreen() // HTML5 Fullscreen API仕様
-            } else {
-            alert('ご利用のブラウザはフルスクリーン操作に対応していません')
-            return
-            } } </script>
-      </div>
+
+      <p>Internet Explolerだと動きません。他のブラウザで試してください(Chrome,Edge等)</p>
+
+      <form>
+        <textarea cols=60 rows=3>
+更新
+2019/03/24 ver 1.3 クラスアップ(すぺしゃる）実装
+2019/03/24 ver 1.2 ヒント機能実装
+2019/03/24 ver 1.1 微修正/表示遅延対応
+2019/03/24 ver 1.0 公開 バグってたらすまんなver
+>2019/03/23 ver --
+          </textarea>
+      </form>
+
+    </div>
+
+    <footer>
+      <p>素材画像の権利は画像制作者(手書きあき）に帰属します。</p>
+      <a href=http://www.2chan.net>ふたば★ちゃんねる </a> </footer> <script>
+        var target = document.getElementsByClassName('GamePlayerCore')[0]
+        var btn = document.getElementById('fullscreenSwitch')
+
+        /*フルスクリーン実行用ファンクション*/
+        function goFS() {
+        if (target.webkitRequestFullscreen) {
+        target.webkitRequestFullscreen() //Chrome15+, Safari5.1+, Opera15+
+        } else if (target.mozRequestFullScreen) {
+        target.mozRequestFullScreen() //FF10+
+        } else if (target.msRequestFullscreen) {
+        target.msRequestFullscreen() //IE11+
+        } else if (target.requestFullscreen) {
+        target.requestFullscreen() // HTML5 Fullscreen API仕様
+        } else {
+        alert('ご利用のブラウザはフルスクリーン操作に対応していません')
+        return
+        }
+        }
+        </script>
+
   </body>
 
 </html>
