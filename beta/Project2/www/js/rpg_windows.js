@@ -14,7 +14,7 @@ function Window_Base() {
 Window_Base.prototype = Object.create(Window.prototype)
 Window_Base.prototype.constructor = Window_Base
 
-Window_Base.prototype.initialize = function(x, y, width, height) {
+Window_Base.prototype.initialize = function (x, y, width, height) {
   Window.prototype.initialize.call(this)
   this.loadWindowskin()
   this.move(x, y, width, height)
@@ -32,11 +32,11 @@ Window_Base._iconHeight = 32
 Window_Base._faceWidth = 144
 Window_Base._faceHeight = 144
 
-Window_Base.prototype.lineHeight = function() {
+Window_Base.prototype.lineHeight = function () {
   return 36
 }
 
-Window_Base.prototype.standardFontFace = function() {
+Window_Base.prototype.standardFontFace = function () {
   if ($gameSystem.isChinese()) {
     return 'SimHei, Heiti TC, sans-serif'
   } else if ($gameSystem.isKorean()) {
@@ -46,67 +46,67 @@ Window_Base.prototype.standardFontFace = function() {
   }
 }
 
-Window_Base.prototype.standardFontSize = function() {
+Window_Base.prototype.standardFontSize = function () {
   return 28
 }
 
-Window_Base.prototype.standardPadding = function() {
+Window_Base.prototype.standardPadding = function () {
   return 18
 }
 
-Window_Base.prototype.textPadding = function() {
+Window_Base.prototype.textPadding = function () {
   return 6
 }
 
-Window_Base.prototype.standardBackOpacity = function() {
+Window_Base.prototype.standardBackOpacity = function () {
   return 192
 }
 
-Window_Base.prototype.loadWindowskin = function() {
+Window_Base.prototype.loadWindowskin = function () {
   this.windowskin = ImageManager.loadSystem('Window')
 }
 
-Window_Base.prototype.updatePadding = function() {
+Window_Base.prototype.updatePadding = function () {
   this.padding = this.standardPadding()
 }
 
-Window_Base.prototype.updateBackOpacity = function() {
+Window_Base.prototype.updateBackOpacity = function () {
   this.backOpacity = this.standardBackOpacity()
 }
 
-Window_Base.prototype.contentsWidth = function() {
+Window_Base.prototype.contentsWidth = function () {
   return this.width - this.standardPadding() * 2
 }
 
-Window_Base.prototype.contentsHeight = function() {
+Window_Base.prototype.contentsHeight = function () {
   return this.height - this.standardPadding() * 2
 }
 
-Window_Base.prototype.fittingHeight = function(numLines) {
+Window_Base.prototype.fittingHeight = function (numLines) {
   return numLines * this.lineHeight() + this.standardPadding() * 2
 }
 
-Window_Base.prototype.updateTone = function() {
+Window_Base.prototype.updateTone = function () {
   var tone = $gameSystem.windowTone()
   this.setTone(tone[0], tone[1], tone[2])
 }
 
-Window_Base.prototype.createContents = function() {
+Window_Base.prototype.createContents = function () {
   this.contents = new Bitmap(this.contentsWidth(), this.contentsHeight())
   this.resetFontSettings()
 }
 
-Window_Base.prototype.resetFontSettings = function() {
+Window_Base.prototype.resetFontSettings = function () {
   this.contents.fontFace = this.standardFontFace()
   this.contents.fontSize = this.standardFontSize()
   this.resetTextColor()
 }
 
-Window_Base.prototype.resetTextColor = function() {
+Window_Base.prototype.resetTextColor = function () {
   this.changeTextColor(this.normalColor())
 }
 
-Window_Base.prototype.update = function() {
+Window_Base.prototype.update = function () {
   Window.prototype.update.call(this)
   this.updateTone()
   this.updateOpen()
@@ -114,7 +114,7 @@ Window_Base.prototype.update = function() {
   this.updateBackgroundDimmer()
 }
 
-Window_Base.prototype.updateOpen = function() {
+Window_Base.prototype.updateOpen = function () {
   if (this._opening) {
     this.openness += 32
     if (this.isOpen()) {
@@ -123,7 +123,7 @@ Window_Base.prototype.updateOpen = function() {
   }
 }
 
-Window_Base.prototype.updateClose = function() {
+Window_Base.prototype.updateClose = function () {
   if (this._closing) {
     this.openness -= 32
     if (this.isClosed()) {
@@ -132,137 +132,142 @@ Window_Base.prototype.updateClose = function() {
   }
 }
 
-Window_Base.prototype.open = function() {
+Window_Base.prototype.open = function () {
   if (!this.isOpen()) {
     this._opening = true
   }
   this._closing = false
 }
 
-Window_Base.prototype.close = function() {
+Window_Base.prototype.close = function () {
   if (!this.isClosed()) {
     this._closing = true
   }
   this._opening = false
 }
 
-Window_Base.prototype.isOpening = function() {
+Window_Base.prototype.isOpening = function () {
   return this._opening
 }
 
-Window_Base.prototype.isClosing = function() {
+Window_Base.prototype.isClosing = function () {
   return this._closing
 }
 
-Window_Base.prototype.show = function() {
+Window_Base.prototype.show = function () {
   this.visible = true
 }
 
-Window_Base.prototype.hide = function() {
+Window_Base.prototype.hide = function () {
   this.visible = false
 }
 
-Window_Base.prototype.activate = function() {
+Window_Base.prototype.activate = function () {
   this.active = true
 }
 
-Window_Base.prototype.deactivate = function() {
+Window_Base.prototype.deactivate = function () {
   this.active = false
 }
 
-Window_Base.prototype.textColor = function(n) {
+Window_Base.prototype.textColor = function (n) {
   var px = 96 + (n % 8) * 12 + 6
   var py = 144 + Math.floor(n / 8) * 12 + 6
   return this.windowskin.getPixel(px, py)
 }
 
-Window_Base.prototype.normalColor = function() {
+Window_Base.prototype.normalColor = function () {
   return this.textColor(0)
 }
 
-Window_Base.prototype.systemColor = function() {
+Window_Base.prototype.systemColor = function () {
   return this.textColor(16)
 }
 
-Window_Base.prototype.crisisColor = function() {
+Window_Base.prototype.crisisColor = function () {
   return this.textColor(17)
 }
 
-Window_Base.prototype.deathColor = function() {
+Window_Base.prototype.deathColor = function () {
   return this.textColor(18)
 }
 
-Window_Base.prototype.gaugeBackColor = function() {
+Window_Base.prototype.gaugeBackColor = function () {
   return this.textColor(19)
 }
 
-Window_Base.prototype.hpGaugeColor1 = function() {
+Window_Base.prototype.hpGaugeColor1 = function () {
   return this.textColor(20)
 }
 
-Window_Base.prototype.hpGaugeColor2 = function() {
+Window_Base.prototype.hpGaugeColor2 = function () {
   return this.textColor(21)
 }
 
-Window_Base.prototype.mpGaugeColor1 = function() {
+Window_Base.prototype.mpGaugeColor1 = function () {
   return this.textColor(22)
 }
 
-Window_Base.prototype.mpGaugeColor2 = function() {
+Window_Base.prototype.mpGaugeColor2 = function () {
   return this.textColor(23)
 }
 
-Window_Base.prototype.mpCostColor = function() {
+Window_Base.prototype.mpCostColor = function () {
   return this.textColor(23)
 }
 
-Window_Base.prototype.powerUpColor = function() {
+Window_Base.prototype.powerUpColor = function () {
   return this.textColor(24)
 }
 
-Window_Base.prototype.powerDownColor = function() {
+Window_Base.prototype.powerDownColor = function () {
   return this.textColor(25)
 }
 
-Window_Base.prototype.tpGaugeColor1 = function() {
+Window_Base.prototype.tpGaugeColor1 = function () {
   return this.textColor(28)
 }
 
-Window_Base.prototype.tpGaugeColor2 = function() {
+Window_Base.prototype.tpGaugeColor2 = function () {
   return this.textColor(29)
 }
 
-Window_Base.prototype.tpCostColor = function() {
+Window_Base.prototype.tpCostColor = function () {
   return this.textColor(29)
 }
 
-Window_Base.prototype.pendingColor = function() {
+Window_Base.prototype.pendingColor = function () {
   return this.windowskin.getPixel(120, 120)
 }
 
-Window_Base.prototype.translucentOpacity = function() {
+Window_Base.prototype.translucentOpacity = function () {
   return 160
 }
 
-Window_Base.prototype.changeTextColor = function(color) {
+Window_Base.prototype.changeTextColor = function (color) {
   this.contents.textColor = color
 }
 
-Window_Base.prototype.changePaintOpacity = function(enabled) {
+Window_Base.prototype.changePaintOpacity = function (enabled) {
   this.contents.paintOpacity = enabled ? 255 : this.translucentOpacity()
 }
 
-Window_Base.prototype.drawText = function(text, x, y, maxWidth, align) {
+Window_Base.prototype.drawText = function (text, x, y, maxWidth, align) {
   this.contents.drawText(text, x, y, maxWidth, this.lineHeight(), align)
 }
 
-Window_Base.prototype.textWidth = function(text) {
+Window_Base.prototype.textWidth = function (text) {
   return this.contents.measureTextWidth(text)
 }
 
-Window_Base.prototype.drawTextEx = function(text, x, y) {
+Window_Base.prototype.drawTextEx = function (text, x, y) {
   if (text) {
-    var textState = { index: 0, x: x, y: y, left: x }
+    var textState = {
+      index: 0,
+      x: x,
+      y: y,
+      left: x
+    }
     textState.text = this.convertEscapeCharacters(text)
     textState.height = this.calcTextHeight(textState, false)
     this.resetFontSettings()
@@ -275,30 +280,30 @@ Window_Base.prototype.drawTextEx = function(text, x, y) {
   }
 }
 
-Window_Base.prototype.convertEscapeCharacters = function(text) {
+Window_Base.prototype.convertEscapeCharacters = function (text) {
   text = text.replace(/\\/g, '\x1b')
   text = text.replace(/\x1b\x1b/g, '\\')
   text = text.replace(
     /\x1bV\[(\d+)\]/gi,
-    function() {
+    function () {
       return $gameVariables.value(parseInt(arguments[1]))
     }.bind(this)
   )
   text = text.replace(
     /\x1bV\[(\d+)\]/gi,
-    function() {
+    function () {
       return $gameVariables.value(parseInt(arguments[1]))
     }.bind(this)
   )
   text = text.replace(
     /\x1bN\[(\d+)\]/gi,
-    function() {
+    function () {
       return this.actorName(parseInt(arguments[1]))
     }.bind(this)
   )
   text = text.replace(
     /\x1bP\[(\d+)\]/gi,
-    function() {
+    function () {
       return this.partyMemberName(parseInt(arguments[1]))
     }.bind(this)
   )
@@ -306,17 +311,17 @@ Window_Base.prototype.convertEscapeCharacters = function(text) {
   return text
 }
 
-Window_Base.prototype.actorName = function(n) {
+Window_Base.prototype.actorName = function (n) {
   var actor = n >= 1 ? $gameActors.actor(n) : null
   return actor ? actor.name() : ''
 }
 
-Window_Base.prototype.partyMemberName = function(n) {
+Window_Base.prototype.partyMemberName = function (n) {
   var actor = n >= 1 ? $gameParty.members()[n - 1] : null
   return actor ? actor.name() : ''
 }
 
-Window_Base.prototype.processCharacter = function(textState) {
+Window_Base.prototype.processCharacter = function (textState) {
   switch (textState.text[textState.index]) {
     case '\n':
       this.processNewLine(textState)
@@ -333,25 +338,25 @@ Window_Base.prototype.processCharacter = function(textState) {
   }
 }
 
-Window_Base.prototype.processNormalCharacter = function(textState) {
+Window_Base.prototype.processNormalCharacter = function (textState) {
   var c = textState.text[textState.index++]
   var w = this.textWidth(c)
   this.contents.drawText(c, textState.x, textState.y, w * 2, textState.height)
   textState.x += w
 }
 
-Window_Base.prototype.processNewLine = function(textState) {
+Window_Base.prototype.processNewLine = function (textState) {
   textState.x = textState.left
   textState.y += textState.height
   textState.height = this.calcTextHeight(textState, false)
   textState.index++
 }
 
-Window_Base.prototype.processNewPage = function(textState) {
+Window_Base.prototype.processNewPage = function (textState) {
   textState.index++
 }
 
-Window_Base.prototype.obtainEscapeCode = function(textState) {
+Window_Base.prototype.obtainEscapeCode = function (textState) {
   textState.index++
   var regExp = /^[\$\.\|\^!><\{\}\\]|^[A-Z]+/i
   var arr = regExp.exec(textState.text.slice(textState.index))
@@ -363,7 +368,7 @@ Window_Base.prototype.obtainEscapeCode = function(textState) {
   }
 }
 
-Window_Base.prototype.obtainEscapeParam = function(textState) {
+Window_Base.prototype.obtainEscapeParam = function (textState) {
   var arr = /^\[\d+\]/.exec(textState.text.slice(textState.index))
   if (arr) {
     textState.index += arr[0].length
@@ -373,7 +378,7 @@ Window_Base.prototype.obtainEscapeParam = function(textState) {
   }
 }
 
-Window_Base.prototype.processEscapeCharacter = function(code, textState) {
+Window_Base.prototype.processEscapeCharacter = function (code, textState) {
   switch (code) {
     case 'C':
       this.changeTextColor(this.textColor(this.obtainEscapeParam(textState)))
@@ -390,24 +395,24 @@ Window_Base.prototype.processEscapeCharacter = function(code, textState) {
   }
 }
 
-Window_Base.prototype.processDrawIcon = function(iconIndex, textState) {
+Window_Base.prototype.processDrawIcon = function (iconIndex, textState) {
   this.drawIcon(iconIndex, textState.x + 2, textState.y + 2)
   textState.x += Window_Base._iconWidth + 4
 }
 
-Window_Base.prototype.makeFontBigger = function() {
+Window_Base.prototype.makeFontBigger = function () {
   if (this.contents.fontSize <= 96) {
     this.contents.fontSize += 12
   }
 }
 
-Window_Base.prototype.makeFontSmaller = function() {
+Window_Base.prototype.makeFontSmaller = function () {
   if (this.contents.fontSize >= 24) {
     this.contents.fontSize -= 12
   }
 }
 
-Window_Base.prototype.calcTextHeight = function(textState, all) {
+Window_Base.prototype.calcTextHeight = function (textState, all) {
   var lastFontSize = this.contents.fontSize
   var textHeight = 0
   var lines = textState.text.slice(textState.index).split('\n')
@@ -439,7 +444,7 @@ Window_Base.prototype.calcTextHeight = function(textState, all) {
   return textHeight
 }
 
-Window_Base.prototype.drawIcon = function(iconIndex, x, y) {
+Window_Base.prototype.drawIcon = function (iconIndex, x, y) {
   var bitmap = ImageManager.loadSystem('IconSet')
   var pw = Window_Base._iconWidth
   var ph = Window_Base._iconHeight
@@ -448,7 +453,7 @@ Window_Base.prototype.drawIcon = function(iconIndex, x, y) {
   this.contents.blt(bitmap, sx, sy, pw, ph, x, y)
 }
 
-Window_Base.prototype.drawFace = function(
+Window_Base.prototype.drawFace = function (
   faceName,
   faceIndex,
   x,
@@ -470,7 +475,7 @@ Window_Base.prototype.drawFace = function(
   this.contents.blt(bitmap, sx, sy, sw, sh, dx, dy)
 }
 
-Window_Base.prototype.drawCharacter = function(
+Window_Base.prototype.drawCharacter = function (
   characterName,
   characterIndex,
   x,
@@ -486,14 +491,14 @@ Window_Base.prototype.drawCharacter = function(
   this.contents.blt(bitmap, sx, sy, pw, ph, x - pw / 2, y - ph)
 }
 
-Window_Base.prototype.drawGauge = function(x, y, width, rate, color1, color2) {
+Window_Base.prototype.drawGauge = function (x, y, width, rate, color1, color2) {
   var fillW = Math.floor(width * rate)
   var gaugeY = y + this.lineHeight() - 8
   this.contents.fillRect(x, gaugeY, width, 6, this.gaugeBackColor())
   this.contents.gradientFillRect(x, gaugeY, fillW, 6, color1, color2)
 }
 
-Window_Base.prototype.hpColor = function(actor) {
+Window_Base.prototype.hpColor = function (actor) {
   if (actor.isDead()) {
     return this.deathColor()
   } else if (actor.isDying()) {
@@ -503,48 +508,48 @@ Window_Base.prototype.hpColor = function(actor) {
   }
 }
 
-Window_Base.prototype.mpColor = function(actor) {
+Window_Base.prototype.mpColor = function (actor) {
   return this.normalColor()
 }
 
-Window_Base.prototype.tpColor = function(actor) {
+Window_Base.prototype.tpColor = function (actor) {
   return this.normalColor()
 }
 
-Window_Base.prototype.drawActorCharacter = function(actor, x, y) {
+Window_Base.prototype.drawActorCharacter = function (actor, x, y) {
   this.drawCharacter(actor.characterName(), actor.characterIndex(), x, y)
 }
 
-Window_Base.prototype.drawActorFace = function(actor, x, y, width, height) {
+Window_Base.prototype.drawActorFace = function (actor, x, y, width, height) {
   this.drawFace(actor.faceName(), actor.faceIndex(), x, y, width, height)
 }
 
-Window_Base.prototype.drawActorName = function(actor, x, y, width) {
+Window_Base.prototype.drawActorName = function (actor, x, y, width) {
   width = width || 168
   this.changeTextColor(this.hpColor(actor))
   this.drawText(actor.name(), x, y, width)
 }
 
-Window_Base.prototype.drawActorClass = function(actor, x, y, width) {
+Window_Base.prototype.drawActorClass = function (actor, x, y, width) {
   width = width || 168
   this.resetTextColor()
   this.drawText(actor.currentClass().name, x, y, width)
 }
 
-Window_Base.prototype.drawActorNickname = function(actor, x, y, width) {
+Window_Base.prototype.drawActorNickname = function (actor, x, y, width) {
   width = width || 270
   this.resetTextColor()
   this.drawText(actor.nickname(), x, y, width)
 }
 
-Window_Base.prototype.drawActorLevel = function(actor, x, y) {
+Window_Base.prototype.drawActorLevel = function (actor, x, y) {
   this.changeTextColor(this.systemColor())
   this.drawText(TextManager.levelA, x, y, 48)
   this.resetTextColor()
   this.drawText(actor.level, x + 84, y, 36, 'right')
 }
 
-Window_Base.prototype.drawActorIcons = function(actor, x, y, width) {
+Window_Base.prototype.drawActorIcons = function (actor, x, y, width) {
   width = width || 144
   var icons = actor
     .allIcons()
@@ -554,7 +559,7 @@ Window_Base.prototype.drawActorIcons = function(actor, x, y, width) {
   }
 }
 
-Window_Base.prototype.drawCurrentAndMax = function(
+Window_Base.prototype.drawCurrentAndMax = function (
   current,
   max,
   x,
@@ -581,7 +586,7 @@ Window_Base.prototype.drawCurrentAndMax = function(
   }
 }
 
-Window_Base.prototype.drawActorHp = function(actor, x, y, width) {
+Window_Base.prototype.drawActorHp = function (actor, x, y, width) {
   width = width || 186
   var color1 = this.hpGaugeColor1()
   var color2 = this.hpGaugeColor2()
@@ -599,7 +604,7 @@ Window_Base.prototype.drawActorHp = function(actor, x, y, width) {
   )
 }
 
-Window_Base.prototype.drawActorMp = function(actor, x, y, width) {
+Window_Base.prototype.drawActorMp = function (actor, x, y, width) {
   width = width || 186
   var color1 = this.mpGaugeColor1()
   var color2 = this.mpGaugeColor2()
@@ -617,7 +622,7 @@ Window_Base.prototype.drawActorMp = function(actor, x, y, width) {
   )
 }
 
-Window_Base.prototype.drawActorTp = function(actor, x, y, width) {
+Window_Base.prototype.drawActorTp = function (actor, x, y, width) {
   width = width || 96
   var color1 = this.tpGaugeColor1()
   var color2 = this.tpGaugeColor2()
@@ -628,7 +633,7 @@ Window_Base.prototype.drawActorTp = function(actor, x, y, width) {
   this.drawText(actor.tp, x + width - 64, y, 64, 'right')
 }
 
-Window_Base.prototype.drawActorSimpleStatus = function(actor, x, y, width) {
+Window_Base.prototype.drawActorSimpleStatus = function (actor, x, y, width) {
   var lineHeight = this.lineHeight()
   var x2 = x + 180
   var width2 = Math.min(200, width - 180 - this.textPadding())
@@ -640,7 +645,7 @@ Window_Base.prototype.drawActorSimpleStatus = function(actor, x, y, width) {
   this.drawActorMp(actor, x2, y + lineHeight * 2, width2)
 }
 
-Window_Base.prototype.drawItemName = function(item, x, y, width) {
+Window_Base.prototype.drawItemName = function (item, x, y, width) {
   width = width || 312
   if (item) {
     var iconBoxWidth = Window_Base._iconWidth + 4
@@ -650,7 +655,7 @@ Window_Base.prototype.drawItemName = function(item, x, y, width) {
   }
 }
 
-Window_Base.prototype.drawCurrencyValue = function(value, unit, x, y, width) {
+Window_Base.prototype.drawCurrencyValue = function (value, unit, x, y, width) {
   var unitWidth = Math.min(80, this.textWidth(unit))
   this.resetTextColor()
   this.drawText(value, x, y, width - unitWidth - 6, 'right')
@@ -658,7 +663,7 @@ Window_Base.prototype.drawCurrencyValue = function(value, unit, x, y, width) {
   this.drawText(unit, x + width - unitWidth, y, unitWidth, 'right')
 }
 
-Window_Base.prototype.paramchangeTextColor = function(change) {
+Window_Base.prototype.paramchangeTextColor = function (change) {
   if (change > 0) {
     return this.powerUpColor()
   } else if (change < 0) {
@@ -668,7 +673,7 @@ Window_Base.prototype.paramchangeTextColor = function(change) {
   }
 }
 
-Window_Base.prototype.setBackgroundType = function(type) {
+Window_Base.prototype.setBackgroundType = function (type) {
   if (type === 0) {
     this.opacity = 255
   } else {
@@ -681,7 +686,7 @@ Window_Base.prototype.setBackgroundType = function(type) {
   }
 }
 
-Window_Base.prototype.showBackgroundDimmer = function() {
+Window_Base.prototype.showBackgroundDimmer = function () {
   if (!this._dimmerSprite) {
     this._dimmerSprite = new Sprite()
     this._dimmerSprite.bitmap = new Bitmap(0, 0)
@@ -695,19 +700,19 @@ Window_Base.prototype.showBackgroundDimmer = function() {
   this.updateBackgroundDimmer()
 }
 
-Window_Base.prototype.hideBackgroundDimmer = function() {
+Window_Base.prototype.hideBackgroundDimmer = function () {
   if (this._dimmerSprite) {
     this._dimmerSprite.visible = false
   }
 }
 
-Window_Base.prototype.updateBackgroundDimmer = function() {
+Window_Base.prototype.updateBackgroundDimmer = function () {
   if (this._dimmerSprite) {
     this._dimmerSprite.opacity = this.openness
   }
 }
 
-Window_Base.prototype.refreshDimmerBitmap = function() {
+Window_Base.prototype.refreshDimmerBitmap = function () {
   if (this._dimmerSprite) {
     var bitmap = this._dimmerSprite.bitmap
     var w = this.width
@@ -723,15 +728,15 @@ Window_Base.prototype.refreshDimmerBitmap = function() {
   }
 }
 
-Window_Base.prototype.dimColor1 = function() {
+Window_Base.prototype.dimColor1 = function () {
   return 'rgba(0, 0, 0, 0.6)'
 }
 
-Window_Base.prototype.dimColor2 = function() {
+Window_Base.prototype.dimColor2 = function () {
   return 'rgba(0, 0, 0, 0)'
 }
 
-Window_Base.prototype.canvasToLocalX = function(x) {
+Window_Base.prototype.canvasToLocalX = function (x) {
   var node = this
   while (node) {
     x -= node.x
@@ -740,7 +745,7 @@ Window_Base.prototype.canvasToLocalX = function(x) {
   return x
 }
 
-Window_Base.prototype.canvasToLocalY = function(y) {
+Window_Base.prototype.canvasToLocalY = function (y) {
   var node = this
   while (node) {
     y -= node.y
@@ -749,8 +754,8 @@ Window_Base.prototype.canvasToLocalY = function(y) {
   return y
 }
 
-Window_Base.prototype.reserveFaceImages = function() {
-  $gameParty.members().forEach(function(actor) {
+Window_Base.prototype.reserveFaceImages = function () {
+  $gameParty.members().forEach(function (actor) {
     ImageManager.reserveFace(actor.faceName())
   }, this)
 }
@@ -767,7 +772,7 @@ function Window_Selectable() {
 Window_Selectable.prototype = Object.create(Window_Base.prototype)
 Window_Selectable.prototype.constructor = Window_Selectable
 
-Window_Selectable.prototype.initialize = function(x, y, width, height) {
+Window_Selectable.prototype.initialize = function (x, y, width, height) {
   Window_Base.prototype.initialize.call(this, x, y, width, height)
   this._index = -1
   this._cursorFixed = false
@@ -782,64 +787,64 @@ Window_Selectable.prototype.initialize = function(x, y, width, height) {
   this.deactivate()
 }
 
-Window_Selectable.prototype.index = function() {
+Window_Selectable.prototype.index = function () {
   return this._index
 }
 
-Window_Selectable.prototype.cursorFixed = function() {
+Window_Selectable.prototype.cursorFixed = function () {
   return this._cursorFixed
 }
 
-Window_Selectable.prototype.setCursorFixed = function(cursorFixed) {
+Window_Selectable.prototype.setCursorFixed = function (cursorFixed) {
   this._cursorFixed = cursorFixed
 }
 
-Window_Selectable.prototype.cursorAll = function() {
+Window_Selectable.prototype.cursorAll = function () {
   return this._cursorAll
 }
 
-Window_Selectable.prototype.setCursorAll = function(cursorAll) {
+Window_Selectable.prototype.setCursorAll = function (cursorAll) {
   this._cursorAll = cursorAll
 }
 
-Window_Selectable.prototype.maxCols = function() {
+Window_Selectable.prototype.maxCols = function () {
   return 1
 }
 
-Window_Selectable.prototype.maxItems = function() {
+Window_Selectable.prototype.maxItems = function () {
   return 0
 }
 
-Window_Selectable.prototype.spacing = function() {
+Window_Selectable.prototype.spacing = function () {
   return 12
 }
 
-Window_Selectable.prototype.itemWidth = function() {
+Window_Selectable.prototype.itemWidth = function () {
   return Math.floor(
     (this.width - this.padding * 2 + this.spacing()) / this.maxCols() -
-      this.spacing()
+    this.spacing()
   )
 }
 
-Window_Selectable.prototype.itemHeight = function() {
+Window_Selectable.prototype.itemHeight = function () {
   return this.lineHeight()
 }
 
-Window_Selectable.prototype.maxRows = function() {
+Window_Selectable.prototype.maxRows = function () {
   return Math.max(Math.ceil(this.maxItems() / this.maxCols()), 1)
 }
 
-Window_Selectable.prototype.activate = function() {
+Window_Selectable.prototype.activate = function () {
   Window_Base.prototype.activate.call(this)
   this.reselect()
 }
 
-Window_Selectable.prototype.deactivate = function() {
+Window_Selectable.prototype.deactivate = function () {
   Window_Base.prototype.deactivate.call(this)
   this.reselect()
 }
 
-Window_Selectable.prototype.select = function(index) {
+Window_Selectable.prototype.select = function (index) {
   this._index = index
   this._stayCount = 0
   this.ensureCursorVisible()
@@ -847,27 +852,27 @@ Window_Selectable.prototype.select = function(index) {
   this.callUpdateHelp()
 }
 
-Window_Selectable.prototype.deselect = function() {
+Window_Selectable.prototype.deselect = function () {
   this.select(-1)
 }
 
-Window_Selectable.prototype.reselect = function() {
+Window_Selectable.prototype.reselect = function () {
   this.select(this._index)
 }
 
-Window_Selectable.prototype.row = function() {
+Window_Selectable.prototype.row = function () {
   return Math.floor(this.index() / this.maxCols())
 }
 
-Window_Selectable.prototype.topRow = function() {
+Window_Selectable.prototype.topRow = function () {
   return Math.floor(this._scrollY / this.itemHeight())
 }
 
-Window_Selectable.prototype.maxTopRow = function() {
+Window_Selectable.prototype.maxTopRow = function () {
   return Math.max(0, this.maxRows() - this.maxPageRows())
 }
 
-Window_Selectable.prototype.setTopRow = function(row) {
+Window_Selectable.prototype.setTopRow = function (row) {
   var scrollY = row.clamp(0, this.maxTopRow()) * this.itemHeight()
   if (this._scrollY !== scrollY) {
     this._scrollY = scrollY
@@ -876,36 +881,36 @@ Window_Selectable.prototype.setTopRow = function(row) {
   }
 }
 
-Window_Selectable.prototype.resetScroll = function() {
+Window_Selectable.prototype.resetScroll = function () {
   this.setTopRow(0)
 }
 
-Window_Selectable.prototype.maxPageRows = function() {
+Window_Selectable.prototype.maxPageRows = function () {
   var pageHeight = this.height - this.padding * 2
   return Math.floor(pageHeight / this.itemHeight())
 }
 
-Window_Selectable.prototype.maxPageItems = function() {
+Window_Selectable.prototype.maxPageItems = function () {
   return this.maxPageRows() * this.maxCols()
 }
 
-Window_Selectable.prototype.isHorizontal = function() {
+Window_Selectable.prototype.isHorizontal = function () {
   return this.maxPageRows() === 1
 }
 
-Window_Selectable.prototype.bottomRow = function() {
+Window_Selectable.prototype.bottomRow = function () {
   return Math.max(0, this.topRow() + this.maxPageRows() - 1)
 }
 
-Window_Selectable.prototype.setBottomRow = function(row) {
+Window_Selectable.prototype.setBottomRow = function (row) {
   this.setTopRow(row - (this.maxPageRows() - 1))
 }
 
-Window_Selectable.prototype.topIndex = function() {
+Window_Selectable.prototype.topIndex = function () {
   return this.topRow() * this.maxCols()
 }
 
-Window_Selectable.prototype.itemRect = function(index) {
+Window_Selectable.prototype.itemRect = function (index) {
   var rect = new Rectangle()
   var maxCols = this.maxCols()
   rect.width = this.itemWidth()
@@ -915,19 +920,19 @@ Window_Selectable.prototype.itemRect = function(index) {
   return rect
 }
 
-Window_Selectable.prototype.itemRectForText = function(index) {
+Window_Selectable.prototype.itemRectForText = function (index) {
   var rect = this.itemRect(index)
   rect.x += this.textPadding()
   rect.width -= this.textPadding() * 2
   return rect
 }
 
-Window_Selectable.prototype.setHelpWindow = function(helpWindow) {
+Window_Selectable.prototype.setHelpWindow = function (helpWindow) {
   this._helpWindow = helpWindow
   this.callUpdateHelp()
 }
 
-Window_Selectable.prototype.setHelpWindow2 = function(
+Window_Selectable.prototype.setHelpWindow2 = function (
   helpWindow1,
   helpWindow2
 ) {
@@ -936,7 +941,7 @@ Window_Selectable.prototype.setHelpWindow2 = function(
   this.callUpdateHelp()
 }
 
-Window_Selectable.prototype.showHelpWindow = function() {
+Window_Selectable.prototype.showHelpWindow = function () {
   if (this._helpWindow) {
     this._helpWindow.show()
   }
@@ -945,7 +950,7 @@ Window_Selectable.prototype.showHelpWindow = function() {
   }
 }
 
-Window_Selectable.prototype.hideHelpWindow = function() {
+Window_Selectable.prototype.hideHelpWindow = function () {
   if (this._helpWindow) {
     this._helpWindow.hide()
   }
@@ -954,25 +959,25 @@ Window_Selectable.prototype.hideHelpWindow = function() {
   }
 }
 
-Window_Selectable.prototype.setHandler = function(symbol, method) {
+Window_Selectable.prototype.setHandler = function (symbol, method) {
   this._handlers[symbol] = method
 }
 
-Window_Selectable.prototype.isHandled = function(symbol) {
+Window_Selectable.prototype.isHandled = function (symbol) {
   return !!this._handlers[symbol]
 }
 
-Window_Selectable.prototype.callHandler = function(symbol) {
+Window_Selectable.prototype.callHandler = function (symbol) {
   if (this.isHandled(symbol)) {
     this._handlers[symbol]()
   }
 }
 
-Window_Selectable.prototype.isOpenAndActive = function() {
+Window_Selectable.prototype.isOpenAndActive = function () {
   return this.isOpen() && this.active
 }
 
-Window_Selectable.prototype.isCursorMovable = function() {
+Window_Selectable.prototype.isCursorMovable = function () {
   return (
     this.isOpenAndActive() &&
     !this._cursorFixed &&
@@ -981,7 +986,7 @@ Window_Selectable.prototype.isCursorMovable = function() {
   )
 }
 
-Window_Selectable.prototype.cursorDown = function(wrap) {
+Window_Selectable.prototype.cursorDown = function (wrap) {
   var index = this.index()
   var maxItems = this.maxItems()
   var maxCols = this.maxCols()
@@ -990,7 +995,7 @@ Window_Selectable.prototype.cursorDown = function(wrap) {
   }
 }
 
-Window_Selectable.prototype.cursorUp = function(wrap) {
+Window_Selectable.prototype.cursorUp = function (wrap) {
   var index = this.index()
   var maxItems = this.maxItems()
   var maxCols = this.maxCols()
@@ -999,7 +1004,7 @@ Window_Selectable.prototype.cursorUp = function(wrap) {
   }
 }
 
-Window_Selectable.prototype.cursorRight = function(wrap) {
+Window_Selectable.prototype.cursorRight = function (wrap) {
   var index = this.index()
   var maxItems = this.maxItems()
   var maxCols = this.maxCols()
@@ -1008,7 +1013,7 @@ Window_Selectable.prototype.cursorRight = function(wrap) {
   }
 }
 
-Window_Selectable.prototype.cursorLeft = function(wrap) {
+Window_Selectable.prototype.cursorLeft = function (wrap) {
   var index = this.index()
   var maxItems = this.maxItems()
   var maxCols = this.maxCols()
@@ -1017,7 +1022,7 @@ Window_Selectable.prototype.cursorLeft = function(wrap) {
   }
 }
 
-Window_Selectable.prototype.cursorPagedown = function() {
+Window_Selectable.prototype.cursorPagedown = function () {
   var index = this.index()
   var maxItems = this.maxItems()
   if (this.topRow() + this.maxPageRows() < this.maxRows()) {
@@ -1026,7 +1031,7 @@ Window_Selectable.prototype.cursorPagedown = function() {
   }
 }
 
-Window_Selectable.prototype.cursorPageup = function() {
+Window_Selectable.prototype.cursorPageup = function () {
   var index = this.index()
   if (this.topRow() > 0) {
     this.setTopRow(this.topRow() - this.maxPageRows())
@@ -1034,19 +1039,19 @@ Window_Selectable.prototype.cursorPageup = function() {
   }
 }
 
-Window_Selectable.prototype.scrollDown = function() {
+Window_Selectable.prototype.scrollDown = function () {
   if (this.topRow() + 1 < this.maxRows()) {
     this.setTopRow(this.topRow() + 1)
   }
 }
 
-Window_Selectable.prototype.scrollUp = function() {
+Window_Selectable.prototype.scrollUp = function () {
   if (this.topRow() > 0) {
     this.setTopRow(this.topRow() - 1)
   }
 }
 
-Window_Selectable.prototype.update = function() {
+Window_Selectable.prototype.update = function () {
   Window_Base.prototype.update.call(this)
   this.updateArrows()
   this.processCursorMove()
@@ -1056,14 +1061,14 @@ Window_Selectable.prototype.update = function() {
   this._stayCount++
 }
 
-Window_Selectable.prototype.updateArrows = function() {
+Window_Selectable.prototype.updateArrows = function () {
   var topRow = this.topRow()
   var maxTopRow = this.maxTopRow()
   this.downArrowVisible = maxTopRow > 0 && topRow < maxTopRow
   this.upArrowVisible = topRow > 0
 }
 
-Window_Selectable.prototype.processCursorMove = function() {
+Window_Selectable.prototype.processCursorMove = function () {
   if (this.isCursorMovable()) {
     var lastIndex = this.index()
     if (Input.isRepeated('down')) {
@@ -1090,7 +1095,7 @@ Window_Selectable.prototype.processCursorMove = function() {
   }
 }
 
-Window_Selectable.prototype.processHandling = function() {
+Window_Selectable.prototype.processHandling = function () {
   if (this.isOpenAndActive()) {
     if (this.isOkEnabled() && this.isOkTriggered()) {
       this.processOk()
@@ -1104,7 +1109,7 @@ Window_Selectable.prototype.processHandling = function() {
   }
 }
 
-Window_Selectable.prototype.processWheel = function() {
+Window_Selectable.prototype.processWheel = function () {
   if (this.isOpenAndActive()) {
     var threshold = 20
     if (TouchInput.wheelY >= threshold) {
@@ -1116,7 +1121,7 @@ Window_Selectable.prototype.processWheel = function() {
   }
 }
 
-Window_Selectable.prototype.processTouch = function() {
+Window_Selectable.prototype.processTouch = function () {
   if (this.isOpenAndActive()) {
     if (TouchInput.isTriggered() && this.isTouchedInsideFrame()) {
       this._touching = true
@@ -1138,13 +1143,13 @@ Window_Selectable.prototype.processTouch = function() {
   }
 }
 
-Window_Selectable.prototype.isTouchedInsideFrame = function() {
+Window_Selectable.prototype.isTouchedInsideFrame = function () {
   var x = this.canvasToLocalX(TouchInput.x)
   var y = this.canvasToLocalY(TouchInput.y)
   return x >= 0 && y >= 0 && x < this.width && y < this.height
 }
 
-Window_Selectable.prototype.onTouch = function(triggered) {
+Window_Selectable.prototype.onTouch = function (triggered) {
   var lastIndex = this.index()
   var x = this.canvasToLocalX(TouchInput.x)
   var y = this.canvasToLocalY(TouchInput.y)
@@ -1169,7 +1174,7 @@ Window_Selectable.prototype.onTouch = function(triggered) {
   }
 }
 
-Window_Selectable.prototype.hitTest = function(x, y) {
+Window_Selectable.prototype.hitTest = function (x, y) {
   if (this.isContentsArea(x, y)) {
     var cx = x - this.padding
     var cy = y - this.padding
@@ -1189,7 +1194,7 @@ Window_Selectable.prototype.hitTest = function(x, y) {
   return -1
 }
 
-Window_Selectable.prototype.isContentsArea = function(x, y) {
+Window_Selectable.prototype.isContentsArea = function (x, y) {
   var left = this.padding
   var top = this.padding
   var right = this.width - this.padding
@@ -1197,27 +1202,27 @@ Window_Selectable.prototype.isContentsArea = function(x, y) {
   return x >= left && y >= top && x < right && y < bottom
 }
 
-Window_Selectable.prototype.isTouchOkEnabled = function() {
+Window_Selectable.prototype.isTouchOkEnabled = function () {
   return this.isOkEnabled()
 }
 
-Window_Selectable.prototype.isOkEnabled = function() {
+Window_Selectable.prototype.isOkEnabled = function () {
   return this.isHandled('ok')
 }
 
-Window_Selectable.prototype.isCancelEnabled = function() {
+Window_Selectable.prototype.isCancelEnabled = function () {
   return this.isHandled('cancel')
 }
 
-Window_Selectable.prototype.isOkTriggered = function() {
+Window_Selectable.prototype.isOkTriggered = function () {
   return Input.isRepeated('ok')
 }
 
-Window_Selectable.prototype.isCancelTriggered = function() {
+Window_Selectable.prototype.isCancelTriggered = function () {
   return Input.isRepeated('cancel')
 }
 
-Window_Selectable.prototype.processOk = function() {
+Window_Selectable.prototype.processOk = function () {
   if (this.isCurrentItemEnabled()) {
     this.playOkSound()
     this.updateInputData()
@@ -1228,49 +1233,49 @@ Window_Selectable.prototype.processOk = function() {
   }
 }
 
-Window_Selectable.prototype.playOkSound = function() {
+Window_Selectable.prototype.playOkSound = function () {
   SoundManager.playOk()
 }
 
-Window_Selectable.prototype.playBuzzerSound = function() {
+Window_Selectable.prototype.playBuzzerSound = function () {
   SoundManager.playBuzzer()
 }
 
-Window_Selectable.prototype.callOkHandler = function() {
+Window_Selectable.prototype.callOkHandler = function () {
   this.callHandler('ok')
 }
 
-Window_Selectable.prototype.processCancel = function() {
+Window_Selectable.prototype.processCancel = function () {
   SoundManager.playCancel()
   this.updateInputData()
   this.deactivate()
   this.callCancelHandler()
 }
 
-Window_Selectable.prototype.callCancelHandler = function() {
+Window_Selectable.prototype.callCancelHandler = function () {
   this.callHandler('cancel')
 }
 
-Window_Selectable.prototype.processPageup = function() {
+Window_Selectable.prototype.processPageup = function () {
   SoundManager.playCursor()
   this.updateInputData()
   this.deactivate()
   this.callHandler('pageup')
 }
 
-Window_Selectable.prototype.processPagedown = function() {
+Window_Selectable.prototype.processPagedown = function () {
   SoundManager.playCursor()
   this.updateInputData()
   this.deactivate()
   this.callHandler('pagedown')
 }
 
-Window_Selectable.prototype.updateInputData = function() {
+Window_Selectable.prototype.updateInputData = function () {
   Input.update()
   TouchInput.update()
 }
 
-Window_Selectable.prototype.updateCursor = function() {
+Window_Selectable.prototype.updateCursor = function () {
   if (this._cursorAll) {
     var allRowsHeight = this.maxRows() * this.itemHeight()
     this.setCursorRect(0, 0, this.contents.width, allRowsHeight)
@@ -1283,12 +1288,12 @@ Window_Selectable.prototype.updateCursor = function() {
   }
 }
 
-Window_Selectable.prototype.isCursorVisible = function() {
+Window_Selectable.prototype.isCursorVisible = function () {
   var row = this.row()
   return row >= this.topRow() && row <= this.bottomRow()
 }
 
-Window_Selectable.prototype.ensureCursorVisible = function() {
+Window_Selectable.prototype.ensureCursorVisible = function () {
   var row = this.row()
   if (row < this.topRow()) {
     this.setTopRow(row)
@@ -1297,18 +1302,18 @@ Window_Selectable.prototype.ensureCursorVisible = function() {
   }
 }
 
-Window_Selectable.prototype.callUpdateHelp = function() {
+Window_Selectable.prototype.callUpdateHelp = function () {
   if (this.active && this._helpWindow && this._helpWindow2) {
     this.updateHelp()
   }
 }
 
-Window_Selectable.prototype.updateHelp = function() {
+Window_Selectable.prototype.updateHelp = function () {
   this._helpWindow.clear()
   this._helpWindow2.clear()
 }
 
-Window_Selectable.prototype.setHelpWindowItem = function(item) {
+Window_Selectable.prototype.setHelpWindowItem = function (item) {
   if (this._helpWindow) {
     this._helpWindow.setItem(item)
   }
@@ -1317,11 +1322,11 @@ Window_Selectable.prototype.setHelpWindowItem = function(item) {
   }
 }
 
-Window_Selectable.prototype.isCurrentItemEnabled = function() {
+Window_Selectable.prototype.isCurrentItemEnabled = function () {
   return true
 }
 
-Window_Selectable.prototype.drawAllItems = function() {
+Window_Selectable.prototype.drawAllItems = function () {
   var topIndex = this.topIndex()
   for (var i = 0; i < this.maxPageItems(); i++) {
     var index = topIndex + i
@@ -1331,25 +1336,25 @@ Window_Selectable.prototype.drawAllItems = function() {
   }
 }
 
-Window_Selectable.prototype.drawItem = function(index) {}
+Window_Selectable.prototype.drawItem = function (index) {}
 
-Window_Selectable.prototype.clearItem = function(index) {
+Window_Selectable.prototype.clearItem = function (index) {
   var rect = this.itemRect(index)
   this.contents.clearRect(rect.x, rect.y, rect.width, rect.height)
 }
 
-Window_Selectable.prototype.redrawItem = function(index) {
+Window_Selectable.prototype.redrawItem = function (index) {
   if (index >= 0) {
     this.clearItem(index)
     this.drawItem(index)
   }
 }
 
-Window_Selectable.prototype.redrawCurrentItem = function() {
+Window_Selectable.prototype.redrawCurrentItem = function () {
   this.redrawItem(this.index())
 }
 
-Window_Selectable.prototype.refresh = function() {
+Window_Selectable.prototype.refresh = function () {
   if (this.contents) {
     this.contents.clear()
     this.drawAllItems()
@@ -1368,7 +1373,7 @@ function Window_Command() {
 Window_Command.prototype = Object.create(Window_Selectable.prototype)
 Window_Command.prototype.constructor = Window_Command
 
-Window_Command.prototype.initialize = function(x, y) {
+Window_Command.prototype.initialize = function (x, y) {
   this.clearCommandList()
   this.makeCommandList()
   var width = this.windowWidth()
@@ -1379,67 +1384,72 @@ Window_Command.prototype.initialize = function(x, y) {
   this.activate()
 }
 
-Window_Command.prototype.windowWidth = function() {
+Window_Command.prototype.windowWidth = function () {
   return 240
 }
 
-Window_Command.prototype.windowHeight = function() {
+Window_Command.prototype.windowHeight = function () {
   return this.fittingHeight(this.numVisibleRows())
 }
 
-Window_Command.prototype.numVisibleRows = function() {
+Window_Command.prototype.numVisibleRows = function () {
   return Math.ceil(this.maxItems() / this.maxCols())
 }
 
-Window_Command.prototype.maxItems = function() {
+Window_Command.prototype.maxItems = function () {
   return this._list.length
 }
 
-Window_Command.prototype.clearCommandList = function() {
+Window_Command.prototype.clearCommandList = function () {
   this._list = []
 }
 
-Window_Command.prototype.makeCommandList = function() {}
+Window_Command.prototype.makeCommandList = function () {}
 
-Window_Command.prototype.addCommand = function(name, symbol, enabled, ext) {
+Window_Command.prototype.addCommand = function (name, symbol, enabled, ext) {
   if (enabled === undefined) {
     enabled = true
   }
   if (ext === undefined) {
     ext = null
   }
-  this._list.push({ name: name, symbol: symbol, enabled: enabled, ext: ext })
+  this._list.push({
+    name: name,
+    symbol: symbol,
+    enabled: enabled,
+    ext: ext
+  })
 }
 
-Window_Command.prototype.commandName = function(index) {
+Window_Command.prototype.commandName = function (index) {
   return this._list[index].name
 }
 
-Window_Command.prototype.commandSymbol = function(index) {
+Window_Command.prototype.commandSymbol = function (index) {
   return this._list[index].symbol
 }
 
-Window_Command.prototype.isCommandEnabled = function(index) {
+Window_Command.prototype.isCommandEnabled = function (index) {
   return this._list[index].enabled
 }
 
-Window_Command.prototype.currentData = function() {
+Window_Command.prototype.currentData = function () {
   return this.index() >= 0 ? this._list[this.index()] : null
 }
 
-Window_Command.prototype.isCurrentItemEnabled = function() {
+Window_Command.prototype.isCurrentItemEnabled = function () {
   return this.currentData() ? this.currentData().enabled : false
 }
 
-Window_Command.prototype.currentSymbol = function() {
+Window_Command.prototype.currentSymbol = function () {
   return this.currentData() ? this.currentData().symbol : null
 }
 
-Window_Command.prototype.currentExt = function() {
+Window_Command.prototype.currentExt = function () {
   return this.currentData() ? this.currentData().ext : null
 }
 
-Window_Command.prototype.findSymbol = function(symbol) {
+Window_Command.prototype.findSymbol = function (symbol) {
   for (var i = 0; i < this._list.length; i++) {
     if (this._list[i].symbol === symbol) {
       return i
@@ -1448,7 +1458,7 @@ Window_Command.prototype.findSymbol = function(symbol) {
   return -1
 }
 
-Window_Command.prototype.selectSymbol = function(symbol) {
+Window_Command.prototype.selectSymbol = function (symbol) {
   var index = this.findSymbol(symbol)
   if (index >= 0) {
     this.select(index)
@@ -1457,7 +1467,7 @@ Window_Command.prototype.selectSymbol = function(symbol) {
   }
 }
 
-Window_Command.prototype.findExt = function(ext) {
+Window_Command.prototype.findExt = function (ext) {
   for (var i = 0; i < this._list.length; i++) {
     if (this._list[i].ext === ext) {
       return i
@@ -1466,7 +1476,7 @@ Window_Command.prototype.findExt = function(ext) {
   return -1
 }
 
-Window_Command.prototype.selectExt = function(ext) {
+Window_Command.prototype.selectExt = function (ext) {
   var index = this.findExt(ext)
   if (index >= 0) {
     this.select(index)
@@ -1475,7 +1485,7 @@ Window_Command.prototype.selectExt = function(ext) {
   }
 }
 
-Window_Command.prototype.drawItem = function(index) {
+Window_Command.prototype.drawItem = function (index) {
   var rect = this.itemRectForText(index)
   var align = this.itemTextAlign()
   this.resetTextColor()
@@ -1483,15 +1493,15 @@ Window_Command.prototype.drawItem = function(index) {
   this.drawText(this.commandName(index), rect.x, rect.y, rect.width, align)
 }
 
-Window_Command.prototype.itemTextAlign = function() {
+Window_Command.prototype.itemTextAlign = function () {
   return 'left'
 }
 
-Window_Command.prototype.isOkEnabled = function() {
+Window_Command.prototype.isOkEnabled = function () {
   return true
 }
 
-Window_Command.prototype.callOkHandler = function() {
+Window_Command.prototype.callOkHandler = function () {
   var symbol = this.currentSymbol()
   if (this.isHandled(symbol)) {
     this.callHandler(symbol)
@@ -1502,7 +1512,7 @@ Window_Command.prototype.callOkHandler = function() {
   }
 }
 
-Window_Command.prototype.refresh = function() {
+Window_Command.prototype.refresh = function () {
   this.clearCommandList()
   this.makeCommandList()
   this.createContents()
@@ -1521,19 +1531,19 @@ function Window_HorzCommand() {
 Window_HorzCommand.prototype = Object.create(Window_Command.prototype)
 Window_HorzCommand.prototype.constructor = Window_HorzCommand
 
-Window_HorzCommand.prototype.initialize = function(x, y) {
+Window_HorzCommand.prototype.initialize = function (x, y) {
   Window_Command.prototype.initialize.call(this, x, y)
 }
 
-Window_HorzCommand.prototype.numVisibleRows = function() {
+Window_HorzCommand.prototype.numVisibleRows = function () {
   return 1
 }
 
-Window_HorzCommand.prototype.maxCols = function() {
+Window_HorzCommand.prototype.maxCols = function () {
   return 4
 }
 
-Window_HorzCommand.prototype.itemTextAlign = function() {
+Window_HorzCommand.prototype.itemTextAlign = function () {
   return 'center'
 }
 
@@ -1549,29 +1559,29 @@ function Window_Help() {
 Window_Help.prototype = Object.create(Window_Base.prototype)
 Window_Help.prototype.constructor = Window_Help
 
-Window_Help.prototype.initialize = function(numLines) {
+Window_Help.prototype.initialize = function (numLines) {
   var width = Graphics.boxWidth
   var height = this.fittingHeight(numLines || 2)
   Window_Base.prototype.initialize.call(this, 0, 0, width, height)
   this._text = ''
 }
 
-Window_Help.prototype.setText = function(text) {
+Window_Help.prototype.setText = function (text) {
   if (this._text !== text) {
     this._text = text
     this.refresh()
   }
 }
 
-Window_Help.prototype.clear = function() {
+Window_Help.prototype.clear = function () {
   this.setText('')
 }
 
-Window_Help.prototype.setItem = function(item) {
+Window_Help.prototype.setItem = function (item) {
   this.setText(item ? item.description : '')
 }
 
-Window_Help.prototype.refresh = function() {
+Window_Help.prototype.refresh = function () {
   this.contents.clear()
   this.drawTextEx(this._text, this.textPadding(), 0)
 }
@@ -1588,7 +1598,7 @@ function Window_Help2() {
 Window_Help2.prototype = Object.create(Window_Base.prototype)
 Window_Help2.prototype.constructor = Window_Help
 
-Window_Help2.prototype.initialize = function(x, y, width, height) {
+Window_Help2.prototype.initialize = function (x, y, width, height) {
   Window_Base.prototype.initialize.call(this, x, y, width, height)
   this._text = ''
 
@@ -1598,7 +1608,7 @@ Window_Help2.prototype.initialize = function(x, y, width, height) {
   //console.log('initialize ' + this._text, this._graphicName)
 }
 
-Window_Help2.prototype.setText = function(text) {
+Window_Help2.prototype.setText = function (text) {
   //console.log('setText ', 'old ' + this._text, 'new ' + text, this._graphicName)
   if (this._text !== text) {
     this._text = text
@@ -1606,7 +1616,7 @@ Window_Help2.prototype.setText = function(text) {
   }
 }
 
-Window_Help2.prototype.clear = function() {
+Window_Help2.prototype.clear = function () {
   this.setText('')
 
   //umaaji add
@@ -1614,27 +1624,35 @@ Window_Help2.prototype.clear = function() {
   //console.log('clear ' + this._text, this._graphicName)
 }
 
-Window_Help2.prototype.setItem = function(item) {
+Window_Help2.prototype.setItem = function (item) {
   //console.log('setItem ' + this._text, this._graphicName)
   this.setText(item ? item.description : '')
 
   if (item) {
-    this._graphicName = item.id - 1 + 100 // item id is 1 start
+    //カテゴリ判定
+    if (DataManager.isWeapon(item)) {
+      //specialかどうか
+      this._graphicName = "sp_" + (item.id) // item id is 1 start  
+    } else {
+      //通常アイテム
+      this._graphicName = item.id - 1 + 100 // item id is 1 start  
+    }
+
     this.drawSpecial(this._graphicName)
     //console.log('draw end', this._graphicName)
   }
-//    else {
-//     console.log('no draw end', this._graphicName)
-//   }
+  //    else {
+  //     console.log('no draw end', this._graphicName)
+  //   }
 
 }
 
-Window_Help2.prototype.drawSpecial = function(filename) {
+Window_Help2.prototype.drawSpecial = function (filename) {
   var bitmap = ImageManager.loadBitmap('img/pictures/', filename)
   //this.contents.blt(bitmap, 0, 0, bitmap.width, bitmap.height, 0,0);
 
   bitmap.addLoadListener(
-    function() {
+    function () {
       //中心に描画
       var x = (this._width >> 1) - (bitmap.width >> 1) - 13
       if (x < -13) x = -13 // フレーム余白修正
@@ -1657,7 +1675,7 @@ Window_Help2.prototype.drawSpecial = function(filename) {
   )
 }
 
-Window_Help2.prototype.refresh = function() {
+Window_Help2.prototype.refresh = function () {
   //console.log('refresh')
   this.contents.clear()
   //this.drawTextEx(this._text, this.textPadding(), 0)
@@ -1675,37 +1693,37 @@ function Window_Gold() {
 Window_Gold.prototype = Object.create(Window_Base.prototype)
 Window_Gold.prototype.constructor = Window_Gold
 
-Window_Gold.prototype.initialize = function(x, y) {
+Window_Gold.prototype.initialize = function (x, y) {
   var width = this.windowWidth()
   var height = this.windowHeight()
   Window_Base.prototype.initialize.call(this, x, y, width, height)
   this.refresh()
 }
 
-Window_Gold.prototype.windowWidth = function() {
+Window_Gold.prototype.windowWidth = function () {
   return 240
 }
 
-Window_Gold.prototype.windowHeight = function() {
+Window_Gold.prototype.windowHeight = function () {
   return this.fittingHeight(1)
 }
 
-Window_Gold.prototype.refresh = function() {
+Window_Gold.prototype.refresh = function () {
   var x = this.textPadding()
   var width = this.contents.width - this.textPadding() * 2
   this.contents.clear()
   this.drawCurrencyValue(this.value(), this.currencyUnit(), x, 0, width)
 }
 
-Window_Gold.prototype.value = function() {
+Window_Gold.prototype.value = function () {
   return $gameParty.gold()
 }
 
-Window_Gold.prototype.currencyUnit = function() {
+Window_Gold.prototype.currencyUnit = function () {
   return TextManager.currencyUnit
 }
 
-Window_Gold.prototype.open = function() {
+Window_Gold.prototype.open = function () {
   this.refresh()
   Window_Base.prototype.open.call(this)
 }
@@ -1722,26 +1740,26 @@ function Window_MenuCommand() {
 Window_MenuCommand.prototype = Object.create(Window_Command.prototype)
 Window_MenuCommand.prototype.constructor = Window_MenuCommand
 
-Window_MenuCommand.prototype.initialize = function(x, y) {
+Window_MenuCommand.prototype.initialize = function (x, y) {
   Window_Command.prototype.initialize.call(this, x, y)
   this.selectLast()
 }
 
 Window_MenuCommand._lastCommandSymbol = null
 
-Window_MenuCommand.initCommandPosition = function() {
+Window_MenuCommand.initCommandPosition = function () {
   this._lastCommandSymbol = null
 }
 
-Window_MenuCommand.prototype.windowWidth = function() {
+Window_MenuCommand.prototype.windowWidth = function () {
   return 240
 }
 
-Window_MenuCommand.prototype.numVisibleRows = function() {
+Window_MenuCommand.prototype.numVisibleRows = function () {
   return this.maxItems()
 }
 
-Window_MenuCommand.prototype.makeCommandList = function() {
+Window_MenuCommand.prototype.makeCommandList = function () {
   this.addMainCommands()
   this.addFormationCommand()
   this.addOriginalCommands()
@@ -1750,7 +1768,7 @@ Window_MenuCommand.prototype.makeCommandList = function() {
   this.addGameEndCommand()
 }
 
-Window_MenuCommand.prototype.addMainCommands = function() {
+Window_MenuCommand.prototype.addMainCommands = function () {
   var enabled = this.areMainCommandsEnabled()
   if (this.needsCommand('item')) {
     this.addCommand(TextManager.item, 'item', enabled)
@@ -1766,35 +1784,35 @@ Window_MenuCommand.prototype.addMainCommands = function() {
   }
 }
 
-Window_MenuCommand.prototype.addFormationCommand = function() {
+Window_MenuCommand.prototype.addFormationCommand = function () {
   if (this.needsCommand('formation')) {
     var enabled = this.isFormationEnabled()
     this.addCommand(TextManager.formation, 'formation', enabled)
   }
 }
 
-Window_MenuCommand.prototype.addOriginalCommands = function() {}
+Window_MenuCommand.prototype.addOriginalCommands = function () {}
 
-Window_MenuCommand.prototype.addOptionsCommand = function() {
+Window_MenuCommand.prototype.addOptionsCommand = function () {
   if (this.needsCommand('options')) {
     var enabled = this.isOptionsEnabled()
     this.addCommand(TextManager.options, 'options', enabled)
   }
 }
 
-Window_MenuCommand.prototype.addSaveCommand = function() {
+Window_MenuCommand.prototype.addSaveCommand = function () {
   if (this.needsCommand('save')) {
     var enabled = this.isSaveEnabled()
     this.addCommand(TextManager.save, 'save', enabled)
   }
 }
 
-Window_MenuCommand.prototype.addGameEndCommand = function() {
+Window_MenuCommand.prototype.addGameEndCommand = function () {
   var enabled = this.isGameEndEnabled()
   this.addCommand(TextManager.gameEnd, 'gameEnd', enabled)
 }
 
-Window_MenuCommand.prototype.needsCommand = function(name) {
+Window_MenuCommand.prototype.needsCommand = function (name) {
   var flags = $dataSystem.menuCommands
   if (flags) {
     switch (name) {
@@ -1815,32 +1833,32 @@ Window_MenuCommand.prototype.needsCommand = function(name) {
   return true
 }
 
-Window_MenuCommand.prototype.areMainCommandsEnabled = function() {
+Window_MenuCommand.prototype.areMainCommandsEnabled = function () {
   return $gameParty.exists()
 }
 
-Window_MenuCommand.prototype.isFormationEnabled = function() {
+Window_MenuCommand.prototype.isFormationEnabled = function () {
   return $gameParty.size() >= 2 && $gameSystem.isFormationEnabled()
 }
 
-Window_MenuCommand.prototype.isOptionsEnabled = function() {
+Window_MenuCommand.prototype.isOptionsEnabled = function () {
   return true
 }
 
-Window_MenuCommand.prototype.isSaveEnabled = function() {
+Window_MenuCommand.prototype.isSaveEnabled = function () {
   return !DataManager.isEventTest() && $gameSystem.isSaveEnabled()
 }
 
-Window_MenuCommand.prototype.isGameEndEnabled = function() {
+Window_MenuCommand.prototype.isGameEndEnabled = function () {
   return true
 }
 
-Window_MenuCommand.prototype.processOk = function() {
+Window_MenuCommand.prototype.processOk = function () {
   Window_MenuCommand._lastCommandSymbol = this.currentSymbol()
   Window_Command.prototype.processOk.call(this)
 }
 
-Window_MenuCommand.prototype.selectLast = function() {
+Window_MenuCommand.prototype.selectLast = function () {
   this.selectSymbol(Window_MenuCommand._lastCommandSymbol)
 }
 
@@ -1856,7 +1874,7 @@ function Window_MenuStatus() {
 Window_MenuStatus.prototype = Object.create(Window_Selectable.prototype)
 Window_MenuStatus.prototype.constructor = Window_MenuStatus
 
-Window_MenuStatus.prototype.initialize = function(x, y) {
+Window_MenuStatus.prototype.initialize = function (x, y) {
   var width = this.windowWidth()
   var height = this.windowHeight()
   Window_Selectable.prototype.initialize.call(this, x, y, width, height)
@@ -1865,40 +1883,40 @@ Window_MenuStatus.prototype.initialize = function(x, y) {
   this.refresh()
 }
 
-Window_MenuStatus.prototype.windowWidth = function() {
+Window_MenuStatus.prototype.windowWidth = function () {
   return Graphics.boxWidth - 240
 }
 
-Window_MenuStatus.prototype.windowHeight = function() {
+Window_MenuStatus.prototype.windowHeight = function () {
   return Graphics.boxHeight
 }
 
-Window_MenuStatus.prototype.maxItems = function() {
+Window_MenuStatus.prototype.maxItems = function () {
   return $gameParty.size()
 }
 
-Window_MenuStatus.prototype.itemHeight = function() {
+Window_MenuStatus.prototype.itemHeight = function () {
   var clientHeight = this.height - this.padding * 2
   return Math.floor(clientHeight / this.numVisibleRows())
 }
 
-Window_MenuStatus.prototype.numVisibleRows = function() {
+Window_MenuStatus.prototype.numVisibleRows = function () {
   return 4
 }
 
-Window_MenuStatus.prototype.loadImages = function() {
-  $gameParty.members().forEach(function(actor) {
+Window_MenuStatus.prototype.loadImages = function () {
+  $gameParty.members().forEach(function (actor) {
     ImageManager.reserveFace(actor.faceName())
   }, this)
 }
 
-Window_MenuStatus.prototype.drawItem = function(index) {
+Window_MenuStatus.prototype.drawItem = function (index) {
   this.drawItemBackground(index)
   this.drawItemImage(index)
   this.drawItemStatus(index)
 }
 
-Window_MenuStatus.prototype.drawItemBackground = function(index) {
+Window_MenuStatus.prototype.drawItemBackground = function (index) {
   if (index === this._pendingIndex) {
     var rect = this.itemRect(index)
     var color = this.pendingColor()
@@ -1908,7 +1926,7 @@ Window_MenuStatus.prototype.drawItemBackground = function(index) {
   }
 }
 
-Window_MenuStatus.prototype.drawItemImage = function(index) {
+Window_MenuStatus.prototype.drawItemImage = function (index) {
   var actor = $gameParty.members()[index]
   var rect = this.itemRect(index)
   this.changePaintOpacity(actor.isBattleMember())
@@ -1922,7 +1940,7 @@ Window_MenuStatus.prototype.drawItemImage = function(index) {
   this.changePaintOpacity(true)
 }
 
-Window_MenuStatus.prototype.drawItemStatus = function(index) {
+Window_MenuStatus.prototype.drawItemStatus = function (index) {
   var actor = $gameParty.members()[index]
   var rect = this.itemRect(index)
   var x = rect.x + 162
@@ -1931,12 +1949,12 @@ Window_MenuStatus.prototype.drawItemStatus = function(index) {
   this.drawActorSimpleStatus(actor, x, y, width)
 }
 
-Window_MenuStatus.prototype.processOk = function() {
+Window_MenuStatus.prototype.processOk = function () {
   Window_Selectable.prototype.processOk.call(this)
   $gameParty.setMenuActor($gameParty.members()[this.index()])
 }
 
-Window_MenuStatus.prototype.isCurrentItemEnabled = function() {
+Window_MenuStatus.prototype.isCurrentItemEnabled = function () {
   if (this._formationMode) {
     var actor = $gameParty.members()[this.index()]
     return actor && actor.isFormationChangeOk()
@@ -1945,23 +1963,23 @@ Window_MenuStatus.prototype.isCurrentItemEnabled = function() {
   }
 }
 
-Window_MenuStatus.prototype.selectLast = function() {
+Window_MenuStatus.prototype.selectLast = function () {
   this.select($gameParty.menuActor().index() || 0)
 }
 
-Window_MenuStatus.prototype.formationMode = function() {
+Window_MenuStatus.prototype.formationMode = function () {
   return this._formationMode
 }
 
-Window_MenuStatus.prototype.setFormationMode = function(formationMode) {
+Window_MenuStatus.prototype.setFormationMode = function (formationMode) {
   this._formationMode = formationMode
 }
 
-Window_MenuStatus.prototype.pendingIndex = function() {
+Window_MenuStatus.prototype.pendingIndex = function () {
   return this._pendingIndex
 }
 
-Window_MenuStatus.prototype.setPendingIndex = function(index) {
+Window_MenuStatus.prototype.setPendingIndex = function (index) {
   var lastPendingIndex = this._pendingIndex
   this._pendingIndex = index
   this.redrawItem(this._pendingIndex)
@@ -1980,23 +1998,23 @@ function Window_MenuActor() {
 Window_MenuActor.prototype = Object.create(Window_MenuStatus.prototype)
 Window_MenuActor.prototype.constructor = Window_MenuActor
 
-Window_MenuActor.prototype.initialize = function() {
+Window_MenuActor.prototype.initialize = function () {
   Window_MenuStatus.prototype.initialize.call(this, 0, 0)
   this.hide()
 }
 
-Window_MenuActor.prototype.processOk = function() {
+Window_MenuActor.prototype.processOk = function () {
   if (!this.cursorAll()) {
     $gameParty.setTargetActor($gameParty.members()[this.index()])
   }
   this.callOkHandler()
 }
 
-Window_MenuActor.prototype.selectLast = function() {
+Window_MenuActor.prototype.selectLast = function () {
   this.select($gameParty.targetActor().index() || 0)
 }
 
-Window_MenuActor.prototype.selectForItem = function(item) {
+Window_MenuActor.prototype.selectForItem = function (item) {
   var actor = $gameParty.menuActor()
   var action = new Game_Action(actor)
   action.setItemObject(item)
@@ -2029,35 +2047,51 @@ function Window_ItemCategory() {
 Window_ItemCategory.prototype = Object.create(Window_HorzCommand.prototype)
 Window_ItemCategory.prototype.constructor = Window_ItemCategory
 
-Window_ItemCategory.prototype.initialize = function() {
+Window_ItemCategory.prototype.initialize = function () {
   Window_HorzCommand.prototype.initialize.call(this, 0, 0)
 }
 
-Window_ItemCategory.prototype.windowWidth = function() {
+Window_ItemCategory.prototype.windowWidth = function () {
   return Graphics.boxWidth
 }
 
-Window_ItemCategory.prototype.maxCols = function() {
+Window_ItemCategory.prototype.maxCols = function () {
   // return 4;
   return 2;
 }
 
-Window_ItemCategory.prototype.update = function() {
+Window_ItemCategory.prototype.update = function () {
   Window_HorzCommand.prototype.update.call(this)
   if (this._itemWindow) {
     this._itemWindow.setCategory(this.currentSymbol())
   }
 }
 
-Window_ItemCategory.prototype.makeCommandList = function() {
+Window_ItemCategory.prototype.makeCommandList = function () {
   // this.addCommand(TextManager.item,    'item');
   // this.addCommand(TextManager.armor,   'armor');
   this.addCommand(TextManager.keyItem, 'keyItem');
-  this.addCommand(TextManager.weapon,  'weapon');
+  this.addCommand(TextManager.weapon, 'weapon');
 }
 
-Window_ItemCategory.prototype.setItemWindow = function(itemWindow) {
+Window_ItemCategory.prototype.setItemWindow = function (itemWindow) {
   this._itemWindow = itemWindow
+}
+
+//umaaji add
+Window_ItemCategory.prototype.drawItem = function (index) {
+  console.log("category drawitem", "index", index)
+  var rect = this.itemRectForText(index)
+  var align = this.itemTextAlign()
+  this.resetTextColor()
+  this.changeTextColor(this.powerUpColor())
+  if (index === 0) {
+    this.changeTextColor(this.powerUpColor())
+  } else if (index === 1) {
+    this.changeTextColor(this.crisisColor())
+  }
+  this.changePaintOpacity(this.isCommandEnabled(index))
+  this.drawText(this.commandName(index), rect.x, rect.y, rect.width, align)
 }
 
 //-----------------------------------------------------------------------------
@@ -2072,13 +2106,13 @@ function Window_ItemList() {
 Window_ItemList.prototype = Object.create(Window_Selectable.prototype)
 Window_ItemList.prototype.constructor = Window_ItemList
 
-Window_ItemList.prototype.initialize = function(x, y, width, height) {
+Window_ItemList.prototype.initialize = function (x, y, width, height) {
   Window_Selectable.prototype.initialize.call(this, x, y, width, height)
   this._category = 'none'
   this._data = []
 }
 
-Window_ItemList.prototype.setCategory = function(category) {
+Window_ItemList.prototype.setCategory = function (category) {
   if (this._category !== category) {
     this._category = category
     this.refresh()
@@ -2086,28 +2120,28 @@ Window_ItemList.prototype.setCategory = function(category) {
   }
 }
 
-Window_ItemList.prototype.maxCols = function() {
+Window_ItemList.prototype.maxCols = function () {
   return 1
 }
 
-Window_ItemList.prototype.spacing = function() {
+Window_ItemList.prototype.spacing = function () {
   return 48
 }
 
-Window_ItemList.prototype.maxItems = function() {
+Window_ItemList.prototype.maxItems = function () {
   return this._data ? this._data.length : 1
 }
 
-Window_ItemList.prototype.item = function() {
+Window_ItemList.prototype.item = function () {
   var index = this.index()
   return this._data && index >= 0 ? this._data[index] : null
 }
 
-Window_ItemList.prototype.isCurrentItemEnabled = function() {
+Window_ItemList.prototype.isCurrentItemEnabled = function () {
   return this.isEnabled(this.item())
 }
 
-Window_ItemList.prototype.includes = function(item) {
+Window_ItemList.prototype.includes = function (item) {
   switch (this._category) {
     case 'item':
       return DataManager.isItem(item) && item.itypeId === 1
@@ -2122,16 +2156,16 @@ Window_ItemList.prototype.includes = function(item) {
   }
 }
 
-Window_ItemList.prototype.needsNumber = function() {
+Window_ItemList.prototype.needsNumber = function () {
   return true
 }
 
-Window_ItemList.prototype.isEnabled = function(item) {
+Window_ItemList.prototype.isEnabled = function (item) {
   return $gameParty.canUse(item)
 }
 
-Window_ItemList.prototype.makeItemList = function() {
-  this._data = $gameParty.allItems().filter(function(item) {
+Window_ItemList.prototype.makeItemList = function () {
+  this._data = $gameParty.allItems().filter(function (item) {
     return this.includes(item)
   }, this)
   if (this.includes(null)) {
@@ -2139,12 +2173,12 @@ Window_ItemList.prototype.makeItemList = function() {
   }
 }
 
-Window_ItemList.prototype.selectLast = function() {
+Window_ItemList.prototype.selectLast = function () {
   var index = this._data.indexOf($gameParty.lastItem())
   this.select(index >= 0 ? index : 0)
 }
 
-Window_ItemList.prototype.drawItem = function(index) {
+Window_ItemList.prototype.drawItem = function (index) {
   var item = this._data[index]
   if (item) {
     var numberWidth = this.numberWidth()
@@ -2157,22 +2191,22 @@ Window_ItemList.prototype.drawItem = function(index) {
   }
 }
 
-Window_ItemList.prototype.numberWidth = function() {
+Window_ItemList.prototype.numberWidth = function () {
   return this.textWidth('000')
 }
 
-Window_ItemList.prototype.drawItemNumber = function(item, x, y, width) {
+Window_ItemList.prototype.drawItemNumber = function (item, x, y, width) {
   if (this.needsNumber()) {
     this.drawText(':', x, y, width - this.textWidth('00'), 'right')
     this.drawText($gameParty.numItems(item), x, y, width, 'right')
   }
 }
 
-Window_ItemList.prototype.updateHelp = function() {
+Window_ItemList.prototype.updateHelp = function () {
   this.setHelpWindowItem(this.item())
 }
 
-Window_ItemList.prototype.refresh = function() {
+Window_ItemList.prototype.refresh = function () {
   this.makeItemList()
   this.createContents()
   this.drawAllItems()
@@ -2190,16 +2224,16 @@ function Window_SkillType() {
 Window_SkillType.prototype = Object.create(Window_Command.prototype)
 Window_SkillType.prototype.constructor = Window_SkillType
 
-Window_SkillType.prototype.initialize = function(x, y) {
+Window_SkillType.prototype.initialize = function (x, y) {
   Window_Command.prototype.initialize.call(this, x, y)
   this._actor = null
 }
 
-Window_SkillType.prototype.windowWidth = function() {
+Window_SkillType.prototype.windowWidth = function () {
   return 240
 }
 
-Window_SkillType.prototype.setActor = function(actor) {
+Window_SkillType.prototype.setActor = function (actor) {
   if (this._actor !== actor) {
     this._actor = actor
     this.refresh()
@@ -2207,35 +2241,35 @@ Window_SkillType.prototype.setActor = function(actor) {
   }
 }
 
-Window_SkillType.prototype.numVisibleRows = function() {
+Window_SkillType.prototype.numVisibleRows = function () {
   return 4
 }
 
-Window_SkillType.prototype.makeCommandList = function() {
+Window_SkillType.prototype.makeCommandList = function () {
   if (this._actor) {
     var skillTypes = this._actor.addedSkillTypes()
-    skillTypes.sort(function(a, b) {
+    skillTypes.sort(function (a, b) {
       return a - b
     })
-    skillTypes.forEach(function(stypeId) {
+    skillTypes.forEach(function (stypeId) {
       var name = $dataSystem.skillTypes[stypeId]
       this.addCommand(name, 'skill', true, stypeId)
     }, this)
   }
 }
 
-Window_SkillType.prototype.update = function() {
+Window_SkillType.prototype.update = function () {
   Window_Command.prototype.update.call(this)
   if (this._skillWindow) {
     this._skillWindow.setStypeId(this.currentExt())
   }
 }
 
-Window_SkillType.prototype.setSkillWindow = function(skillWindow) {
+Window_SkillType.prototype.setSkillWindow = function (skillWindow) {
   this._skillWindow = skillWindow
 }
 
-Window_SkillType.prototype.selectLast = function() {
+Window_SkillType.prototype.selectLast = function () {
   var skill = this._actor.lastMenuSkill()
   if (skill) {
     this.selectExt(skill.stypeId)
@@ -2256,19 +2290,19 @@ function Window_SkillStatus() {
 Window_SkillStatus.prototype = Object.create(Window_Base.prototype)
 Window_SkillStatus.prototype.constructor = Window_SkillStatus
 
-Window_SkillStatus.prototype.initialize = function(x, y, width, height) {
+Window_SkillStatus.prototype.initialize = function (x, y, width, height) {
   Window_Base.prototype.initialize.call(this, x, y, width, height)
   this._actor = null
 }
 
-Window_SkillStatus.prototype.setActor = function(actor) {
+Window_SkillStatus.prototype.setActor = function (actor) {
   if (this._actor !== actor) {
     this._actor = actor
     this.refresh()
   }
 }
 
-Window_SkillStatus.prototype.refresh = function() {
+Window_SkillStatus.prototype.refresh = function () {
   this.contents.clear()
   if (this._actor) {
     var w = this.width - this.padding * 2
@@ -2292,14 +2326,14 @@ function Window_SkillList() {
 Window_SkillList.prototype = Object.create(Window_Selectable.prototype)
 Window_SkillList.prototype.constructor = Window_SkillList
 
-Window_SkillList.prototype.initialize = function(x, y, width, height) {
+Window_SkillList.prototype.initialize = function (x, y, width, height) {
   Window_Selectable.prototype.initialize.call(this, x, y, width, height)
   this._actor = null
   this._stypeId = 0
   this._data = []
 }
 
-Window_SkillList.prototype.setActor = function(actor) {
+Window_SkillList.prototype.setActor = function (actor) {
   if (this._actor !== actor) {
     this._actor = actor
     this.refresh()
@@ -2307,7 +2341,7 @@ Window_SkillList.prototype.setActor = function(actor) {
   }
 }
 
-Window_SkillList.prototype.setStypeId = function(stypeId) {
+Window_SkillList.prototype.setStypeId = function (stypeId) {
   if (this._stypeId !== stypeId) {
     this._stypeId = stypeId
     this.refresh()
@@ -2315,37 +2349,37 @@ Window_SkillList.prototype.setStypeId = function(stypeId) {
   }
 }
 
-Window_SkillList.prototype.maxCols = function() {
+Window_SkillList.prototype.maxCols = function () {
   return 2
 }
 
-Window_SkillList.prototype.spacing = function() {
+Window_SkillList.prototype.spacing = function () {
   return 48
 }
 
-Window_SkillList.prototype.maxItems = function() {
+Window_SkillList.prototype.maxItems = function () {
   return this._data ? this._data.length : 1
 }
 
-Window_SkillList.prototype.item = function() {
+Window_SkillList.prototype.item = function () {
   return this._data && this.index() >= 0 ? this._data[this.index()] : null
 }
 
-Window_SkillList.prototype.isCurrentItemEnabled = function() {
+Window_SkillList.prototype.isCurrentItemEnabled = function () {
   return this.isEnabled(this._data[this.index()])
 }
 
-Window_SkillList.prototype.includes = function(item) {
+Window_SkillList.prototype.includes = function (item) {
   return item && item.stypeId === this._stypeId
 }
 
-Window_SkillList.prototype.isEnabled = function(item) {
+Window_SkillList.prototype.isEnabled = function (item) {
   return this._actor && this._actor.canUse(item)
 }
 
-Window_SkillList.prototype.makeItemList = function() {
+Window_SkillList.prototype.makeItemList = function () {
   if (this._actor) {
-    this._data = this._actor.skills().filter(function(item) {
+    this._data = this._actor.skills().filter(function (item) {
       return this.includes(item)
     }, this)
   } else {
@@ -2353,7 +2387,7 @@ Window_SkillList.prototype.makeItemList = function() {
   }
 }
 
-Window_SkillList.prototype.selectLast = function() {
+Window_SkillList.prototype.selectLast = function () {
   var skill
   if ($gameParty.inBattle()) {
     skill = this._actor.lastBattleSkill()
@@ -2364,7 +2398,7 @@ Window_SkillList.prototype.selectLast = function() {
   this.select(index >= 0 ? index : 0)
 }
 
-Window_SkillList.prototype.drawItem = function(index) {
+Window_SkillList.prototype.drawItem = function (index) {
   var skill = this._data[index]
   if (skill) {
     var costWidth = this.costWidth()
@@ -2377,11 +2411,11 @@ Window_SkillList.prototype.drawItem = function(index) {
   }
 }
 
-Window_SkillList.prototype.costWidth = function() {
+Window_SkillList.prototype.costWidth = function () {
   return this.textWidth('000')
 }
 
-Window_SkillList.prototype.drawSkillCost = function(skill, x, y, width) {
+Window_SkillList.prototype.drawSkillCost = function (skill, x, y, width) {
   if (this._actor.skillTpCost(skill) > 0) {
     this.changeTextColor(this.tpCostColor())
     this.drawText(this._actor.skillTpCost(skill), x, y, width, 'right')
@@ -2391,11 +2425,11 @@ Window_SkillList.prototype.drawSkillCost = function(skill, x, y, width) {
   }
 }
 
-Window_SkillList.prototype.updateHelp = function() {
+Window_SkillList.prototype.updateHelp = function () {
   this.setHelpWindowItem(this.item())
 }
 
-Window_SkillList.prototype.refresh = function() {
+Window_SkillList.prototype.refresh = function () {
   this.makeItemList()
   this.createContents()
   this.drawAllItems()
@@ -2413,7 +2447,7 @@ function Window_EquipStatus() {
 Window_EquipStatus.prototype = Object.create(Window_Base.prototype)
 Window_EquipStatus.prototype.constructor = Window_EquipStatus
 
-Window_EquipStatus.prototype.initialize = function(x, y) {
+Window_EquipStatus.prototype.initialize = function (x, y) {
   var width = this.windowWidth()
   var height = this.windowHeight()
   Window_Base.prototype.initialize.call(this, x, y, width, height)
@@ -2422,26 +2456,26 @@ Window_EquipStatus.prototype.initialize = function(x, y) {
   this.refresh()
 }
 
-Window_EquipStatus.prototype.windowWidth = function() {
+Window_EquipStatus.prototype.windowWidth = function () {
   return 312
 }
 
-Window_EquipStatus.prototype.windowHeight = function() {
+Window_EquipStatus.prototype.windowHeight = function () {
   return this.fittingHeight(this.numVisibleRows())
 }
 
-Window_EquipStatus.prototype.numVisibleRows = function() {
+Window_EquipStatus.prototype.numVisibleRows = function () {
   return 7
 }
 
-Window_EquipStatus.prototype.setActor = function(actor) {
+Window_EquipStatus.prototype.setActor = function (actor) {
   if (this._actor !== actor) {
     this._actor = actor
     this.refresh()
   }
 }
 
-Window_EquipStatus.prototype.refresh = function() {
+Window_EquipStatus.prototype.refresh = function () {
   this.contents.clear()
   if (this._actor) {
     this.drawActorName(this._actor, this.textPadding(), 0)
@@ -2451,14 +2485,14 @@ Window_EquipStatus.prototype.refresh = function() {
   }
 }
 
-Window_EquipStatus.prototype.setTempActor = function(tempActor) {
+Window_EquipStatus.prototype.setTempActor = function (tempActor) {
   if (this._tempActor !== tempActor) {
     this._tempActor = tempActor
     this.refresh()
   }
 }
 
-Window_EquipStatus.prototype.drawItem = function(x, y, paramId) {
+Window_EquipStatus.prototype.drawItem = function (x, y, paramId) {
   this.drawParamName(x + this.textPadding(), y, paramId)
   if (this._actor) {
     this.drawCurrentParam(x + 140, y, paramId)
@@ -2469,22 +2503,22 @@ Window_EquipStatus.prototype.drawItem = function(x, y, paramId) {
   }
 }
 
-Window_EquipStatus.prototype.drawParamName = function(x, y, paramId) {
+Window_EquipStatus.prototype.drawParamName = function (x, y, paramId) {
   this.changeTextColor(this.systemColor())
   this.drawText(TextManager.param(paramId), x, y, 120)
 }
 
-Window_EquipStatus.prototype.drawCurrentParam = function(x, y, paramId) {
+Window_EquipStatus.prototype.drawCurrentParam = function (x, y, paramId) {
   this.resetTextColor()
   this.drawText(this._actor.param(paramId), x, y, 48, 'right')
 }
 
-Window_EquipStatus.prototype.drawRightArrow = function(x, y) {
+Window_EquipStatus.prototype.drawRightArrow = function (x, y) {
   this.changeTextColor(this.systemColor())
   this.drawText('\u2192', x, y, 32, 'center')
 }
 
-Window_EquipStatus.prototype.drawNewParam = function(x, y, paramId) {
+Window_EquipStatus.prototype.drawNewParam = function (x, y, paramId) {
   var newValue = this._tempActor.param(paramId)
   var diffvalue = newValue - this._actor.param(paramId)
   this.changeTextColor(this.paramchangeTextColor(diffvalue))
@@ -2503,20 +2537,20 @@ function Window_EquipCommand() {
 Window_EquipCommand.prototype = Object.create(Window_HorzCommand.prototype)
 Window_EquipCommand.prototype.constructor = Window_EquipCommand
 
-Window_EquipCommand.prototype.initialize = function(x, y, width) {
+Window_EquipCommand.prototype.initialize = function (x, y, width) {
   this._windowWidth = width
   Window_HorzCommand.prototype.initialize.call(this, x, y)
 }
 
-Window_EquipCommand.prototype.windowWidth = function() {
+Window_EquipCommand.prototype.windowWidth = function () {
   return this._windowWidth
 }
 
-Window_EquipCommand.prototype.maxCols = function() {
+Window_EquipCommand.prototype.maxCols = function () {
   return 3
 }
 
-Window_EquipCommand.prototype.makeCommandList = function() {
+Window_EquipCommand.prototype.makeCommandList = function () {
   this.addCommand(TextManager.equip2, 'equip')
   this.addCommand(TextManager.optimize, 'optimize')
   this.addCommand(TextManager.clear, 'clear')
@@ -2534,35 +2568,35 @@ function Window_EquipSlot() {
 Window_EquipSlot.prototype = Object.create(Window_Selectable.prototype)
 Window_EquipSlot.prototype.constructor = Window_EquipSlot
 
-Window_EquipSlot.prototype.initialize = function(x, y, width, height) {
+Window_EquipSlot.prototype.initialize = function (x, y, width, height) {
   Window_Selectable.prototype.initialize.call(this, x, y, width, height)
   this._actor = null
   this.refresh()
 }
 
-Window_EquipSlot.prototype.setActor = function(actor) {
+Window_EquipSlot.prototype.setActor = function (actor) {
   if (this._actor !== actor) {
     this._actor = actor
     this.refresh()
   }
 }
 
-Window_EquipSlot.prototype.update = function() {
+Window_EquipSlot.prototype.update = function () {
   Window_Selectable.prototype.update.call(this)
   if (this._itemWindow) {
     this._itemWindow.setSlotId(this.index())
   }
 }
 
-Window_EquipSlot.prototype.maxItems = function() {
+Window_EquipSlot.prototype.maxItems = function () {
   return this._actor ? this._actor.equipSlots().length : 0
 }
 
-Window_EquipSlot.prototype.item = function() {
+Window_EquipSlot.prototype.item = function () {
   return this._actor ? this._actor.equips()[this.index()] : null
 }
 
-Window_EquipSlot.prototype.drawItem = function(index) {
+Window_EquipSlot.prototype.drawItem = function (index) {
   if (this._actor) {
     var rect = this.itemRectForText(index)
     this.changeTextColor(this.systemColor())
@@ -2573,29 +2607,29 @@ Window_EquipSlot.prototype.drawItem = function(index) {
   }
 }
 
-Window_EquipSlot.prototype.slotName = function(index) {
+Window_EquipSlot.prototype.slotName = function (index) {
   var slots = this._actor.equipSlots()
   return this._actor ? $dataSystem.equipTypes[slots[index]] : ''
 }
 
-Window_EquipSlot.prototype.isEnabled = function(index) {
+Window_EquipSlot.prototype.isEnabled = function (index) {
   return this._actor ? this._actor.isEquipChangeOk(index) : false
 }
 
-Window_EquipSlot.prototype.isCurrentItemEnabled = function() {
+Window_EquipSlot.prototype.isCurrentItemEnabled = function () {
   return this.isEnabled(this.index())
 }
 
-Window_EquipSlot.prototype.setStatusWindow = function(statusWindow) {
+Window_EquipSlot.prototype.setStatusWindow = function (statusWindow) {
   this._statusWindow = statusWindow
   this.callUpdateHelp()
 }
 
-Window_EquipSlot.prototype.setItemWindow = function(itemWindow) {
+Window_EquipSlot.prototype.setItemWindow = function (itemWindow) {
   this._itemWindow = itemWindow
 }
 
-Window_EquipSlot.prototype.updateHelp = function() {
+Window_EquipSlot.prototype.updateHelp = function () {
   Window_Selectable.prototype.updateHelp.call(this)
   this.setHelpWindowItem(this.item())
   if (this._statusWindow) {
@@ -2615,13 +2649,13 @@ function Window_EquipItem() {
 Window_EquipItem.prototype = Object.create(Window_ItemList.prototype)
 Window_EquipItem.prototype.constructor = Window_EquipItem
 
-Window_EquipItem.prototype.initialize = function(x, y, width, height) {
+Window_EquipItem.prototype.initialize = function (x, y, width, height) {
   Window_ItemList.prototype.initialize.call(this, x, y, width, height)
   this._actor = null
   this._slotId = 0
 }
 
-Window_EquipItem.prototype.setActor = function(actor) {
+Window_EquipItem.prototype.setActor = function (actor) {
   if (this._actor !== actor) {
     this._actor = actor
     this.refresh()
@@ -2629,7 +2663,7 @@ Window_EquipItem.prototype.setActor = function(actor) {
   }
 }
 
-Window_EquipItem.prototype.setSlotId = function(slotId) {
+Window_EquipItem.prototype.setSlotId = function (slotId) {
   if (this._slotId !== slotId) {
     this._slotId = slotId
     this.refresh()
@@ -2637,7 +2671,7 @@ Window_EquipItem.prototype.setSlotId = function(slotId) {
   }
 }
 
-Window_EquipItem.prototype.includes = function(item) {
+Window_EquipItem.prototype.includes = function (item) {
   if (item === null) {
     return true
   }
@@ -2650,18 +2684,18 @@ Window_EquipItem.prototype.includes = function(item) {
   return this._actor.canEquip(item)
 }
 
-Window_EquipItem.prototype.isEnabled = function(item) {
+Window_EquipItem.prototype.isEnabled = function (item) {
   return true
 }
 
-Window_EquipItem.prototype.selectLast = function() {}
+Window_EquipItem.prototype.selectLast = function () {}
 
-Window_EquipItem.prototype.setStatusWindow = function(statusWindow) {
+Window_EquipItem.prototype.setStatusWindow = function (statusWindow) {
   this._statusWindow = statusWindow
   this.callUpdateHelp()
 }
 
-Window_EquipItem.prototype.updateHelp = function() {
+Window_EquipItem.prototype.updateHelp = function () {
   Window_ItemList.prototype.updateHelp.call(this)
   if (this._actor && this._statusWindow) {
     var actor = JsonEx.makeDeepCopy(this._actor)
@@ -2670,7 +2704,7 @@ Window_EquipItem.prototype.updateHelp = function() {
   }
 }
 
-Window_EquipItem.prototype.playOkSound = function() {}
+Window_EquipItem.prototype.playOkSound = function () {}
 
 //-----------------------------------------------------------------------------
 // Window_Status
@@ -2684,7 +2718,7 @@ function Window_Status() {
 Window_Status.prototype = Object.create(Window_Selectable.prototype)
 Window_Status.prototype.constructor = Window_Status
 
-Window_Status.prototype.initialize = function() {
+Window_Status.prototype.initialize = function () {
   var width = Graphics.boxWidth
   var height = Graphics.boxHeight
   Window_Selectable.prototype.initialize.call(this, 0, 0, width, height)
@@ -2693,14 +2727,14 @@ Window_Status.prototype.initialize = function() {
   this.activate()
 }
 
-Window_Status.prototype.setActor = function(actor) {
+Window_Status.prototype.setActor = function (actor) {
   if (this._actor !== actor) {
     this._actor = actor
     this.refresh()
   }
 }
 
-Window_Status.prototype.refresh = function() {
+Window_Status.prototype.refresh = function () {
   this.contents.clear()
   if (this._actor) {
     var lineHeight = this.lineHeight()
@@ -2714,39 +2748,39 @@ Window_Status.prototype.refresh = function() {
   }
 }
 
-Window_Status.prototype.drawBlock1 = function(y) {
+Window_Status.prototype.drawBlock1 = function (y) {
   this.drawActorName(this._actor, 6, y)
   this.drawActorClass(this._actor, 192, y)
   this.drawActorNickname(this._actor, 432, y)
 }
 
-Window_Status.prototype.drawBlock2 = function(y) {
+Window_Status.prototype.drawBlock2 = function (y) {
   this.drawActorFace(this._actor, 12, y)
   this.drawBasicInfo(204, y)
   this.drawExpInfo(456, y)
 }
 
-Window_Status.prototype.drawBlock3 = function(y) {
+Window_Status.prototype.drawBlock3 = function (y) {
   this.drawParameters(48, y)
   this.drawEquipments(432, y)
 }
 
-Window_Status.prototype.drawBlock4 = function(y) {
+Window_Status.prototype.drawBlock4 = function (y) {
   this.drawProfile(6, y)
 }
 
-Window_Status.prototype.drawHorzLine = function(y) {
+Window_Status.prototype.drawHorzLine = function (y) {
   var lineY = y + this.lineHeight() / 2 - 1
   this.contents.paintOpacity = 48
   this.contents.fillRect(0, lineY, this.contentsWidth(), 2, this.lineColor())
   this.contents.paintOpacity = 255
 }
 
-Window_Status.prototype.lineColor = function() {
+Window_Status.prototype.lineColor = function () {
   return this.normalColor()
 }
 
-Window_Status.prototype.drawBasicInfo = function(x, y) {
+Window_Status.prototype.drawBasicInfo = function (x, y) {
   var lineHeight = this.lineHeight()
   this.drawActorLevel(this._actor, x, y + lineHeight * 0)
   this.drawActorIcons(this._actor, x, y + lineHeight * 1)
@@ -2754,7 +2788,7 @@ Window_Status.prototype.drawBasicInfo = function(x, y) {
   this.drawActorMp(this._actor, x, y + lineHeight * 3)
 }
 
-Window_Status.prototype.drawParameters = function(x, y) {
+Window_Status.prototype.drawParameters = function (x, y) {
   var lineHeight = this.lineHeight()
   for (var i = 0; i < 6; i++) {
     var paramId = i + 2
@@ -2766,7 +2800,7 @@ Window_Status.prototype.drawParameters = function(x, y) {
   }
 }
 
-Window_Status.prototype.drawExpInfo = function(x, y) {
+Window_Status.prototype.drawExpInfo = function (x, y) {
   var lineHeight = this.lineHeight()
   var expTotal = TextManager.expTotal.format(TextManager.exp)
   var expNext = TextManager.expNext.format(TextManager.level)
@@ -2784,7 +2818,7 @@ Window_Status.prototype.drawExpInfo = function(x, y) {
   this.drawText(value2, x, y + lineHeight * 3, 270, 'right')
 }
 
-Window_Status.prototype.drawEquipments = function(x, y) {
+Window_Status.prototype.drawEquipments = function (x, y) {
   var equips = this._actor.equips()
   var count = Math.min(equips.length, this.maxEquipmentLines())
   for (var i = 0; i < count; i++) {
@@ -2792,11 +2826,11 @@ Window_Status.prototype.drawEquipments = function(x, y) {
   }
 }
 
-Window_Status.prototype.drawProfile = function(x, y) {
+Window_Status.prototype.drawProfile = function (x, y) {
   this.drawTextEx(this._actor.profile(), x, y)
 }
 
-Window_Status.prototype.maxEquipmentLines = function() {
+Window_Status.prototype.maxEquipmentLines = function () {
   return 6
 }
 
@@ -2812,42 +2846,42 @@ function Window_Options() {
 Window_Options.prototype = Object.create(Window_Command.prototype)
 Window_Options.prototype.constructor = Window_Options
 
-Window_Options.prototype.initialize = function() {
+Window_Options.prototype.initialize = function () {
   Window_Command.prototype.initialize.call(this, 0, 0)
   this.updatePlacement()
 }
 
-Window_Options.prototype.windowWidth = function() {
+Window_Options.prototype.windowWidth = function () {
   return 400
 }
 
-Window_Options.prototype.windowHeight = function() {
+Window_Options.prototype.windowHeight = function () {
   return this.fittingHeight(Math.min(this.numVisibleRows(), 12))
 }
 
-Window_Options.prototype.updatePlacement = function() {
+Window_Options.prototype.updatePlacement = function () {
   this.x = (Graphics.boxWidth - this.width) / 2
   this.y = (Graphics.boxHeight - this.height) / 2
 }
 
-Window_Options.prototype.makeCommandList = function() {
+Window_Options.prototype.makeCommandList = function () {
   this.addGeneralOptions()
   this.addVolumeOptions()
 }
 
-Window_Options.prototype.addGeneralOptions = function() {
+Window_Options.prototype.addGeneralOptions = function () {
   this.addCommand(TextManager.alwaysDash, 'alwaysDash')
   this.addCommand(TextManager.commandRemember, 'commandRemember')
 }
 
-Window_Options.prototype.addVolumeOptions = function() {
+Window_Options.prototype.addVolumeOptions = function () {
   this.addCommand(TextManager.bgmVolume, 'bgmVolume')
   this.addCommand(TextManager.bgsVolume, 'bgsVolume')
   this.addCommand(TextManager.meVolume, 'meVolume')
   this.addCommand(TextManager.seVolume, 'seVolume')
 }
 
-Window_Options.prototype.drawItem = function(index) {
+Window_Options.prototype.drawItem = function (index) {
   var rect = this.itemRectForText(index)
   var statusWidth = this.statusWidth()
   var titleWidth = rect.width - statusWidth
@@ -2863,11 +2897,11 @@ Window_Options.prototype.drawItem = function(index) {
   )
 }
 
-Window_Options.prototype.statusWidth = function() {
+Window_Options.prototype.statusWidth = function () {
   return 120
 }
 
-Window_Options.prototype.statusText = function(index) {
+Window_Options.prototype.statusText = function (index) {
   var symbol = this.commandSymbol(index)
   var value = this.getConfigValue(symbol)
   if (this.isVolumeSymbol(symbol)) {
@@ -2877,19 +2911,19 @@ Window_Options.prototype.statusText = function(index) {
   }
 }
 
-Window_Options.prototype.isVolumeSymbol = function(symbol) {
+Window_Options.prototype.isVolumeSymbol = function (symbol) {
   return symbol.contains('Volume')
 }
 
-Window_Options.prototype.booleanStatusText = function(value) {
+Window_Options.prototype.booleanStatusText = function (value) {
   return value ? 'ON' : 'OFF'
 }
 
-Window_Options.prototype.volumeStatusText = function(value) {
+Window_Options.prototype.volumeStatusText = function (value) {
   return value + '%'
 }
 
-Window_Options.prototype.processOk = function() {
+Window_Options.prototype.processOk = function () {
   var index = this.index()
   var symbol = this.commandSymbol(index)
   var value = this.getConfigValue(symbol)
@@ -2905,7 +2939,7 @@ Window_Options.prototype.processOk = function() {
   }
 }
 
-Window_Options.prototype.cursorRight = function(wrap) {
+Window_Options.prototype.cursorRight = function (wrap) {
   var index = this.index()
   var symbol = this.commandSymbol(index)
   var value = this.getConfigValue(symbol)
@@ -2918,7 +2952,7 @@ Window_Options.prototype.cursorRight = function(wrap) {
   }
 }
 
-Window_Options.prototype.cursorLeft = function(wrap) {
+Window_Options.prototype.cursorLeft = function (wrap) {
   var index = this.index()
   var symbol = this.commandSymbol(index)
   var value = this.getConfigValue(symbol)
@@ -2931,11 +2965,11 @@ Window_Options.prototype.cursorLeft = function(wrap) {
   }
 }
 
-Window_Options.prototype.volumeOffset = function() {
+Window_Options.prototype.volumeOffset = function () {
   return 20
 }
 
-Window_Options.prototype.changeValue = function(symbol, value) {
+Window_Options.prototype.changeValue = function (symbol, value) {
   var lastValue = this.getConfigValue(symbol)
   if (lastValue !== value) {
     this.setConfigValue(symbol, value)
@@ -2944,11 +2978,11 @@ Window_Options.prototype.changeValue = function(symbol, value) {
   }
 }
 
-Window_Options.prototype.getConfigValue = function(symbol) {
+Window_Options.prototype.getConfigValue = function (symbol) {
   return ConfigManager[symbol]
 }
 
-Window_Options.prototype.setConfigValue = function(symbol, volume) {
+Window_Options.prototype.setConfigValue = function (symbol, volume) {
   ConfigManager[symbol] = volume
 }
 
@@ -2964,30 +2998,30 @@ function Window_SavefileList() {
 Window_SavefileList.prototype = Object.create(Window_Selectable.prototype)
 Window_SavefileList.prototype.constructor = Window_SavefileList
 
-Window_SavefileList.prototype.initialize = function(x, y, width, height) {
+Window_SavefileList.prototype.initialize = function (x, y, width, height) {
   Window_Selectable.prototype.initialize.call(this, x, y, width, height)
   this.activate()
   this._mode = null
 }
 
-Window_SavefileList.prototype.setMode = function(mode) {
+Window_SavefileList.prototype.setMode = function (mode) {
   this._mode = mode
 }
 
-Window_SavefileList.prototype.maxItems = function() {
+Window_SavefileList.prototype.maxItems = function () {
   return DataManager.maxSavefiles()
 }
 
-Window_SavefileList.prototype.maxVisibleItems = function() {
+Window_SavefileList.prototype.maxVisibleItems = function () {
   return 5
 }
 
-Window_SavefileList.prototype.itemHeight = function() {
+Window_SavefileList.prototype.itemHeight = function () {
   var innerHeight = this.height - this.padding * 2
   return Math.floor(innerHeight / this.maxVisibleItems())
 }
 
-Window_SavefileList.prototype.drawItem = function(index) {
+Window_SavefileList.prototype.drawItem = function (index) {
   var id = index + 1
   var valid = DataManager.isThisGameFile(id)
   var info = DataManager.loadSavefileInfo(id)
@@ -3004,11 +3038,11 @@ Window_SavefileList.prototype.drawItem = function(index) {
   }
 }
 
-Window_SavefileList.prototype.drawFileId = function(id, x, y) {
+Window_SavefileList.prototype.drawFileId = function (id, x, y) {
   this.drawText(TextManager.file + ' ' + id, x, y, 180)
 }
 
-Window_SavefileList.prototype.drawContents = function(info, rect, valid) {
+Window_SavefileList.prototype.drawContents = function (info, rect, valid) {
   var bottom = rect.y + rect.height
   if (rect.width >= 420) {
     this.drawGameTitle(info, rect.x + 192, rect.y, rect.width - 192)
@@ -3023,13 +3057,13 @@ Window_SavefileList.prototype.drawContents = function(info, rect, valid) {
   }
 }
 
-Window_SavefileList.prototype.drawGameTitle = function(info, x, y, width) {
+Window_SavefileList.prototype.drawGameTitle = function (info, x, y, width) {
   if (info.title) {
     this.drawText(info.title, x, y, width)
   }
 }
 
-Window_SavefileList.prototype.drawPartyCharacters = function(info, x, y) {
+Window_SavefileList.prototype.drawPartyCharacters = function (info, x, y) {
   if (info.characters) {
     for (var i = 0; i < info.characters.length; i++) {
       var data = info.characters[i]
@@ -3038,13 +3072,13 @@ Window_SavefileList.prototype.drawPartyCharacters = function(info, x, y) {
   }
 }
 
-Window_SavefileList.prototype.drawPlaytime = function(info, x, y, width) {
+Window_SavefileList.prototype.drawPlaytime = function (info, x, y, width) {
   if (info.playtime) {
     this.drawText(info.playtime, x, y, width, 'right')
   }
 }
 
-Window_SavefileList.prototype.playOkSound = function() {}
+Window_SavefileList.prototype.playOkSound = function () {}
 
 //-----------------------------------------------------------------------------
 // Window_ShopCommand
@@ -3058,21 +3092,21 @@ function Window_ShopCommand() {
 Window_ShopCommand.prototype = Object.create(Window_HorzCommand.prototype)
 Window_ShopCommand.prototype.constructor = Window_ShopCommand
 
-Window_ShopCommand.prototype.initialize = function(width, purchaseOnly) {
+Window_ShopCommand.prototype.initialize = function (width, purchaseOnly) {
   this._windowWidth = width
   this._purchaseOnly = purchaseOnly
   Window_HorzCommand.prototype.initialize.call(this, 0, 0)
 }
 
-Window_ShopCommand.prototype.windowWidth = function() {
+Window_ShopCommand.prototype.windowWidth = function () {
   return this._windowWidth
 }
 
-Window_ShopCommand.prototype.maxCols = function() {
+Window_ShopCommand.prototype.maxCols = function () {
   return 3
 }
 
-Window_ShopCommand.prototype.makeCommandList = function() {
+Window_ShopCommand.prototype.makeCommandList = function () {
   this.addCommand(TextManager.buy, 'buy')
   this.addCommand(TextManager.sell, 'sell', !this._purchaseOnly)
   this.addCommand(TextManager.cancel, 'cancel')
@@ -3090,7 +3124,7 @@ function Window_ShopBuy() {
 Window_ShopBuy.prototype = Object.create(Window_Selectable.prototype)
 Window_ShopBuy.prototype.constructor = Window_ShopBuy
 
-Window_ShopBuy.prototype.initialize = function(x, y, height, shopGoods) {
+Window_ShopBuy.prototype.initialize = function (x, y, height, shopGoods) {
   var width = this.windowWidth()
   Window_Selectable.prototype.initialize.call(this, x, y, width, height)
   this._shopGoods = shopGoods
@@ -3099,47 +3133,47 @@ Window_ShopBuy.prototype.initialize = function(x, y, height, shopGoods) {
   this.select(0)
 }
 
-Window_ShopBuy.prototype.windowWidth = function() {
+Window_ShopBuy.prototype.windowWidth = function () {
   return 456
 }
 
-Window_ShopBuy.prototype.maxItems = function() {
+Window_ShopBuy.prototype.maxItems = function () {
   return this._data ? this._data.length : 1
 }
 
-Window_ShopBuy.prototype.item = function() {
+Window_ShopBuy.prototype.item = function () {
   return this._data[this.index()]
 }
 
-Window_ShopBuy.prototype.setMoney = function(money) {
+Window_ShopBuy.prototype.setMoney = function (money) {
   this._money = money
   this.refresh()
 }
 
-Window_ShopBuy.prototype.isCurrentItemEnabled = function() {
+Window_ShopBuy.prototype.isCurrentItemEnabled = function () {
   return this.isEnabled(this._data[this.index()])
 }
 
-Window_ShopBuy.prototype.price = function(item) {
+Window_ShopBuy.prototype.price = function (item) {
   return this._price[this._data.indexOf(item)] || 0
 }
 
-Window_ShopBuy.prototype.isEnabled = function(item) {
+Window_ShopBuy.prototype.isEnabled = function (item) {
   return (
     item && this.price(item) <= this._money && !$gameParty.hasMaxItems(item)
   )
 }
 
-Window_ShopBuy.prototype.refresh = function() {
+Window_ShopBuy.prototype.refresh = function () {
   this.makeItemList()
   this.createContents()
   this.drawAllItems()
 }
 
-Window_ShopBuy.prototype.makeItemList = function() {
+Window_ShopBuy.prototype.makeItemList = function () {
   this._data = []
   this._price = []
-  this._shopGoods.forEach(function(goods) {
+  this._shopGoods.forEach(function (goods) {
     var item = null
     switch (goods[0]) {
       case 0:
@@ -3159,7 +3193,7 @@ Window_ShopBuy.prototype.makeItemList = function() {
   }, this)
 }
 
-Window_ShopBuy.prototype.drawItem = function(index) {
+Window_ShopBuy.prototype.drawItem = function (index) {
   var item = this._data[index]
   var rect = this.itemRect(index)
   var priceWidth = 96
@@ -3176,12 +3210,12 @@ Window_ShopBuy.prototype.drawItem = function(index) {
   this.changePaintOpacity(true)
 }
 
-Window_ShopBuy.prototype.setStatusWindow = function(statusWindow) {
+Window_ShopBuy.prototype.setStatusWindow = function (statusWindow) {
   this._statusWindow = statusWindow
   this.callUpdateHelp()
 }
 
-Window_ShopBuy.prototype.updateHelp = function() {
+Window_ShopBuy.prototype.updateHelp = function () {
   this.setHelpWindowItem(this.item())
   if (this._statusWindow) {
     this._statusWindow.setItem(this.item())
@@ -3200,11 +3234,11 @@ function Window_ShopSell() {
 Window_ShopSell.prototype = Object.create(Window_ItemList.prototype)
 Window_ShopSell.prototype.constructor = Window_ShopSell
 
-Window_ShopSell.prototype.initialize = function(x, y, width, height) {
+Window_ShopSell.prototype.initialize = function (x, y, width, height) {
   Window_ItemList.prototype.initialize.call(this, x, y, width, height)
 }
 
-Window_ShopSell.prototype.isEnabled = function(item) {
+Window_ShopSell.prototype.isEnabled = function (item) {
   return item && item.price > 0
 }
 
@@ -3221,7 +3255,7 @@ function Window_ShopNumber() {
 Window_ShopNumber.prototype = Object.create(Window_Selectable.prototype)
 Window_ShopNumber.prototype.constructor = Window_ShopNumber
 
-Window_ShopNumber.prototype.initialize = function(x, y, height) {
+Window_ShopNumber.prototype.initialize = function (x, y, height) {
   var width = this.windowWidth()
   Window_Selectable.prototype.initialize.call(this, x, y, width, height)
   this._item = null
@@ -3232,15 +3266,15 @@ Window_ShopNumber.prototype.initialize = function(x, y, height) {
   this.createButtons()
 }
 
-Window_ShopNumber.prototype.windowWidth = function() {
+Window_ShopNumber.prototype.windowWidth = function () {
   return 456
 }
 
-Window_ShopNumber.prototype.number = function() {
+Window_ShopNumber.prototype.number = function () {
   return this._number
 }
 
-Window_ShopNumber.prototype.setup = function(item, max, price) {
+Window_ShopNumber.prototype.setup = function (item, max, price) {
   this._item = item
   this._max = Math.floor(max)
   this._price = price
@@ -3250,12 +3284,12 @@ Window_ShopNumber.prototype.setup = function(item, max, price) {
   this.refresh()
 }
 
-Window_ShopNumber.prototype.setCurrencyUnit = function(currencyUnit) {
+Window_ShopNumber.prototype.setCurrencyUnit = function (currencyUnit) {
   this._currencyUnit = currencyUnit
   this.refresh()
 }
 
-Window_ShopNumber.prototype.createButtons = function() {
+Window_ShopNumber.prototype.createButtons = function () {
   var bitmap = ImageManager.loadSystem('ButtonSet')
   var buttonWidth = 48
   var buttonHeight = 48
@@ -3278,7 +3312,7 @@ Window_ShopNumber.prototype.createButtons = function() {
   this._buttons[4].setClickHandler(this.onButtonOk.bind(this))
 }
 
-Window_ShopNumber.prototype.placeButtons = function() {
+Window_ShopNumber.prototype.placeButtons = function () {
   var numButtons = this._buttons.length
   var spacing = 16
   var totalWidth = -spacing
@@ -3294,7 +3328,7 @@ Window_ShopNumber.prototype.placeButtons = function() {
   }
 }
 
-Window_ShopNumber.prototype.updateButtonsVisiblity = function() {
+Window_ShopNumber.prototype.updateButtonsVisiblity = function () {
   if (TouchInput.date > Input.date) {
     this.showButtons()
   } else {
@@ -3302,19 +3336,19 @@ Window_ShopNumber.prototype.updateButtonsVisiblity = function() {
   }
 }
 
-Window_ShopNumber.prototype.showButtons = function() {
+Window_ShopNumber.prototype.showButtons = function () {
   for (var i = 0; i < this._buttons.length; i++) {
     this._buttons[i].visible = true
   }
 }
 
-Window_ShopNumber.prototype.hideButtons = function() {
+Window_ShopNumber.prototype.hideButtons = function () {
   for (var i = 0; i < this._buttons.length; i++) {
     this._buttons[i].visible = false
   }
 }
 
-Window_ShopNumber.prototype.refresh = function() {
+Window_ShopNumber.prototype.refresh = function () {
   this.contents.clear()
   this.drawItemName(this._item, 0, this.itemY())
   this.drawMultiplicationSign()
@@ -3322,7 +3356,7 @@ Window_ShopNumber.prototype.refresh = function() {
   this.drawTotalPrice()
 }
 
-Window_ShopNumber.prototype.drawMultiplicationSign = function() {
+Window_ShopNumber.prototype.drawMultiplicationSign = function () {
   var sign = '\u00d7'
   var width = this.textWidth(sign)
   var x = this.cursorX() - width * 2
@@ -3331,7 +3365,7 @@ Window_ShopNumber.prototype.drawMultiplicationSign = function() {
   this.drawText(sign, x, y, width)
 }
 
-Window_ShopNumber.prototype.drawNumber = function() {
+Window_ShopNumber.prototype.drawNumber = function () {
   var x = this.cursorX()
   var y = this.itemY()
   var width = this.cursorWidth() - this.textPadding()
@@ -3339,49 +3373,49 @@ Window_ShopNumber.prototype.drawNumber = function() {
   this.drawText(this._number, x, y, width, 'right')
 }
 
-Window_ShopNumber.prototype.drawTotalPrice = function() {
+Window_ShopNumber.prototype.drawTotalPrice = function () {
   var total = this._price * this._number
   var width = this.contentsWidth() - this.textPadding()
   this.drawCurrencyValue(total, this._currencyUnit, 0, this.priceY(), width)
 }
 
-Window_ShopNumber.prototype.itemY = function() {
+Window_ShopNumber.prototype.itemY = function () {
   return Math.round(this.contentsHeight() / 2 - this.lineHeight() * 1.5)
 }
 
-Window_ShopNumber.prototype.priceY = function() {
+Window_ShopNumber.prototype.priceY = function () {
   return Math.round(this.contentsHeight() / 2 + this.lineHeight() / 2)
 }
 
-Window_ShopNumber.prototype.buttonY = function() {
+Window_ShopNumber.prototype.buttonY = function () {
   return Math.round(this.priceY() + this.lineHeight() * 2.5)
 }
 
-Window_ShopNumber.prototype.cursorWidth = function() {
+Window_ShopNumber.prototype.cursorWidth = function () {
   var digitWidth = this.textWidth('0')
   return this.maxDigits() * digitWidth + this.textPadding() * 2
 }
 
-Window_ShopNumber.prototype.cursorX = function() {
+Window_ShopNumber.prototype.cursorX = function () {
   return this.contentsWidth() - this.cursorWidth() - this.textPadding()
 }
 
-Window_ShopNumber.prototype.maxDigits = function() {
+Window_ShopNumber.prototype.maxDigits = function () {
   return 2
 }
 
-Window_ShopNumber.prototype.update = function() {
+Window_ShopNumber.prototype.update = function () {
   Window_Selectable.prototype.update.call(this)
   this.processNumberChange()
 }
 
-Window_ShopNumber.prototype.isOkTriggered = function() {
+Window_ShopNumber.prototype.isOkTriggered = function () {
   return Input.isTriggered('ok')
 }
 
-Window_ShopNumber.prototype.playOkSound = function() {}
+Window_ShopNumber.prototype.playOkSound = function () {}
 
-Window_ShopNumber.prototype.processNumberChange = function() {
+Window_ShopNumber.prototype.processNumberChange = function () {
   if (this.isOpenAndActive()) {
     if (Input.isRepeated('right')) {
       this.changeNumber(1)
@@ -3398,7 +3432,7 @@ Window_ShopNumber.prototype.processNumberChange = function() {
   }
 }
 
-Window_ShopNumber.prototype.changeNumber = function(amount) {
+Window_ShopNumber.prototype.changeNumber = function (amount) {
   var lastNumber = this._number
   this._number = (this._number + amount).clamp(1, this._max)
   if (this._number !== lastNumber) {
@@ -3407,7 +3441,7 @@ Window_ShopNumber.prototype.changeNumber = function(amount) {
   }
 }
 
-Window_ShopNumber.prototype.updateCursor = function() {
+Window_ShopNumber.prototype.updateCursor = function () {
   this.setCursorRect(
     this.cursorX(),
     this.itemY(),
@@ -3416,23 +3450,23 @@ Window_ShopNumber.prototype.updateCursor = function() {
   )
 }
 
-Window_ShopNumber.prototype.onButtonUp = function() {
+Window_ShopNumber.prototype.onButtonUp = function () {
   this.changeNumber(1)
 }
 
-Window_ShopNumber.prototype.onButtonUp2 = function() {
+Window_ShopNumber.prototype.onButtonUp2 = function () {
   this.changeNumber(10)
 }
 
-Window_ShopNumber.prototype.onButtonDown = function() {
+Window_ShopNumber.prototype.onButtonDown = function () {
   this.changeNumber(-1)
 }
 
-Window_ShopNumber.prototype.onButtonDown2 = function() {
+Window_ShopNumber.prototype.onButtonDown2 = function () {
   this.changeNumber(-10)
 }
 
-Window_ShopNumber.prototype.onButtonOk = function() {
+Window_ShopNumber.prototype.onButtonOk = function () {
   this.processOk()
 }
 
@@ -3449,14 +3483,14 @@ function Window_ShopStatus() {
 Window_ShopStatus.prototype = Object.create(Window_Base.prototype)
 Window_ShopStatus.prototype.constructor = Window_ShopStatus
 
-Window_ShopStatus.prototype.initialize = function(x, y, width, height) {
+Window_ShopStatus.prototype.initialize = function (x, y, width, height) {
   Window_Base.prototype.initialize.call(this, x, y, width, height)
   this._item = null
   this._pageIndex = 0
   this.refresh()
 }
 
-Window_ShopStatus.prototype.refresh = function() {
+Window_ShopStatus.prototype.refresh = function () {
   this.contents.clear()
   if (this._item) {
     var x = this.textPadding()
@@ -3467,16 +3501,16 @@ Window_ShopStatus.prototype.refresh = function() {
   }
 }
 
-Window_ShopStatus.prototype.setItem = function(item) {
+Window_ShopStatus.prototype.setItem = function (item) {
   this._item = item
   this.refresh()
 }
 
-Window_ShopStatus.prototype.isEquipItem = function() {
+Window_ShopStatus.prototype.isEquipItem = function () {
   return DataManager.isWeapon(this._item) || DataManager.isArmor(this._item)
 }
 
-Window_ShopStatus.prototype.drawPossession = function(x, y) {
+Window_ShopStatus.prototype.drawPossession = function (x, y) {
   var width = this.contents.width - this.textPadding() - x
   var possessionWidth = this.textWidth('0000')
   this.changeTextColor(this.systemColor())
@@ -3485,28 +3519,28 @@ Window_ShopStatus.prototype.drawPossession = function(x, y) {
   this.drawText($gameParty.numItems(this._item), x, y, width, 'right')
 }
 
-Window_ShopStatus.prototype.drawEquipInfo = function(x, y) {
+Window_ShopStatus.prototype.drawEquipInfo = function (x, y) {
   var members = this.statusMembers()
   for (var i = 0; i < members.length; i++) {
     this.drawActorEquipInfo(x, y + this.lineHeight() * (i * 2.4), members[i])
   }
 }
 
-Window_ShopStatus.prototype.statusMembers = function() {
+Window_ShopStatus.prototype.statusMembers = function () {
   var start = this._pageIndex * this.pageSize()
   var end = start + this.pageSize()
   return $gameParty.members().slice(start, end)
 }
 
-Window_ShopStatus.prototype.pageSize = function() {
+Window_ShopStatus.prototype.pageSize = function () {
   return 4
 }
 
-Window_ShopStatus.prototype.maxPages = function() {
+Window_ShopStatus.prototype.maxPages = function () {
   return Math.floor(($gameParty.size() + this.pageSize() - 1) / this.pageSize())
 }
 
-Window_ShopStatus.prototype.drawActorEquipInfo = function(x, y, actor) {
+Window_ShopStatus.prototype.drawActorEquipInfo = function (x, y, actor) {
   var enabled = actor.canEquip(this._item)
   this.changePaintOpacity(enabled)
   this.resetTextColor()
@@ -3519,7 +3553,7 @@ Window_ShopStatus.prototype.drawActorEquipInfo = function(x, y, actor) {
   this.changePaintOpacity(true)
 }
 
-Window_ShopStatus.prototype.drawActorParamChange = function(
+Window_ShopStatus.prototype.drawActorParamChange = function (
   x,
   y,
   actor,
@@ -3532,11 +3566,11 @@ Window_ShopStatus.prototype.drawActorParamChange = function(
   this.drawText((change > 0 ? '+' : '') + change, x, y, width, 'right')
 }
 
-Window_ShopStatus.prototype.paramId = function() {
+Window_ShopStatus.prototype.paramId = function () {
   return DataManager.isWeapon(this._item) ? 2 : 3
 }
 
-Window_ShopStatus.prototype.currentEquippedItem = function(actor, etypeId) {
+Window_ShopStatus.prototype.currentEquippedItem = function (actor, etypeId) {
   var list = []
   var equips = actor.equips()
   var slots = actor.equipSlots()
@@ -3557,22 +3591,22 @@ Window_ShopStatus.prototype.currentEquippedItem = function(actor, etypeId) {
   return worstItem
 }
 
-Window_ShopStatus.prototype.update = function() {
+Window_ShopStatus.prototype.update = function () {
   Window_Base.prototype.update.call(this)
   this.updatePage()
 }
 
-Window_ShopStatus.prototype.updatePage = function() {
+Window_ShopStatus.prototype.updatePage = function () {
   if (this.isPageChangeEnabled() && this.isPageChangeRequested()) {
     this.changePage()
   }
 }
 
-Window_ShopStatus.prototype.isPageChangeEnabled = function() {
+Window_ShopStatus.prototype.isPageChangeEnabled = function () {
   return this.visible && this.maxPages() >= 2
 }
 
-Window_ShopStatus.prototype.isPageChangeRequested = function() {
+Window_ShopStatus.prototype.isPageChangeRequested = function () {
   if (Input.isTriggered('shift')) {
     return true
   }
@@ -3582,13 +3616,13 @@ Window_ShopStatus.prototype.isPageChangeRequested = function() {
   return false
 }
 
-Window_ShopStatus.prototype.isTouchedInsideFrame = function() {
+Window_ShopStatus.prototype.isTouchedInsideFrame = function () {
   var x = this.canvasToLocalX(TouchInput.x)
   var y = this.canvasToLocalY(TouchInput.y)
   return x >= 0 && y >= 0 && x < this.width && y < this.height
 }
 
-Window_ShopStatus.prototype.changePage = function() {
+Window_ShopStatus.prototype.changePage = function () {
   this._pageIndex = (this._pageIndex + 1) % this.maxPages()
   this.refresh()
   SoundManager.playCursor()
@@ -3606,7 +3640,7 @@ function Window_NameEdit() {
 Window_NameEdit.prototype = Object.create(Window_Base.prototype)
 Window_NameEdit.prototype.constructor = Window_NameEdit
 
-Window_NameEdit.prototype.initialize = function(actor, maxLength) {
+Window_NameEdit.prototype.initialize = function (actor, maxLength) {
   var width = this.windowWidth()
   var height = this.windowHeight()
   var x = (Graphics.boxWidth - width) / 2
@@ -3622,26 +3656,26 @@ Window_NameEdit.prototype.initialize = function(actor, maxLength) {
   ImageManager.reserveFace(actor.faceName())
 }
 
-Window_NameEdit.prototype.windowWidth = function() {
+Window_NameEdit.prototype.windowWidth = function () {
   return 480
 }
 
-Window_NameEdit.prototype.windowHeight = function() {
+Window_NameEdit.prototype.windowHeight = function () {
   return this.fittingHeight(4)
 }
 
-Window_NameEdit.prototype.name = function() {
+Window_NameEdit.prototype.name = function () {
   return this._name
 }
 
-Window_NameEdit.prototype.restoreDefault = function() {
+Window_NameEdit.prototype.restoreDefault = function () {
   this._name = this._defaultName
   this._index = this._name.length
   this.refresh()
   return this._name.length > 0
 }
 
-Window_NameEdit.prototype.add = function(ch) {
+Window_NameEdit.prototype.add = function (ch) {
   if (this._index < this._maxLength) {
     this._name += ch
     this._index++
@@ -3652,7 +3686,7 @@ Window_NameEdit.prototype.add = function(ch) {
   }
 }
 
-Window_NameEdit.prototype.back = function() {
+Window_NameEdit.prototype.back = function () {
   if (this._index > 0) {
     this._index--
     this._name = this._name.slice(0, this._index)
@@ -3663,22 +3697,22 @@ Window_NameEdit.prototype.back = function() {
   }
 }
 
-Window_NameEdit.prototype.faceWidth = function() {
+Window_NameEdit.prototype.faceWidth = function () {
   return 144
 }
 
-Window_NameEdit.prototype.charWidth = function() {
+Window_NameEdit.prototype.charWidth = function () {
   var text = $gameSystem.isJapanese() ? '\uff21' : 'A'
   return this.textWidth(text)
 }
 
-Window_NameEdit.prototype.left = function() {
+Window_NameEdit.prototype.left = function () {
   var nameCenter = (this.contentsWidth() + this.faceWidth()) / 2
   var nameWidth = (this._maxLength + 1) * this.charWidth()
   return Math.min(nameCenter - nameWidth / 2, this.contentsWidth() - nameWidth)
 }
 
-Window_NameEdit.prototype.itemRect = function(index) {
+Window_NameEdit.prototype.itemRect = function (index) {
   return {
     x: this.left() + index * this.charWidth(),
     y: 54,
@@ -3687,7 +3721,7 @@ Window_NameEdit.prototype.itemRect = function(index) {
   }
 }
 
-Window_NameEdit.prototype.underlineRect = function(index) {
+Window_NameEdit.prototype.underlineRect = function (index) {
   var rect = this.itemRect(index)
   rect.x++
   rect.y += rect.height - 4
@@ -3696,11 +3730,11 @@ Window_NameEdit.prototype.underlineRect = function(index) {
   return rect
 }
 
-Window_NameEdit.prototype.underlineColor = function() {
+Window_NameEdit.prototype.underlineColor = function () {
   return this.normalColor()
 }
 
-Window_NameEdit.prototype.drawUnderline = function(index) {
+Window_NameEdit.prototype.drawUnderline = function (index) {
   var rect = this.underlineRect(index)
   var color = this.underlineColor()
   this.contents.paintOpacity = 48
@@ -3708,13 +3742,13 @@ Window_NameEdit.prototype.drawUnderline = function(index) {
   this.contents.paintOpacity = 255
 }
 
-Window_NameEdit.prototype.drawChar = function(index) {
+Window_NameEdit.prototype.drawChar = function (index) {
   var rect = this.itemRect(index)
   this.resetTextColor()
   this.drawText(this._name[index] || '', rect.x, rect.y)
 }
 
-Window_NameEdit.prototype.refresh = function() {
+Window_NameEdit.prototype.refresh = function () {
   this.contents.clear()
   this.drawActorFace(this._actor, 0, 0)
   for (var i = 0; i < this._maxLength; i++) {
@@ -4291,7 +4325,7 @@ Window_NameInput.JAPAN3 = [
   '決定'
 ]
 
-Window_NameInput.prototype.initialize = function(editWindow) {
+Window_NameInput.prototype.initialize = function (editWindow) {
   var x = editWindow.x
   var y = editWindow.y + editWindow.height + 8
   var width = editWindow.width
@@ -4305,11 +4339,11 @@ Window_NameInput.prototype.initialize = function(editWindow) {
   this.activate()
 }
 
-Window_NameInput.prototype.windowHeight = function() {
+Window_NameInput.prototype.windowHeight = function () {
   return this.fittingHeight(9)
 }
 
-Window_NameInput.prototype.table = function() {
+Window_NameInput.prototype.table = function () {
   if ($gameSystem.isJapanese()) {
     return [
       Window_NameInput.JAPAN1,
@@ -4323,27 +4357,27 @@ Window_NameInput.prototype.table = function() {
   }
 }
 
-Window_NameInput.prototype.maxCols = function() {
+Window_NameInput.prototype.maxCols = function () {
   return 10
 }
 
-Window_NameInput.prototype.maxItems = function() {
+Window_NameInput.prototype.maxItems = function () {
   return 90
 }
 
-Window_NameInput.prototype.character = function() {
+Window_NameInput.prototype.character = function () {
   return this._index < 88 ? this.table()[this._page][this._index] : ''
 }
 
-Window_NameInput.prototype.isPageChange = function() {
+Window_NameInput.prototype.isPageChange = function () {
   return this._index === 88
 }
 
-Window_NameInput.prototype.isOk = function() {
+Window_NameInput.prototype.isOk = function () {
   return this._index === 89
 }
 
-Window_NameInput.prototype.itemRect = function(index) {
+Window_NameInput.prototype.itemRect = function (index) {
   return {
     x: (index % 10) * 42 + Math.floor((index % 10) / 5) * 24,
     y: Math.floor(index / 10) * this.lineHeight(),
@@ -4352,7 +4386,7 @@ Window_NameInput.prototype.itemRect = function(index) {
   }
 }
 
-Window_NameInput.prototype.refresh = function() {
+Window_NameInput.prototype.refresh = function () {
   var table = this.table()
   this.contents.clear()
   this.resetTextColor()
@@ -4364,28 +4398,28 @@ Window_NameInput.prototype.refresh = function() {
   }
 }
 
-Window_NameInput.prototype.updateCursor = function() {
+Window_NameInput.prototype.updateCursor = function () {
   var rect = this.itemRect(this._index)
   this.setCursorRect(rect.x, rect.y, rect.width, rect.height)
 }
 
-Window_NameInput.prototype.isCursorMovable = function() {
+Window_NameInput.prototype.isCursorMovable = function () {
   return this.active
 }
 
-Window_NameInput.prototype.cursorDown = function(wrap) {
+Window_NameInput.prototype.cursorDown = function (wrap) {
   if (this._index < 80 || wrap) {
     this._index = (this._index + 10) % 90
   }
 }
 
-Window_NameInput.prototype.cursorUp = function(wrap) {
+Window_NameInput.prototype.cursorUp = function (wrap) {
   if (this._index >= 10 || wrap) {
     this._index = (this._index + 80) % 90
   }
 }
 
-Window_NameInput.prototype.cursorRight = function(wrap) {
+Window_NameInput.prototype.cursorRight = function (wrap) {
   if (this._index % 10 < 9) {
     this._index++
   } else if (wrap) {
@@ -4393,7 +4427,7 @@ Window_NameInput.prototype.cursorRight = function(wrap) {
   }
 }
 
-Window_NameInput.prototype.cursorLeft = function(wrap) {
+Window_NameInput.prototype.cursorLeft = function (wrap) {
   if (this._index % 10 > 0) {
     this._index--
   } else if (wrap) {
@@ -4401,17 +4435,17 @@ Window_NameInput.prototype.cursorLeft = function(wrap) {
   }
 }
 
-Window_NameInput.prototype.cursorPagedown = function() {
+Window_NameInput.prototype.cursorPagedown = function () {
   this._page = (this._page + 1) % this.table().length
   this.refresh()
 }
 
-Window_NameInput.prototype.cursorPageup = function() {
+Window_NameInput.prototype.cursorPageup = function () {
   this._page = (this._page + this.table().length - 1) % this.table().length
   this.refresh()
 }
 
-Window_NameInput.prototype.processCursorMove = function() {
+Window_NameInput.prototype.processCursorMove = function () {
   var lastPage = this._page
   Window_Selectable.prototype.processCursorMove.call(this)
   this.updateCursor()
@@ -4420,7 +4454,7 @@ Window_NameInput.prototype.processCursorMove = function() {
   }
 }
 
-Window_NameInput.prototype.processHandling = function() {
+Window_NameInput.prototype.processHandling = function () {
   if (this.isOpen() && this.active) {
     if (Input.isTriggered('shift')) {
       this.processJump()
@@ -4434,28 +4468,28 @@ Window_NameInput.prototype.processHandling = function() {
   }
 }
 
-Window_NameInput.prototype.isCancelEnabled = function() {
+Window_NameInput.prototype.isCancelEnabled = function () {
   return true
 }
 
-Window_NameInput.prototype.processCancel = function() {
+Window_NameInput.prototype.processCancel = function () {
   this.processBack()
 }
 
-Window_NameInput.prototype.processJump = function() {
+Window_NameInput.prototype.processJump = function () {
   if (this._index !== 89) {
     this._index = 89
     SoundManager.playCursor()
   }
 }
 
-Window_NameInput.prototype.processBack = function() {
+Window_NameInput.prototype.processBack = function () {
   if (this._editWindow.back()) {
     SoundManager.playCancel()
   }
 }
 
-Window_NameInput.prototype.processOk = function() {
+Window_NameInput.prototype.processOk = function () {
   if (this.character()) {
     this.onNameAdd()
   } else if (this.isPageChange()) {
@@ -4466,7 +4500,7 @@ Window_NameInput.prototype.processOk = function() {
   }
 }
 
-Window_NameInput.prototype.onNameAdd = function() {
+Window_NameInput.prototype.onNameAdd = function () {
   if (this._editWindow.add(this.character())) {
     SoundManager.playOk()
   } else {
@@ -4474,7 +4508,7 @@ Window_NameInput.prototype.onNameAdd = function() {
   }
 }
 
-Window_NameInput.prototype.onNameOk = function() {
+Window_NameInput.prototype.onNameOk = function () {
   if (this._editWindow.name() === '') {
     if (this._editWindow.restoreDefault()) {
       SoundManager.playOk()
@@ -4499,7 +4533,7 @@ function Window_ChoiceList() {
 Window_ChoiceList.prototype = Object.create(Window_Command.prototype)
 Window_ChoiceList.prototype.constructor = Window_ChoiceList
 
-Window_ChoiceList.prototype.initialize = function(messageWindow) {
+Window_ChoiceList.prototype.initialize = function (messageWindow) {
   this._messageWindow = messageWindow
   Window_Command.prototype.initialize.call(this, 0, 0)
   this.openness = 0
@@ -4507,7 +4541,7 @@ Window_ChoiceList.prototype.initialize = function(messageWindow) {
   this._background = 0
 }
 
-Window_ChoiceList.prototype.start = function() {
+Window_ChoiceList.prototype.start = function () {
   this.updatePlacement()
   this.updateBackground()
   this.refresh()
@@ -4516,11 +4550,11 @@ Window_ChoiceList.prototype.start = function() {
   this.activate()
 }
 
-Window_ChoiceList.prototype.selectDefault = function() {
+Window_ChoiceList.prototype.selectDefault = function () {
   this.select($gameMessage.choiceDefaultType())
 }
 
-Window_ChoiceList.prototype.updatePlacement = function() {
+Window_ChoiceList.prototype.updatePlacement = function () {
   var positionType = $gameMessage.choicePositionType()
   var messageY = this._messageWindow.y
   this.width = this.windowWidth()
@@ -4543,17 +4577,17 @@ Window_ChoiceList.prototype.updatePlacement = function() {
   }
 }
 
-Window_ChoiceList.prototype.updateBackground = function() {
+Window_ChoiceList.prototype.updateBackground = function () {
   this._background = $gameMessage.choiceBackground()
   this.setBackgroundType(this._background)
 }
 
-Window_ChoiceList.prototype.windowWidth = function() {
+Window_ChoiceList.prototype.windowWidth = function () {
   var width = this.maxChoiceWidth() + this.padding * 2
   return Math.min(width, Graphics.boxWidth)
 }
 
-Window_ChoiceList.prototype.numVisibleRows = function() {
+Window_ChoiceList.prototype.numVisibleRows = function () {
   var messageY = this._messageWindow.y
   var messageHeight = this._messageWindow.height
   var centerY = Graphics.boxHeight / 2
@@ -4569,7 +4603,7 @@ Window_ChoiceList.prototype.numVisibleRows = function() {
   return numLines
 }
 
-Window_ChoiceList.prototype.maxChoiceWidth = function() {
+Window_ChoiceList.prototype.maxChoiceWidth = function () {
   var maxWidth = 96
   var choices = $gameMessage.choices()
   for (var i = 0; i < choices.length; i++) {
@@ -4581,41 +4615,41 @@ Window_ChoiceList.prototype.maxChoiceWidth = function() {
   return maxWidth
 }
 
-Window_ChoiceList.prototype.textWidthEx = function(text) {
+Window_ChoiceList.prototype.textWidthEx = function (text) {
   return this.drawTextEx(text, 0, this.contents.height)
 }
 
-Window_ChoiceList.prototype.contentsHeight = function() {
+Window_ChoiceList.prototype.contentsHeight = function () {
   return this.maxItems() * this.itemHeight()
 }
 
-Window_ChoiceList.prototype.makeCommandList = function() {
+Window_ChoiceList.prototype.makeCommandList = function () {
   var choices = $gameMessage.choices()
   for (var i = 0; i < choices.length; i++) {
     this.addCommand(choices[i], 'choice')
   }
 }
 
-Window_ChoiceList.prototype.drawItem = function(index) {
+Window_ChoiceList.prototype.drawItem = function (index) {
   var rect = this.itemRectForText(index)
   this.drawTextEx(this.commandName(index), rect.x, rect.y)
 }
 
-Window_ChoiceList.prototype.isCancelEnabled = function() {
+Window_ChoiceList.prototype.isCancelEnabled = function () {
   return $gameMessage.choiceCancelType() !== -1
 }
 
-Window_ChoiceList.prototype.isOkTriggered = function() {
+Window_ChoiceList.prototype.isOkTriggered = function () {
   return Input.isTriggered('ok')
 }
 
-Window_ChoiceList.prototype.callOkHandler = function() {
+Window_ChoiceList.prototype.callOkHandler = function () {
   $gameMessage.onChoice(this.index())
   this._messageWindow.terminateMessage()
   this.close()
 }
 
-Window_ChoiceList.prototype.callCancelHandler = function() {
+Window_ChoiceList.prototype.callCancelHandler = function () {
   $gameMessage.onChoice($gameMessage.choiceCancelType())
   this._messageWindow.terminateMessage()
   this.close()
@@ -4633,7 +4667,7 @@ function Window_NumberInput() {
 Window_NumberInput.prototype = Object.create(Window_Selectable.prototype)
 Window_NumberInput.prototype.constructor = Window_NumberInput
 
-Window_NumberInput.prototype.initialize = function(messageWindow) {
+Window_NumberInput.prototype.initialize = function (messageWindow) {
   this._messageWindow = messageWindow
   Window_Selectable.prototype.initialize.call(this, 0, 0, 0, 0)
   this._number = 0
@@ -4643,7 +4677,7 @@ Window_NumberInput.prototype.initialize = function(messageWindow) {
   this.deactivate()
 }
 
-Window_NumberInput.prototype.start = function() {
+Window_NumberInput.prototype.start = function () {
   this._maxDigits = $gameMessage.numInputMaxDigits()
   this._number = $gameVariables.value($gameMessage.numInputVariableId())
   this._number = this._number.clamp(0, Math.pow(10, this._maxDigits) - 1)
@@ -4657,7 +4691,7 @@ Window_NumberInput.prototype.start = function() {
   this.select(0)
 }
 
-Window_NumberInput.prototype.updatePlacement = function() {
+Window_NumberInput.prototype.updatePlacement = function () {
   var messageY = this._messageWindow.y
   var spacing = 8
   this.width = this.windowWidth()
@@ -4670,31 +4704,31 @@ Window_NumberInput.prototype.updatePlacement = function() {
   }
 }
 
-Window_NumberInput.prototype.windowWidth = function() {
+Window_NumberInput.prototype.windowWidth = function () {
   return this.maxCols() * this.itemWidth() + this.padding * 2
 }
 
-Window_NumberInput.prototype.windowHeight = function() {
+Window_NumberInput.prototype.windowHeight = function () {
   return this.fittingHeight(1)
 }
 
-Window_NumberInput.prototype.maxCols = function() {
+Window_NumberInput.prototype.maxCols = function () {
   return this._maxDigits
 }
 
-Window_NumberInput.prototype.maxItems = function() {
+Window_NumberInput.prototype.maxItems = function () {
   return this._maxDigits
 }
 
-Window_NumberInput.prototype.spacing = function() {
+Window_NumberInput.prototype.spacing = function () {
   return 0
 }
 
-Window_NumberInput.prototype.itemWidth = function() {
+Window_NumberInput.prototype.itemWidth = function () {
   return 32
 }
 
-Window_NumberInput.prototype.createButtons = function() {
+Window_NumberInput.prototype.createButtons = function () {
   var bitmap = ImageManager.loadSystem('ButtonSet')
   var buttonWidth = 48
   var buttonHeight = 48
@@ -4715,7 +4749,7 @@ Window_NumberInput.prototype.createButtons = function() {
   this._buttons[2].setClickHandler(this.onButtonOk.bind(this))
 }
 
-Window_NumberInput.prototype.placeButtons = function() {
+Window_NumberInput.prototype.placeButtons = function () {
   var numButtons = this._buttons.length
   var spacing = 16
   var totalWidth = -spacing
@@ -4731,7 +4765,7 @@ Window_NumberInput.prototype.placeButtons = function() {
   }
 }
 
-Window_NumberInput.prototype.updateButtonsVisiblity = function() {
+Window_NumberInput.prototype.updateButtonsVisiblity = function () {
   if (TouchInput.date > Input.date) {
     this.showButtons()
   } else {
@@ -4739,19 +4773,19 @@ Window_NumberInput.prototype.updateButtonsVisiblity = function() {
   }
 }
 
-Window_NumberInput.prototype.showButtons = function() {
+Window_NumberInput.prototype.showButtons = function () {
   for (var i = 0; i < this._buttons.length; i++) {
     this._buttons[i].visible = true
   }
 }
 
-Window_NumberInput.prototype.hideButtons = function() {
+Window_NumberInput.prototype.hideButtons = function () {
   for (var i = 0; i < this._buttons.length; i++) {
     this._buttons[i].visible = false
   }
 }
 
-Window_NumberInput.prototype.buttonY = function() {
+Window_NumberInput.prototype.buttonY = function () {
   var spacing = 8
   if (this._messageWindow.y >= Graphics.boxHeight / 2) {
     return 0 - this._buttons[0].height - spacing
@@ -4760,12 +4794,12 @@ Window_NumberInput.prototype.buttonY = function() {
   }
 }
 
-Window_NumberInput.prototype.update = function() {
+Window_NumberInput.prototype.update = function () {
   Window_Selectable.prototype.update.call(this)
   this.processDigitChange()
 }
 
-Window_NumberInput.prototype.processDigitChange = function() {
+Window_NumberInput.prototype.processDigitChange = function () {
   if (this.isOpenAndActive()) {
     if (Input.isRepeated('up')) {
       this.changeDigit(true)
@@ -4775,7 +4809,7 @@ Window_NumberInput.prototype.processDigitChange = function() {
   }
 }
 
-Window_NumberInput.prototype.changeDigit = function(up) {
+Window_NumberInput.prototype.changeDigit = function (up) {
   var index = this.index()
   var place = Math.pow(10, this._maxDigits - 1 - index)
   var n = Math.floor(this._number / place) % 10
@@ -4790,23 +4824,23 @@ Window_NumberInput.prototype.changeDigit = function(up) {
   SoundManager.playCursor()
 }
 
-Window_NumberInput.prototype.isTouchOkEnabled = function() {
+Window_NumberInput.prototype.isTouchOkEnabled = function () {
   return false
 }
 
-Window_NumberInput.prototype.isOkEnabled = function() {
+Window_NumberInput.prototype.isOkEnabled = function () {
   return true
 }
 
-Window_NumberInput.prototype.isCancelEnabled = function() {
+Window_NumberInput.prototype.isCancelEnabled = function () {
   return false
 }
 
-Window_NumberInput.prototype.isOkTriggered = function() {
+Window_NumberInput.prototype.isOkTriggered = function () {
   return Input.isTriggered('ok')
 }
 
-Window_NumberInput.prototype.processOk = function() {
+Window_NumberInput.prototype.processOk = function () {
   SoundManager.playOk()
   $gameVariables.setValue($gameMessage.numInputVariableId(), this._number)
   this._messageWindow.terminateMessage()
@@ -4815,7 +4849,7 @@ Window_NumberInput.prototype.processOk = function() {
   this.close()
 }
 
-Window_NumberInput.prototype.drawItem = function(index) {
+Window_NumberInput.prototype.drawItem = function (index) {
   var rect = this.itemRect(index)
   var align = 'center'
   var s = this._number.padZero(this._maxDigits)
@@ -4824,15 +4858,15 @@ Window_NumberInput.prototype.drawItem = function(index) {
   this.drawText(c, rect.x, rect.y, rect.width, align)
 }
 
-Window_NumberInput.prototype.onButtonUp = function() {
+Window_NumberInput.prototype.onButtonUp = function () {
   this.changeDigit(true)
 }
 
-Window_NumberInput.prototype.onButtonDown = function() {
+Window_NumberInput.prototype.onButtonDown = function () {
   this.changeDigit(false)
 }
 
-Window_NumberInput.prototype.onButtonOk = function() {
+Window_NumberInput.prototype.onButtonOk = function () {
   this.processOk()
   this.hideButtons()
 }
@@ -4849,7 +4883,7 @@ function Window_EventItem() {
 Window_EventItem.prototype = Object.create(Window_ItemList.prototype)
 Window_EventItem.prototype.constructor = Window_EventItem
 
-Window_EventItem.prototype.initialize = function(messageWindow) {
+Window_EventItem.prototype.initialize = function (messageWindow) {
   this._messageWindow = messageWindow
   var width = Graphics.boxWidth
   var height = this.windowHeight()
@@ -4860,15 +4894,15 @@ Window_EventItem.prototype.initialize = function(messageWindow) {
   this.setHandler('cancel', this.onCancel.bind(this))
 }
 
-Window_EventItem.prototype.windowHeight = function() {
+Window_EventItem.prototype.windowHeight = function () {
   return this.fittingHeight(this.numVisibleRows())
 }
 
-Window_EventItem.prototype.numVisibleRows = function() {
+Window_EventItem.prototype.numVisibleRows = function () {
   return 4
 }
 
-Window_EventItem.prototype.start = function() {
+Window_EventItem.prototype.start = function () {
   this.refresh()
   this.updatePlacement()
   this.select(0)
@@ -4876,7 +4910,7 @@ Window_EventItem.prototype.start = function() {
   this.activate()
 }
 
-Window_EventItem.prototype.updatePlacement = function() {
+Window_EventItem.prototype.updatePlacement = function () {
   if (this._messageWindow.y >= Graphics.boxHeight / 2) {
     this.y = 0
   } else {
@@ -4884,16 +4918,16 @@ Window_EventItem.prototype.updatePlacement = function() {
   }
 }
 
-Window_EventItem.prototype.includes = function(item) {
+Window_EventItem.prototype.includes = function (item) {
   var itypeId = $gameMessage.itemChoiceItypeId()
   return DataManager.isItem(item) && item.itypeId === itypeId
 }
 
-Window_EventItem.prototype.isEnabled = function(item) {
+Window_EventItem.prototype.isEnabled = function (item) {
   return true
 }
 
-Window_EventItem.prototype.onOk = function() {
+Window_EventItem.prototype.onOk = function () {
   var item = this.item()
   var itemId = item ? item.id : 0
   $gameVariables.setValue($gameMessage.itemChoiceVariableId(), itemId)
@@ -4901,7 +4935,7 @@ Window_EventItem.prototype.onOk = function() {
   this.close()
 }
 
-Window_EventItem.prototype.onCancel = function() {
+Window_EventItem.prototype.onCancel = function () {
   $gameVariables.setValue($gameMessage.itemChoiceVariableId(), 0)
   this._messageWindow.terminateMessage()
   this.close()
@@ -4919,7 +4953,7 @@ function Window_Message() {
 Window_Message.prototype = Object.create(Window_Base.prototype)
 Window_Message.prototype.constructor = Window_Message
 
-Window_Message.prototype.initialize = function() {
+Window_Message.prototype.initialize = function () {
   var width = this.windowWidth()
   var height = this.windowHeight()
   var x = (Graphics.boxWidth - width) / 2
@@ -4930,7 +4964,7 @@ Window_Message.prototype.initialize = function() {
   this.updatePlacement()
 }
 
-Window_Message.prototype.initMembers = function() {
+Window_Message.prototype.initMembers = function () {
   this._imageReservationId = Utils.generateRuntimeId()
   this._background = 0
   this._positionType = 2
@@ -4940,7 +4974,7 @@ Window_Message.prototype.initMembers = function() {
   this.clearFlags()
 }
 
-Window_Message.prototype.subWindows = function() {
+Window_Message.prototype.subWindows = function () {
   return [
     this._goldWindow,
     this._choiceWindow,
@@ -4949,7 +4983,7 @@ Window_Message.prototype.subWindows = function() {
   ]
 }
 
-Window_Message.prototype.createSubWindows = function() {
+Window_Message.prototype.createSubWindows = function () {
   this._goldWindow = new Window_Gold(0, 0)
   this._goldWindow.x = Graphics.boxWidth - this._goldWindow.width
   this._goldWindow.openness = 0
@@ -4958,25 +4992,25 @@ Window_Message.prototype.createSubWindows = function() {
   this._itemWindow = new Window_EventItem(this)
 }
 
-Window_Message.prototype.windowWidth = function() {
+Window_Message.prototype.windowWidth = function () {
   return Graphics.boxWidth
 }
 
-Window_Message.prototype.windowHeight = function() {
+Window_Message.prototype.windowHeight = function () {
   return this.fittingHeight(this.numVisibleRows())
 }
 
-Window_Message.prototype.clearFlags = function() {
+Window_Message.prototype.clearFlags = function () {
   this._showFast = false
   this._lineShowFast = false
   this._pauseSkip = false
 }
 
-Window_Message.prototype.numVisibleRows = function() {
+Window_Message.prototype.numVisibleRows = function () {
   return 4
 }
 
-Window_Message.prototype.update = function() {
+Window_Message.prototype.update = function () {
   this.checkToNotClose()
   Window_Base.prototype.update.call(this)
   while (!this.isOpening() && !this.isClosing()) {
@@ -4997,7 +5031,7 @@ Window_Message.prototype.update = function() {
   }
 }
 
-Window_Message.prototype.checkToNotClose = function() {
+Window_Message.prototype.checkToNotClose = function () {
   if (this.isClosing() && this.isOpen()) {
     if (this.doesContinue()) {
       this.open()
@@ -5005,11 +5039,11 @@ Window_Message.prototype.checkToNotClose = function() {
   }
 }
 
-Window_Message.prototype.canStart = function() {
+Window_Message.prototype.canStart = function () {
   return $gameMessage.hasText() && !$gameMessage.scrollMode()
 }
 
-Window_Message.prototype.startMessage = function() {
+Window_Message.prototype.startMessage = function () {
   this._textState = {}
   this._textState.index = 0
   this._textState.text = this.convertEscapeCharacters($gameMessage.allText())
@@ -5019,25 +5053,25 @@ Window_Message.prototype.startMessage = function() {
   this.open()
 }
 
-Window_Message.prototype.updatePlacement = function() {
+Window_Message.prototype.updatePlacement = function () {
   this._positionType = $gameMessage.positionType()
   this.y = (this._positionType * (Graphics.boxHeight - this.height)) / 2
   this._goldWindow.y =
     this.y > 0 ? 0 : Graphics.boxHeight - this._goldWindow.height
 }
 
-Window_Message.prototype.updateBackground = function() {
+Window_Message.prototype.updateBackground = function () {
   this._background = $gameMessage.background()
   this.setBackgroundType(this._background)
 }
 
-Window_Message.prototype.terminateMessage = function() {
+Window_Message.prototype.terminateMessage = function () {
   this.close()
   this._goldWindow.close()
   $gameMessage.clear()
 }
 
-Window_Message.prototype.updateWait = function() {
+Window_Message.prototype.updateWait = function () {
   if (this._waitCount > 0) {
     this._waitCount--
     return true
@@ -5046,7 +5080,7 @@ Window_Message.prototype.updateWait = function() {
   }
 }
 
-Window_Message.prototype.updateLoading = function() {
+Window_Message.prototype.updateLoading = function () {
   if (this._faceBitmap) {
     if (this._faceBitmap.isReady()) {
       this.drawMessageFace()
@@ -5060,7 +5094,7 @@ Window_Message.prototype.updateLoading = function() {
   }
 }
 
-Window_Message.prototype.updateInput = function() {
+Window_Message.prototype.updateInput = function () {
   if (this.isAnySubWindowActive()) {
     return true
   }
@@ -5077,7 +5111,7 @@ Window_Message.prototype.updateInput = function() {
   return false
 }
 
-Window_Message.prototype.isAnySubWindowActive = function() {
+Window_Message.prototype.isAnySubWindowActive = function () {
   return (
     this._choiceWindow.active ||
     this._numberWindow.active ||
@@ -5085,7 +5119,7 @@ Window_Message.prototype.isAnySubWindowActive = function() {
   )
 }
 
-Window_Message.prototype.updateMessage = function() {
+Window_Message.prototype.updateMessage = function () {
   if (this._textState) {
     while (!this.isEndOfText(this._textState)) {
       if (this.needsNewPage(this._textState)) {
@@ -5109,7 +5143,7 @@ Window_Message.prototype.updateMessage = function() {
   }
 }
 
-Window_Message.prototype.onEndOfText = function() {
+Window_Message.prototype.onEndOfText = function () {
   if (!this.startInput()) {
     if (!this._pauseSkip) {
       this.startPause()
@@ -5120,7 +5154,7 @@ Window_Message.prototype.onEndOfText = function() {
   this._textState = null
 }
 
-Window_Message.prototype.startInput = function() {
+Window_Message.prototype.startInput = function () {
   if ($gameMessage.isChoice()) {
     this._choiceWindow.start()
     return true
@@ -5135,7 +5169,7 @@ Window_Message.prototype.startInput = function() {
   }
 }
 
-Window_Message.prototype.isTriggered = function() {
+Window_Message.prototype.isTriggered = function () {
   return (
     Input.isRepeated('ok') ||
     Input.isRepeated('cancel') ||
@@ -5143,7 +5177,7 @@ Window_Message.prototype.isTriggered = function() {
   )
 }
 
-Window_Message.prototype.doesContinue = function() {
+Window_Message.prototype.doesContinue = function () {
   return (
     $gameMessage.hasText() &&
     !$gameMessage.scrollMode() &&
@@ -5151,20 +5185,20 @@ Window_Message.prototype.doesContinue = function() {
   )
 }
 
-Window_Message.prototype.areSettingsChanged = function() {
+Window_Message.prototype.areSettingsChanged = function () {
   return (
     this._background !== $gameMessage.background() ||
     this._positionType !== $gameMessage.positionType()
   )
 }
 
-Window_Message.prototype.updateShowFast = function() {
+Window_Message.prototype.updateShowFast = function () {
   if (this.isTriggered()) {
     this._showFast = true
   }
 }
 
-Window_Message.prototype.newPage = function(textState) {
+Window_Message.prototype.newPage = function (textState) {
   this.contents.clear()
   this.resetFontSettings()
   this.clearFlags()
@@ -5175,7 +5209,7 @@ Window_Message.prototype.newPage = function(textState) {
   textState.height = this.calcTextHeight(textState, false)
 }
 
-Window_Message.prototype.loadMessageFace = function() {
+Window_Message.prototype.loadMessageFace = function () {
   this._faceBitmap = ImageManager.reserveFace(
     $gameMessage.faceName(),
     0,
@@ -5183,16 +5217,16 @@ Window_Message.prototype.loadMessageFace = function() {
   )
 }
 
-Window_Message.prototype.drawMessageFace = function() {
+Window_Message.prototype.drawMessageFace = function () {
   this.drawFace($gameMessage.faceName(), $gameMessage.faceIndex(), 0, 0)
   ImageManager.releaseReservation(this._imageReservationId)
 }
 
-Window_Message.prototype.newLineX = function() {
+Window_Message.prototype.newLineX = function () {
   return $gameMessage.faceName() === '' ? 0 : 168
 }
 
-Window_Message.prototype.processNewLine = function(textState) {
+Window_Message.prototype.processNewLine = function (textState) {
   this._lineShowFast = false
   Window_Base.prototype.processNewLine.call(this, textState)
   if (this.needsNewPage(textState)) {
@@ -5200,7 +5234,7 @@ Window_Message.prototype.processNewLine = function(textState) {
   }
 }
 
-Window_Message.prototype.processNewPage = function(textState) {
+Window_Message.prototype.processNewPage = function (textState) {
   Window_Base.prototype.processNewPage.call(this, textState)
   if (textState.text[textState.index] === '\n') {
     textState.index++
@@ -5209,18 +5243,18 @@ Window_Message.prototype.processNewPage = function(textState) {
   this.startPause()
 }
 
-Window_Message.prototype.isEndOfText = function(textState) {
+Window_Message.prototype.isEndOfText = function (textState) {
   return textState.index >= textState.text.length
 }
 
-Window_Message.prototype.needsNewPage = function(textState) {
+Window_Message.prototype.needsNewPage = function (textState) {
   return (
     !this.isEndOfText(textState) &&
     textState.y + textState.height > this.contents.height
   )
 }
 
-Window_Message.prototype.processEscapeCharacter = function(code, textState) {
+Window_Message.prototype.processEscapeCharacter = function (code, textState) {
   switch (code) {
     case '$':
       this._goldWindow.open()
@@ -5249,11 +5283,11 @@ Window_Message.prototype.processEscapeCharacter = function(code, textState) {
   }
 }
 
-Window_Message.prototype.startWait = function(count) {
+Window_Message.prototype.startWait = function (count) {
   this._waitCount = count
 }
 
-Window_Message.prototype.startPause = function() {
+Window_Message.prototype.startPause = function () {
   this.startWait(10)
   this.pause = true
 }
@@ -5271,7 +5305,7 @@ function Window_ScrollText() {
 Window_ScrollText.prototype = Object.create(Window_Base.prototype)
 Window_ScrollText.prototype.constructor = Window_ScrollText
 
-Window_ScrollText.prototype.initialize = function() {
+Window_ScrollText.prototype.initialize = function () {
   var width = Graphics.boxWidth
   var height = Graphics.boxHeight
   Window_Base.prototype.initialize.call(this, 0, 0, width, height)
@@ -5281,7 +5315,7 @@ Window_ScrollText.prototype.initialize = function() {
   this._allTextHeight = 0
 }
 
-Window_ScrollText.prototype.update = function() {
+Window_ScrollText.prototype.update = function () {
   Window_Base.prototype.update.call(this)
   if ($gameMessage.scrollMode()) {
     if (this._text) {
@@ -5293,14 +5327,16 @@ Window_ScrollText.prototype.update = function() {
   }
 }
 
-Window_ScrollText.prototype.startMessage = function() {
+Window_ScrollText.prototype.startMessage = function () {
   this._text = $gameMessage.allText()
   this.refresh()
   this.show()
 }
 
-Window_ScrollText.prototype.refresh = function() {
-  var textState = { index: 0 }
+Window_ScrollText.prototype.refresh = function () {
+  var textState = {
+    index: 0
+  }
   textState.text = this.convertEscapeCharacters(this._text)
   this.resetFontSettings()
   this._allTextHeight = this.calcTextHeight(textState, true)
@@ -5309,18 +5345,18 @@ Window_ScrollText.prototype.refresh = function() {
   this.drawTextEx(this._text, this.textPadding(), 1)
 }
 
-Window_ScrollText.prototype.contentsHeight = function() {
+Window_ScrollText.prototype.contentsHeight = function () {
   return Math.max(this._allTextHeight, 1)
 }
 
-Window_ScrollText.prototype.updateMessage = function() {
+Window_ScrollText.prototype.updateMessage = function () {
   this.origin.y += this.scrollSpeed()
   if (this.origin.y >= this.contents.height) {
     this.terminateMessage()
   }
 }
 
-Window_ScrollText.prototype.scrollSpeed = function() {
+Window_ScrollText.prototype.scrollSpeed = function () {
   var speed = $gameMessage.scrollSpeed() / 2
   if (this.isFastForward()) {
     speed *= this.fastForwardRate()
@@ -5328,7 +5364,7 @@ Window_ScrollText.prototype.scrollSpeed = function() {
   return speed
 }
 
-Window_ScrollText.prototype.isFastForward = function() {
+Window_ScrollText.prototype.isFastForward = function () {
   if ($gameMessage.scrollNoFast()) {
     return false
   } else {
@@ -5340,11 +5376,11 @@ Window_ScrollText.prototype.isFastForward = function() {
   }
 }
 
-Window_ScrollText.prototype.fastForwardRate = function() {
+Window_ScrollText.prototype.fastForwardRate = function () {
   return 3
 }
 
-Window_ScrollText.prototype.terminateMessage = function() {
+Window_ScrollText.prototype.terminateMessage = function () {
   this._text = null
   $gameMessage.clear()
   this.hide()
@@ -5362,7 +5398,7 @@ function Window_MapName() {
 Window_MapName.prototype = Object.create(Window_Base.prototype)
 Window_MapName.prototype.constructor = Window_MapName
 
-Window_MapName.prototype.initialize = function() {
+Window_MapName.prototype.initialize = function () {
   var wight = this.windowWidth()
   var height = this.windowHeight()
   Window_Base.prototype.initialize.call(this, 0, 0, wight, height)
@@ -5372,15 +5408,15 @@ Window_MapName.prototype.initialize = function() {
   this.refresh()
 }
 
-Window_MapName.prototype.windowWidth = function() {
+Window_MapName.prototype.windowWidth = function () {
   return 360
 }
 
-Window_MapName.prototype.windowHeight = function() {
+Window_MapName.prototype.windowHeight = function () {
   return this.fittingHeight(1)
 }
 
-Window_MapName.prototype.update = function() {
+Window_MapName.prototype.update = function () {
   Window_Base.prototype.update.call(this)
   if (this._showCount > 0 && $gameMap.isNameDisplayEnabled()) {
     this.updateFadeIn()
@@ -5390,24 +5426,24 @@ Window_MapName.prototype.update = function() {
   }
 }
 
-Window_MapName.prototype.updateFadeIn = function() {
+Window_MapName.prototype.updateFadeIn = function () {
   this.contentsOpacity += 16
 }
 
-Window_MapName.prototype.updateFadeOut = function() {
+Window_MapName.prototype.updateFadeOut = function () {
   this.contentsOpacity -= 16
 }
 
-Window_MapName.prototype.open = function() {
+Window_MapName.prototype.open = function () {
   this.refresh()
   this._showCount = 150
 }
 
-Window_MapName.prototype.close = function() {
+Window_MapName.prototype.close = function () {
   this._showCount = 0
 }
 
-Window_MapName.prototype.refresh = function() {
+Window_MapName.prototype.refresh = function () {
   this.contents.clear()
   if ($gameMap.displayName()) {
     var width = this.contentsWidth()
@@ -5416,7 +5452,7 @@ Window_MapName.prototype.refresh = function() {
   }
 }
 
-Window_MapName.prototype.drawBackground = function(x, y, width, height) {
+Window_MapName.prototype.drawBackground = function (x, y, width, height) {
   var color1 = this.dimColor1()
   var color2 = this.dimColor2()
   this.contents.gradientFillRect(x, y, width / 2, height, color2, color1)
@@ -5443,7 +5479,7 @@ function Window_BattleLog() {
 Window_BattleLog.prototype = Object.create(Window_Selectable.prototype)
 Window_BattleLog.prototype.constructor = Window_BattleLog
 
-Window_BattleLog.prototype.initialize = function() {
+Window_BattleLog.prototype.initialize = function () {
   var width = this.windowWidth()
   var height = this.windowHeight()
   Window_Selectable.prototype.initialize.call(this, 0, 0, width, height)
@@ -5459,56 +5495,56 @@ Window_BattleLog.prototype.initialize = function() {
   this.refresh()
 }
 
-Window_BattleLog.prototype.setSpriteset = function(spriteset) {
+Window_BattleLog.prototype.setSpriteset = function (spriteset) {
   this._spriteset = spriteset
 }
 
-Window_BattleLog.prototype.windowWidth = function() {
+Window_BattleLog.prototype.windowWidth = function () {
   return Graphics.boxWidth
 }
 
-Window_BattleLog.prototype.windowHeight = function() {
+Window_BattleLog.prototype.windowHeight = function () {
   return this.fittingHeight(this.maxLines())
 }
 
-Window_BattleLog.prototype.maxLines = function() {
+Window_BattleLog.prototype.maxLines = function () {
   return 10
 }
 
-Window_BattleLog.prototype.createBackBitmap = function() {
+Window_BattleLog.prototype.createBackBitmap = function () {
   this._backBitmap = new Bitmap(this.width, this.height)
 }
 
-Window_BattleLog.prototype.createBackSprite = function() {
+Window_BattleLog.prototype.createBackSprite = function () {
   this._backSprite = new Sprite()
   this._backSprite.bitmap = this._backBitmap
   this._backSprite.y = this.y
   this.addChildToBack(this._backSprite)
 }
 
-Window_BattleLog.prototype.numLines = function() {
+Window_BattleLog.prototype.numLines = function () {
   return this._lines.length
 }
 
-Window_BattleLog.prototype.messageSpeed = function() {
+Window_BattleLog.prototype.messageSpeed = function () {
   return 16
 }
 
-Window_BattleLog.prototype.isBusy = function() {
+Window_BattleLog.prototype.isBusy = function () {
   return this._waitCount > 0 || this._waitMode || this._methods.length > 0
 }
 
-Window_BattleLog.prototype.update = function() {
+Window_BattleLog.prototype.update = function () {
   if (!this.updateWait()) {
     this.callNextMethod()
   }
 }
 
-Window_BattleLog.prototype.updateWait = function() {
+Window_BattleLog.prototype.updateWait = function () {
   return this.updateWaitCount() || this.updateWaitMode()
 }
 
-Window_BattleLog.prototype.updateWaitCount = function() {
+Window_BattleLog.prototype.updateWaitCount = function () {
   if (this._waitCount > 0) {
     this._waitCount -= this.isFastForward() ? 3 : 1
     if (this._waitCount < 0) {
@@ -5519,7 +5555,7 @@ Window_BattleLog.prototype.updateWaitCount = function() {
   return false
 }
 
-Window_BattleLog.prototype.updateWaitMode = function() {
+Window_BattleLog.prototype.updateWaitMode = function () {
   var waiting = false
   switch (this._waitMode) {
     case 'effect':
@@ -5535,11 +5571,11 @@ Window_BattleLog.prototype.updateWaitMode = function() {
   return waiting
 }
 
-Window_BattleLog.prototype.setWaitMode = function(waitMode) {
+Window_BattleLog.prototype.setWaitMode = function (waitMode) {
   this._waitMode = waitMode
 }
 
-Window_BattleLog.prototype.callNextMethod = function() {
+Window_BattleLog.prototype.callNextMethod = function () {
   if (this._methods.length > 0) {
     var method = this._methods.shift()
     if (method.name && this[method.name]) {
@@ -5550,7 +5586,7 @@ Window_BattleLog.prototype.callNextMethod = function() {
   }
 }
 
-Window_BattleLog.prototype.isFastForward = function() {
+Window_BattleLog.prototype.isFastForward = function () {
   return (
     Input.isLongPressed('ok') ||
     Input.isPressed('shift') ||
@@ -5558,47 +5594,50 @@ Window_BattleLog.prototype.isFastForward = function() {
   )
 }
 
-Window_BattleLog.prototype.push = function(methodName) {
+Window_BattleLog.prototype.push = function (methodName) {
   var methodArgs = Array.prototype.slice.call(arguments, 1)
-  this._methods.push({ name: methodName, params: methodArgs })
+  this._methods.push({
+    name: methodName,
+    params: methodArgs
+  })
 }
 
-Window_BattleLog.prototype.clear = function() {
+Window_BattleLog.prototype.clear = function () {
   this._lines = []
   this._baseLineStack = []
   this.refresh()
 }
 
-Window_BattleLog.prototype.wait = function() {
+Window_BattleLog.prototype.wait = function () {
   this._waitCount = this.messageSpeed()
 }
 
-Window_BattleLog.prototype.waitForEffect = function() {
+Window_BattleLog.prototype.waitForEffect = function () {
   this.setWaitMode('effect')
 }
 
-Window_BattleLog.prototype.waitForMovement = function() {
+Window_BattleLog.prototype.waitForMovement = function () {
   this.setWaitMode('movement')
 }
 
-Window_BattleLog.prototype.addText = function(text) {
+Window_BattleLog.prototype.addText = function (text) {
   this._lines.push(text)
   this.refresh()
   this.wait()
 }
 
-Window_BattleLog.prototype.pushBaseLine = function() {
+Window_BattleLog.prototype.pushBaseLine = function () {
   this._baseLineStack.push(this._lines.length)
 }
 
-Window_BattleLog.prototype.popBaseLine = function() {
+Window_BattleLog.prototype.popBaseLine = function () {
   var baseLine = this._baseLineStack.pop()
   while (this._lines.length > baseLine) {
     this._lines.pop()
   }
 }
 
-Window_BattleLog.prototype.waitForNewLine = function() {
+Window_BattleLog.prototype.waitForNewLine = function () {
   var baseLine = 0
   if (this._baseLineStack.length > 0) {
     baseLine = this._baseLineStack[this._baseLineStack.length - 1]
@@ -5608,59 +5647,59 @@ Window_BattleLog.prototype.waitForNewLine = function() {
   }
 }
 
-Window_BattleLog.prototype.popupDamage = function(target) {
+Window_BattleLog.prototype.popupDamage = function (target) {
   target.startDamagePopup()
 }
 
-Window_BattleLog.prototype.performActionStart = function(subject, action) {
+Window_BattleLog.prototype.performActionStart = function (subject, action) {
   subject.performActionStart(action)
 }
 
-Window_BattleLog.prototype.performAction = function(subject, action) {
+Window_BattleLog.prototype.performAction = function (subject, action) {
   subject.performAction(action)
 }
 
-Window_BattleLog.prototype.performActionEnd = function(subject) {
+Window_BattleLog.prototype.performActionEnd = function (subject) {
   subject.performActionEnd()
 }
 
-Window_BattleLog.prototype.performDamage = function(target) {
+Window_BattleLog.prototype.performDamage = function (target) {
   target.performDamage()
 }
 
-Window_BattleLog.prototype.performMiss = function(target) {
+Window_BattleLog.prototype.performMiss = function (target) {
   target.performMiss()
 }
 
-Window_BattleLog.prototype.performRecovery = function(target) {
+Window_BattleLog.prototype.performRecovery = function (target) {
   target.performRecovery()
 }
 
-Window_BattleLog.prototype.performEvasion = function(target) {
+Window_BattleLog.prototype.performEvasion = function (target) {
   target.performEvasion()
 }
 
-Window_BattleLog.prototype.performMagicEvasion = function(target) {
+Window_BattleLog.prototype.performMagicEvasion = function (target) {
   target.performMagicEvasion()
 }
 
-Window_BattleLog.prototype.performCounter = function(target) {
+Window_BattleLog.prototype.performCounter = function (target) {
   target.performCounter()
 }
 
-Window_BattleLog.prototype.performReflection = function(target) {
+Window_BattleLog.prototype.performReflection = function (target) {
   target.performReflection()
 }
 
-Window_BattleLog.prototype.performSubstitute = function(substitute, target) {
+Window_BattleLog.prototype.performSubstitute = function (substitute, target) {
   substitute.performSubstitute(target)
 }
 
-Window_BattleLog.prototype.performCollapse = function(target) {
+Window_BattleLog.prototype.performCollapse = function (target) {
   target.performCollapse()
 }
 
-Window_BattleLog.prototype.showAnimation = function(
+Window_BattleLog.prototype.showAnimation = function (
   subject,
   targets,
   animationId
@@ -5672,7 +5711,7 @@ Window_BattleLog.prototype.showAnimation = function(
   }
 }
 
-Window_BattleLog.prototype.showAttackAnimation = function(subject, targets) {
+Window_BattleLog.prototype.showAttackAnimation = function (subject, targets) {
   if (subject.isActor()) {
     this.showActorAttackAnimation(subject, targets)
   } else {
@@ -5680,7 +5719,7 @@ Window_BattleLog.prototype.showAttackAnimation = function(subject, targets) {
   }
 }
 
-Window_BattleLog.prototype.showActorAttackAnimation = function(
+Window_BattleLog.prototype.showActorAttackAnimation = function (
   subject,
   targets
 ) {
@@ -5688,14 +5727,14 @@ Window_BattleLog.prototype.showActorAttackAnimation = function(
   this.showNormalAnimation(targets, subject.attackAnimationId2(), true)
 }
 
-Window_BattleLog.prototype.showEnemyAttackAnimation = function(
+Window_BattleLog.prototype.showEnemyAttackAnimation = function (
   subject,
   targets
 ) {
   SoundManager.playEnemyAttack()
 }
 
-Window_BattleLog.prototype.showNormalAnimation = function(
+Window_BattleLog.prototype.showNormalAnimation = function (
   targets,
   animationId,
   mirror
@@ -5704,22 +5743,22 @@ Window_BattleLog.prototype.showNormalAnimation = function(
   if (animation) {
     var delay = this.animationBaseDelay()
     var nextDelay = this.animationNextDelay()
-    targets.forEach(function(target) {
+    targets.forEach(function (target) {
       target.startAnimation(animationId, mirror, delay)
       delay += nextDelay
     })
   }
 }
 
-Window_BattleLog.prototype.animationBaseDelay = function() {
+Window_BattleLog.prototype.animationBaseDelay = function () {
   return 8
 }
 
-Window_BattleLog.prototype.animationNextDelay = function() {
+Window_BattleLog.prototype.animationNextDelay = function () {
   return 12
 }
 
-Window_BattleLog.prototype.refresh = function() {
+Window_BattleLog.prototype.refresh = function () {
   this.drawBackground()
   this.contents.clear()
   for (var i = 0; i < this._lines.length; i++) {
@@ -5727,7 +5766,7 @@ Window_BattleLog.prototype.refresh = function() {
   }
 }
 
-Window_BattleLog.prototype.drawBackground = function() {
+Window_BattleLog.prototype.drawBackground = function () {
   var rect = this.backRect()
   var color = this.backColor()
   this._backBitmap.clear()
@@ -5736,7 +5775,7 @@ Window_BattleLog.prototype.drawBackground = function() {
   this._backBitmap.paintOpacity = 255
 }
 
-Window_BattleLog.prototype.backRect = function() {
+Window_BattleLog.prototype.backRect = function () {
   return {
     x: 0,
     y: this.padding,
@@ -5745,25 +5784,25 @@ Window_BattleLog.prototype.backRect = function() {
   }
 }
 
-Window_BattleLog.prototype.backColor = function() {
+Window_BattleLog.prototype.backColor = function () {
   return '#000000'
 }
 
-Window_BattleLog.prototype.backPaintOpacity = function() {
+Window_BattleLog.prototype.backPaintOpacity = function () {
   return 64
 }
 
-Window_BattleLog.prototype.drawLineText = function(index) {
+Window_BattleLog.prototype.drawLineText = function (index) {
   var rect = this.itemRectForText(index)
   this.contents.clearRect(rect.x, rect.y, rect.width, rect.height)
   this.drawTextEx(this._lines[index], rect.x, rect.y, rect.width)
 }
 
-Window_BattleLog.prototype.startTurn = function() {
+Window_BattleLog.prototype.startTurn = function () {
   this.push('wait')
 }
 
-Window_BattleLog.prototype.startAction = function(subject, action, targets) {
+Window_BattleLog.prototype.startAction = function (subject, action, targets) {
   var item = action.item()
   this.push('performActionStart', subject, action)
   this.push('waitForMovement')
@@ -5772,13 +5811,13 @@ Window_BattleLog.prototype.startAction = function(subject, action, targets) {
   this.displayAction(subject, item)
 }
 
-Window_BattleLog.prototype.endAction = function(subject) {
+Window_BattleLog.prototype.endAction = function (subject) {
   this.push('waitForNewLine')
   this.push('clear')
   this.push('performActionEnd', subject)
 }
 
-Window_BattleLog.prototype.displayCurrentState = function(subject) {
+Window_BattleLog.prototype.displayCurrentState = function (subject) {
   var stateText = subject.mostImportantStateText()
   if (stateText) {
     this.push('addText', subject.name() + stateText)
@@ -5787,11 +5826,11 @@ Window_BattleLog.prototype.displayCurrentState = function(subject) {
   }
 }
 
-Window_BattleLog.prototype.displayRegeneration = function(subject) {
+Window_BattleLog.prototype.displayRegeneration = function (subject) {
   this.push('popupDamage', subject)
 }
 
-Window_BattleLog.prototype.displayAction = function(subject, item) {
+Window_BattleLog.prototype.displayAction = function (subject, item) {
   var numMethods = this._methods.length
   if (DataManager.isSkill(item)) {
     if (item.message1) {
@@ -5808,23 +5847,23 @@ Window_BattleLog.prototype.displayAction = function(subject, item) {
   }
 }
 
-Window_BattleLog.prototype.displayCounter = function(target) {
+Window_BattleLog.prototype.displayCounter = function (target) {
   this.push('performCounter', target)
   this.push('addText', TextManager.counterAttack.format(target.name()))
 }
 
-Window_BattleLog.prototype.displayReflection = function(target) {
+Window_BattleLog.prototype.displayReflection = function (target) {
   this.push('performReflection', target)
   this.push('addText', TextManager.magicReflection.format(target.name()))
 }
 
-Window_BattleLog.prototype.displaySubstitute = function(substitute, target) {
+Window_BattleLog.prototype.displaySubstitute = function (substitute, target) {
   var substName = substitute.name()
   this.push('performSubstitute', substitute, target)
   this.push('addText', TextManager.substitute.format(substName, target.name()))
 }
 
-Window_BattleLog.prototype.displayActionResults = function(subject, target) {
+Window_BattleLog.prototype.displayActionResults = function (subject, target) {
   if (target.result().used) {
     this.push('pushBaseLine')
     this.displayCritical(target)
@@ -5838,13 +5877,13 @@ Window_BattleLog.prototype.displayActionResults = function(subject, target) {
   }
 }
 
-Window_BattleLog.prototype.displayFailure = function(target) {
+Window_BattleLog.prototype.displayFailure = function (target) {
   if (target.result().isHit() && !target.result().success) {
     this.push('addText', TextManager.actionFailure.format(target.name()))
   }
 }
 
-Window_BattleLog.prototype.displayCritical = function(target) {
+Window_BattleLog.prototype.displayCritical = function (target) {
   if (target.result().critical) {
     if (target.isActor()) {
       this.push('addText', TextManager.criticalToActor)
@@ -5854,7 +5893,7 @@ Window_BattleLog.prototype.displayCritical = function(target) {
   }
 }
 
-Window_BattleLog.prototype.displayDamage = function(target) {
+Window_BattleLog.prototype.displayDamage = function (target) {
   if (target.result().missed) {
     this.displayMiss(target)
   } else if (target.result().evaded) {
@@ -5866,7 +5905,7 @@ Window_BattleLog.prototype.displayDamage = function(target) {
   }
 }
 
-Window_BattleLog.prototype.displayMiss = function(target) {
+Window_BattleLog.prototype.displayMiss = function (target) {
   var fmt
   if (target.result().physical) {
     fmt = target.isActor() ? TextManager.actorNoHit : TextManager.enemyNoHit
@@ -5877,7 +5916,7 @@ Window_BattleLog.prototype.displayMiss = function(target) {
   this.push('addText', fmt.format(target.name()))
 }
 
-Window_BattleLog.prototype.displayEvasion = function(target) {
+Window_BattleLog.prototype.displayEvasion = function (target) {
   var fmt
   if (target.result().physical) {
     fmt = TextManager.evasion
@@ -5889,7 +5928,7 @@ Window_BattleLog.prototype.displayEvasion = function(target) {
   this.push('addText', fmt.format(target.name()))
 }
 
-Window_BattleLog.prototype.displayHpDamage = function(target) {
+Window_BattleLog.prototype.displayHpDamage = function (target) {
   if (target.result().hpAffected) {
     if (target.result().hpDamage > 0 && !target.result().drain) {
       this.push('performDamage', target)
@@ -5901,7 +5940,7 @@ Window_BattleLog.prototype.displayHpDamage = function(target) {
   }
 }
 
-Window_BattleLog.prototype.displayMpDamage = function(target) {
+Window_BattleLog.prototype.displayMpDamage = function (target) {
   if (target.isAlive() && target.result().mpDamage !== 0) {
     if (target.result().mpDamage < 0) {
       this.push('performRecovery', target)
@@ -5910,7 +5949,7 @@ Window_BattleLog.prototype.displayMpDamage = function(target) {
   }
 }
 
-Window_BattleLog.prototype.displayTpDamage = function(target) {
+Window_BattleLog.prototype.displayTpDamage = function (target) {
   if (target.isAlive() && target.result().tpDamage !== 0) {
     if (target.result().tpDamage < 0) {
       this.push('performRecovery', target)
@@ -5919,7 +5958,7 @@ Window_BattleLog.prototype.displayTpDamage = function(target) {
   }
 }
 
-Window_BattleLog.prototype.displayAffectedStatus = function(target) {
+Window_BattleLog.prototype.displayAffectedStatus = function (target) {
   if (target.result().isStatusAffected()) {
     this.push('pushBaseLine')
     this.displayChangedStates(target)
@@ -5929,23 +5968,23 @@ Window_BattleLog.prototype.displayAffectedStatus = function(target) {
   }
 }
 
-Window_BattleLog.prototype.displayAutoAffectedStatus = function(target) {
+Window_BattleLog.prototype.displayAutoAffectedStatus = function (target) {
   if (target.result().isStatusAffected()) {
     this.displayAffectedStatus(target, null)
     this.push('clear')
   }
 }
 
-Window_BattleLog.prototype.displayChangedStates = function(target) {
+Window_BattleLog.prototype.displayChangedStates = function (target) {
   this.displayAddedStates(target)
   this.displayRemovedStates(target)
 }
 
-Window_BattleLog.prototype.displayAddedStates = function(target) {
+Window_BattleLog.prototype.displayAddedStates = function (target) {
   target
     .result()
     .addedStateObjects()
-    .forEach(function(state) {
+    .forEach(function (state) {
       var stateMsg = target.isActor() ? state.message1 : state.message2
       if (state.id === target.deathStateId()) {
         this.push('performCollapse', target)
@@ -5959,11 +5998,11 @@ Window_BattleLog.prototype.displayAddedStates = function(target) {
     }, this)
 }
 
-Window_BattleLog.prototype.displayRemovedStates = function(target) {
+Window_BattleLog.prototype.displayRemovedStates = function (target) {
   target
     .result()
     .removedStateObjects()
-    .forEach(function(state) {
+    .forEach(function (state) {
       if (state.message4) {
         this.push('popBaseLine')
         this.push('pushBaseLine')
@@ -5972,22 +6011,22 @@ Window_BattleLog.prototype.displayRemovedStates = function(target) {
     }, this)
 }
 
-Window_BattleLog.prototype.displayChangedBuffs = function(target) {
+Window_BattleLog.prototype.displayChangedBuffs = function (target) {
   var result = target.result()
   this.displayBuffs(target, result.addedBuffs, TextManager.buffAdd)
   this.displayBuffs(target, result.addedDebuffs, TextManager.debuffAdd)
   this.displayBuffs(target, result.removedBuffs, TextManager.buffRemove)
 }
 
-Window_BattleLog.prototype.displayBuffs = function(target, buffs, fmt) {
-  buffs.forEach(function(paramId) {
+Window_BattleLog.prototype.displayBuffs = function (target, buffs, fmt) {
+  buffs.forEach(function (paramId) {
     this.push('popBaseLine')
     this.push('pushBaseLine')
     this.push('addText', fmt.format(target.name(), TextManager.param(paramId)))
   }, this)
 }
 
-Window_BattleLog.prototype.makeHpDamageText = function(target) {
+Window_BattleLog.prototype.makeHpDamageText = function (target) {
   var result = target.result()
   var damage = result.hpDamage
   var isActor = target.isActor()
@@ -6007,7 +6046,7 @@ Window_BattleLog.prototype.makeHpDamageText = function(target) {
   }
 }
 
-Window_BattleLog.prototype.makeMpDamageText = function(target) {
+Window_BattleLog.prototype.makeMpDamageText = function (target) {
   var result = target.result()
   var damage = result.mpDamage
   var isActor = target.isActor()
@@ -6026,7 +6065,7 @@ Window_BattleLog.prototype.makeMpDamageText = function(target) {
   }
 }
 
-Window_BattleLog.prototype.makeTpDamageText = function(target) {
+Window_BattleLog.prototype.makeTpDamageText = function (target) {
   var result = target.result()
   var damage = result.tpDamage
   var isActor = target.isActor()
@@ -6054,27 +6093,27 @@ function Window_PartyCommand() {
 Window_PartyCommand.prototype = Object.create(Window_Command.prototype)
 Window_PartyCommand.prototype.constructor = Window_PartyCommand
 
-Window_PartyCommand.prototype.initialize = function() {
+Window_PartyCommand.prototype.initialize = function () {
   var y = Graphics.boxHeight - this.windowHeight()
   Window_Command.prototype.initialize.call(this, 0, y)
   this.openness = 0
   this.deactivate()
 }
 
-Window_PartyCommand.prototype.windowWidth = function() {
+Window_PartyCommand.prototype.windowWidth = function () {
   return 192
 }
 
-Window_PartyCommand.prototype.numVisibleRows = function() {
+Window_PartyCommand.prototype.numVisibleRows = function () {
   return 4
 }
 
-Window_PartyCommand.prototype.makeCommandList = function() {
+Window_PartyCommand.prototype.makeCommandList = function () {
   this.addCommand(TextManager.fight, 'fight')
   this.addCommand(TextManager.escape, 'escape', BattleManager.canEscape())
 }
 
-Window_PartyCommand.prototype.setup = function() {
+Window_PartyCommand.prototype.setup = function () {
   this.clearCommandList()
   this.makeCommandList()
   this.refresh()
@@ -6095,7 +6134,7 @@ function Window_ActorCommand() {
 Window_ActorCommand.prototype = Object.create(Window_Command.prototype)
 Window_ActorCommand.prototype.constructor = Window_ActorCommand
 
-Window_ActorCommand.prototype.initialize = function() {
+Window_ActorCommand.prototype.initialize = function () {
   var y = Graphics.boxHeight - this.windowHeight()
   Window_Command.prototype.initialize.call(this, 0, y)
   this.openness = 0
@@ -6103,15 +6142,15 @@ Window_ActorCommand.prototype.initialize = function() {
   this._actor = null
 }
 
-Window_ActorCommand.prototype.windowWidth = function() {
+Window_ActorCommand.prototype.windowWidth = function () {
   return 192
 }
 
-Window_ActorCommand.prototype.numVisibleRows = function() {
+Window_ActorCommand.prototype.numVisibleRows = function () {
   return 4
 }
 
-Window_ActorCommand.prototype.makeCommandList = function() {
+Window_ActorCommand.prototype.makeCommandList = function () {
   if (this._actor) {
     this.addAttackCommand()
     this.addSkillCommands()
@@ -6120,30 +6159,30 @@ Window_ActorCommand.prototype.makeCommandList = function() {
   }
 }
 
-Window_ActorCommand.prototype.addAttackCommand = function() {
+Window_ActorCommand.prototype.addAttackCommand = function () {
   this.addCommand(TextManager.attack, 'attack', this._actor.canAttack())
 }
 
-Window_ActorCommand.prototype.addSkillCommands = function() {
+Window_ActorCommand.prototype.addSkillCommands = function () {
   var skillTypes = this._actor.addedSkillTypes()
-  skillTypes.sort(function(a, b) {
+  skillTypes.sort(function (a, b) {
     return a - b
   })
-  skillTypes.forEach(function(stypeId) {
+  skillTypes.forEach(function (stypeId) {
     var name = $dataSystem.skillTypes[stypeId]
     this.addCommand(name, 'skill', true, stypeId)
   }, this)
 }
 
-Window_ActorCommand.prototype.addGuardCommand = function() {
+Window_ActorCommand.prototype.addGuardCommand = function () {
   this.addCommand(TextManager.guard, 'guard', this._actor.canGuard())
 }
 
-Window_ActorCommand.prototype.addItemCommand = function() {
+Window_ActorCommand.prototype.addItemCommand = function () {
   this.addCommand(TextManager.item, 'item')
 }
 
-Window_ActorCommand.prototype.setup = function(actor) {
+Window_ActorCommand.prototype.setup = function (actor) {
   this._actor = actor
   this.clearCommandList()
   this.makeCommandList()
@@ -6153,7 +6192,7 @@ Window_ActorCommand.prototype.setup = function(actor) {
   this.open()
 }
 
-Window_ActorCommand.prototype.processOk = function() {
+Window_ActorCommand.prototype.processOk = function () {
   if (this._actor) {
     if (ConfigManager.commandRemember) {
       this._actor.setLastCommandSymbol(this.currentSymbol())
@@ -6164,7 +6203,7 @@ Window_ActorCommand.prototype.processOk = function() {
   Window_Command.prototype.processOk.call(this)
 }
 
-Window_ActorCommand.prototype.selectLast = function() {
+Window_ActorCommand.prototype.selectLast = function () {
   this.select(0)
   if (this._actor && ConfigManager.commandRemember) {
     var symbol = this._actor.lastCommandSymbol()
@@ -6190,7 +6229,7 @@ function Window_BattleStatus() {
 Window_BattleStatus.prototype = Object.create(Window_Selectable.prototype)
 Window_BattleStatus.prototype.constructor = Window_BattleStatus
 
-Window_BattleStatus.prototype.initialize = function() {
+Window_BattleStatus.prototype.initialize = function () {
   var width = this.windowWidth()
   var height = this.windowHeight()
   var x = Graphics.boxWidth - width
@@ -6200,56 +6239,56 @@ Window_BattleStatus.prototype.initialize = function() {
   this.openness = 0
 }
 
-Window_BattleStatus.prototype.windowWidth = function() {
+Window_BattleStatus.prototype.windowWidth = function () {
   return Graphics.boxWidth - 192
 }
 
-Window_BattleStatus.prototype.windowHeight = function() {
+Window_BattleStatus.prototype.windowHeight = function () {
   return this.fittingHeight(this.numVisibleRows())
 }
 
-Window_BattleStatus.prototype.numVisibleRows = function() {
+Window_BattleStatus.prototype.numVisibleRows = function () {
   return 4
 }
 
-Window_BattleStatus.prototype.maxItems = function() {
+Window_BattleStatus.prototype.maxItems = function () {
   return $gameParty.battleMembers().length
 }
 
-Window_BattleStatus.prototype.refresh = function() {
+Window_BattleStatus.prototype.refresh = function () {
   this.contents.clear()
   this.drawAllItems()
 }
 
-Window_BattleStatus.prototype.drawItem = function(index) {
+Window_BattleStatus.prototype.drawItem = function (index) {
   var actor = $gameParty.battleMembers()[index]
   this.drawBasicArea(this.basicAreaRect(index), actor)
   this.drawGaugeArea(this.gaugeAreaRect(index), actor)
 }
 
-Window_BattleStatus.prototype.basicAreaRect = function(index) {
+Window_BattleStatus.prototype.basicAreaRect = function (index) {
   var rect = this.itemRectForText(index)
   rect.width -= this.gaugeAreaWidth() + 15
   return rect
 }
 
-Window_BattleStatus.prototype.gaugeAreaRect = function(index) {
+Window_BattleStatus.prototype.gaugeAreaRect = function (index) {
   var rect = this.itemRectForText(index)
   rect.x += rect.width - this.gaugeAreaWidth()
   rect.width = this.gaugeAreaWidth()
   return rect
 }
 
-Window_BattleStatus.prototype.gaugeAreaWidth = function() {
+Window_BattleStatus.prototype.gaugeAreaWidth = function () {
   return 330
 }
 
-Window_BattleStatus.prototype.drawBasicArea = function(rect, actor) {
+Window_BattleStatus.prototype.drawBasicArea = function (rect, actor) {
   this.drawActorName(actor, rect.x + 0, rect.y, 150)
   this.drawActorIcons(actor, rect.x + 156, rect.y, rect.width - 156)
 }
 
-Window_BattleStatus.prototype.drawGaugeArea = function(rect, actor) {
+Window_BattleStatus.prototype.drawGaugeArea = function (rect, actor) {
   if ($dataSystem.optDisplayTp) {
     this.drawGaugeAreaWithTp(rect, actor)
   } else {
@@ -6257,13 +6296,13 @@ Window_BattleStatus.prototype.drawGaugeArea = function(rect, actor) {
   }
 }
 
-Window_BattleStatus.prototype.drawGaugeAreaWithTp = function(rect, actor) {
+Window_BattleStatus.prototype.drawGaugeAreaWithTp = function (rect, actor) {
   this.drawActorHp(actor, rect.x + 0, rect.y, 108)
   this.drawActorMp(actor, rect.x + 123, rect.y, 96)
   this.drawActorTp(actor, rect.x + 234, rect.y, 96)
 }
 
-Window_BattleStatus.prototype.drawGaugeAreaWithoutTp = function(rect, actor) {
+Window_BattleStatus.prototype.drawGaugeAreaWithoutTp = function (rect, actor) {
   this.drawActorHp(actor, rect.x + 0, rect.y, 201)
   this.drawActorMp(actor, rect.x + 216, rect.y, 114)
 }
@@ -6280,7 +6319,7 @@ function Window_BattleActor() {
 Window_BattleActor.prototype = Object.create(Window_BattleStatus.prototype)
 Window_BattleActor.prototype.constructor = Window_BattleActor
 
-Window_BattleActor.prototype.initialize = function(x, y) {
+Window_BattleActor.prototype.initialize = function (x, y) {
   Window_BattleStatus.prototype.initialize.call(this)
   this.x = x
   this.y = y
@@ -6288,22 +6327,22 @@ Window_BattleActor.prototype.initialize = function(x, y) {
   this.hide()
 }
 
-Window_BattleActor.prototype.show = function() {
+Window_BattleActor.prototype.show = function () {
   this.select(0)
   Window_BattleStatus.prototype.show.call(this)
 }
 
-Window_BattleActor.prototype.hide = function() {
+Window_BattleActor.prototype.hide = function () {
   Window_BattleStatus.prototype.hide.call(this)
   $gameParty.select(null)
 }
 
-Window_BattleActor.prototype.select = function(index) {
+Window_BattleActor.prototype.select = function (index) {
   Window_BattleStatus.prototype.select.call(this, index)
   $gameParty.select(this.actor())
 }
 
-Window_BattleActor.prototype.actor = function() {
+Window_BattleActor.prototype.actor = function () {
   return $gameParty.members()[this.index()]
 }
 
@@ -6319,7 +6358,7 @@ function Window_BattleEnemy() {
 Window_BattleEnemy.prototype = Object.create(Window_Selectable.prototype)
 Window_BattleEnemy.prototype.constructor = Window_BattleEnemy
 
-Window_BattleEnemy.prototype.initialize = function(x, y) {
+Window_BattleEnemy.prototype.initialize = function (x, y) {
   this._enemies = []
   var width = this.windowWidth()
   var height = this.windowHeight()
@@ -6328,59 +6367,59 @@ Window_BattleEnemy.prototype.initialize = function(x, y) {
   this.hide()
 }
 
-Window_BattleEnemy.prototype.windowWidth = function() {
+Window_BattleEnemy.prototype.windowWidth = function () {
   return Graphics.boxWidth - 192
 }
 
-Window_BattleEnemy.prototype.windowHeight = function() {
+Window_BattleEnemy.prototype.windowHeight = function () {
   return this.fittingHeight(this.numVisibleRows())
 }
 
-Window_BattleEnemy.prototype.numVisibleRows = function() {
+Window_BattleEnemy.prototype.numVisibleRows = function () {
   return 4
 }
 
-Window_BattleEnemy.prototype.maxCols = function() {
+Window_BattleEnemy.prototype.maxCols = function () {
   return 2
 }
 
-Window_BattleEnemy.prototype.maxItems = function() {
+Window_BattleEnemy.prototype.maxItems = function () {
   return this._enemies.length
 }
 
-Window_BattleEnemy.prototype.enemy = function() {
+Window_BattleEnemy.prototype.enemy = function () {
   return this._enemies[this.index()]
 }
 
-Window_BattleEnemy.prototype.enemyIndex = function() {
+Window_BattleEnemy.prototype.enemyIndex = function () {
   var enemy = this.enemy()
   return enemy ? enemy.index() : -1
 }
 
-Window_BattleEnemy.prototype.drawItem = function(index) {
+Window_BattleEnemy.prototype.drawItem = function (index) {
   this.resetTextColor()
   var name = this._enemies[index].name()
   var rect = this.itemRectForText(index)
   this.drawText(name, rect.x, rect.y, rect.width)
 }
 
-Window_BattleEnemy.prototype.show = function() {
+Window_BattleEnemy.prototype.show = function () {
   this.refresh()
   this.select(0)
   Window_Selectable.prototype.show.call(this)
 }
 
-Window_BattleEnemy.prototype.hide = function() {
+Window_BattleEnemy.prototype.hide = function () {
   Window_Selectable.prototype.hide.call(this)
   $gameTroop.select(null)
 }
 
-Window_BattleEnemy.prototype.refresh = function() {
+Window_BattleEnemy.prototype.refresh = function () {
   this._enemies = $gameTroop.aliveMembers()
   Window_Selectable.prototype.refresh.call(this)
 }
 
-Window_BattleEnemy.prototype.select = function(index) {
+Window_BattleEnemy.prototype.select = function (index) {
   Window_Selectable.prototype.select.call(this, index)
   $gameTroop.select(this.enemy())
 }
@@ -6397,18 +6436,18 @@ function Window_BattleSkill() {
 Window_BattleSkill.prototype = Object.create(Window_SkillList.prototype)
 Window_BattleSkill.prototype.constructor = Window_BattleSkill
 
-Window_BattleSkill.prototype.initialize = function(x, y, width, height) {
+Window_BattleSkill.prototype.initialize = function (x, y, width, height) {
   Window_SkillList.prototype.initialize.call(this, x, y, width, height)
   this.hide()
 }
 
-Window_BattleSkill.prototype.show = function() {
+Window_BattleSkill.prototype.show = function () {
   this.selectLast()
   this.showHelpWindow()
   Window_SkillList.prototype.show.call(this)
 }
 
-Window_BattleSkill.prototype.hide = function() {
+Window_BattleSkill.prototype.hide = function () {
   this.hideHelpWindow()
   Window_SkillList.prototype.hide.call(this)
 }
@@ -6425,22 +6464,22 @@ function Window_BattleItem() {
 Window_BattleItem.prototype = Object.create(Window_ItemList.prototype)
 Window_BattleItem.prototype.constructor = Window_BattleItem
 
-Window_BattleItem.prototype.initialize = function(x, y, width, height) {
+Window_BattleItem.prototype.initialize = function (x, y, width, height) {
   Window_ItemList.prototype.initialize.call(this, x, y, width, height)
   this.hide()
 }
 
-Window_BattleItem.prototype.includes = function(item) {
+Window_BattleItem.prototype.includes = function (item) {
   return $gameParty.canUse(item)
 }
 
-Window_BattleItem.prototype.show = function() {
+Window_BattleItem.prototype.show = function () {
   this.selectLast()
   this.showHelpWindow()
   Window_ItemList.prototype.show.call(this)
 }
 
-Window_BattleItem.prototype.hide = function() {
+Window_BattleItem.prototype.hide = function () {
   this.hideHelpWindow()
   Window_ItemList.prototype.hide.call(this)
 }
@@ -6457,7 +6496,7 @@ function Window_TitleCommand() {
 Window_TitleCommand.prototype = Object.create(Window_Command.prototype)
 Window_TitleCommand.prototype.constructor = Window_TitleCommand
 
-Window_TitleCommand.prototype.initialize = function() {
+Window_TitleCommand.prototype.initialize = function () {
   Window_Command.prototype.initialize.call(this, 0, 0)
   this.updatePlacement()
   this.openness = 0
@@ -6466,35 +6505,35 @@ Window_TitleCommand.prototype.initialize = function() {
 
 Window_TitleCommand._lastCommandSymbol = null
 
-Window_TitleCommand.initCommandPosition = function() {
+Window_TitleCommand.initCommandPosition = function () {
   this._lastCommandSymbol = null
 }
 
-Window_TitleCommand.prototype.windowWidth = function() {
+Window_TitleCommand.prototype.windowWidth = function () {
   return 240
 }
 
-Window_TitleCommand.prototype.updatePlacement = function() {
+Window_TitleCommand.prototype.updatePlacement = function () {
   this.x = (Graphics.boxWidth - this.width) / 2
   this.y = Graphics.boxHeight - this.height - 96
 }
 
-Window_TitleCommand.prototype.makeCommandList = function() {
+Window_TitleCommand.prototype.makeCommandList = function () {
   this.addCommand(TextManager.newGame, 'newGame')
   this.addCommand(TextManager.continue_, 'continue', this.isContinueEnabled())
   this.addCommand(TextManager.options, 'options')
 }
 
-Window_TitleCommand.prototype.isContinueEnabled = function() {
+Window_TitleCommand.prototype.isContinueEnabled = function () {
   return DataManager.isAnySavefileExists()
 }
 
-Window_TitleCommand.prototype.processOk = function() {
+Window_TitleCommand.prototype.processOk = function () {
   Window_TitleCommand._lastCommandSymbol = this.currentSymbol()
   Window_Command.prototype.processOk.call(this)
 }
 
-Window_TitleCommand.prototype.selectLast = function() {
+Window_TitleCommand.prototype.selectLast = function () {
   if (Window_TitleCommand._lastCommandSymbol) {
     this.selectSymbol(Window_TitleCommand._lastCommandSymbol)
   } else if (this.isContinueEnabled()) {
@@ -6514,23 +6553,23 @@ function Window_GameEnd() {
 Window_GameEnd.prototype = Object.create(Window_Command.prototype)
 Window_GameEnd.prototype.constructor = Window_GameEnd
 
-Window_GameEnd.prototype.initialize = function() {
+Window_GameEnd.prototype.initialize = function () {
   Window_Command.prototype.initialize.call(this, 0, 0)
   this.updatePlacement()
   this.openness = 0
   this.open()
 }
 
-Window_GameEnd.prototype.windowWidth = function() {
+Window_GameEnd.prototype.windowWidth = function () {
   return 240
 }
 
-Window_GameEnd.prototype.updatePlacement = function() {
+Window_GameEnd.prototype.updatePlacement = function () {
   this.x = (Graphics.boxWidth - this.width) / 2
   this.y = (Graphics.boxHeight - this.height) / 2
 }
 
-Window_GameEnd.prototype.makeCommandList = function() {
+Window_GameEnd.prototype.makeCommandList = function () {
   this.addCommand(TextManager.toTitle, 'toTitle')
   this.addCommand(TextManager.cancel, 'cancel')
 }
@@ -6550,7 +6589,7 @@ Window_DebugRange.prototype.constructor = Window_DebugRange
 Window_DebugRange.lastTopRow = 0
 Window_DebugRange.lastIndex = 0
 
-Window_DebugRange.prototype.initialize = function(x, y) {
+Window_DebugRange.prototype.initialize = function (x, y) {
   this._maxSwitches = Math.ceil(($dataSystem.switches.length - 1) / 10)
   this._maxVariables = Math.ceil(($dataSystem.variables.length - 1) / 10)
   var width = this.windowWidth()
@@ -6562,19 +6601,19 @@ Window_DebugRange.prototype.initialize = function(x, y) {
   this.activate()
 }
 
-Window_DebugRange.prototype.windowWidth = function() {
+Window_DebugRange.prototype.windowWidth = function () {
   return 246
 }
 
-Window_DebugRange.prototype.windowHeight = function() {
+Window_DebugRange.prototype.windowHeight = function () {
   return Graphics.boxHeight
 }
 
-Window_DebugRange.prototype.maxItems = function() {
+Window_DebugRange.prototype.maxItems = function () {
   return this._maxSwitches + this._maxVariables
 }
 
-Window_DebugRange.prototype.update = function() {
+Window_DebugRange.prototype.update = function () {
   Window_Selectable.prototype.update.call(this)
   if (this._editWindow) {
     this._editWindow.setMode(this.mode())
@@ -6582,11 +6621,11 @@ Window_DebugRange.prototype.update = function() {
   }
 }
 
-Window_DebugRange.prototype.mode = function() {
+Window_DebugRange.prototype.mode = function () {
   return this.index() < this._maxSwitches ? 'switch' : 'variable'
 }
 
-Window_DebugRange.prototype.topId = function() {
+Window_DebugRange.prototype.topId = function () {
   var index = this.index()
   if (index < this._maxSwitches) {
     return index * 10 + 1
@@ -6595,12 +6634,12 @@ Window_DebugRange.prototype.topId = function() {
   }
 }
 
-Window_DebugRange.prototype.refresh = function() {
+Window_DebugRange.prototype.refresh = function () {
   this.createContents()
   this.drawAllItems()
 }
 
-Window_DebugRange.prototype.drawItem = function(index) {
+Window_DebugRange.prototype.drawItem = function (index) {
   var rect = this.itemRectForText(index)
   var start
   var text
@@ -6616,20 +6655,20 @@ Window_DebugRange.prototype.drawItem = function(index) {
   this.drawText(text, rect.x, rect.y, rect.width)
 }
 
-Window_DebugRange.prototype.isCancelTriggered = function() {
+Window_DebugRange.prototype.isCancelTriggered = function () {
   return (
     Window_Selectable.prototype.isCancelTriggered() ||
     Input.isTriggered('debug')
   )
 }
 
-Window_DebugRange.prototype.processCancel = function() {
+Window_DebugRange.prototype.processCancel = function () {
   Window_Selectable.prototype.processCancel.call(this)
   Window_DebugRange.lastTopRow = this.topRow()
   Window_DebugRange.lastIndex = this.index()
 }
 
-Window_DebugRange.prototype.setEditWindow = function(editWindow) {
+Window_DebugRange.prototype.setEditWindow = function (editWindow) {
   this._editWindow = editWindow
 }
 
@@ -6645,7 +6684,7 @@ function Window_DebugEdit() {
 Window_DebugEdit.prototype = Object.create(Window_Selectable.prototype)
 Window_DebugEdit.prototype.constructor = Window_DebugEdit
 
-Window_DebugEdit.prototype.initialize = function(x, y, width) {
+Window_DebugEdit.prototype.initialize = function (x, y, width) {
   var height = this.fittingHeight(10)
   Window_Selectable.prototype.initialize.call(this, x, y, width, height)
   this._mode = 'switch'
@@ -6653,16 +6692,16 @@ Window_DebugEdit.prototype.initialize = function(x, y, width) {
   this.refresh()
 }
 
-Window_DebugEdit.prototype.maxItems = function() {
+Window_DebugEdit.prototype.maxItems = function () {
   return 10
 }
 
-Window_DebugEdit.prototype.refresh = function() {
+Window_DebugEdit.prototype.refresh = function () {
   this.contents.clear()
   this.drawAllItems()
 }
 
-Window_DebugEdit.prototype.drawItem = function(index) {
+Window_DebugEdit.prototype.drawItem = function (index) {
   var dataId = this._topId + index
   var idText = dataId.padZero(4) + ':'
   var idWidth = this.textWidth(idText)
@@ -6678,7 +6717,7 @@ Window_DebugEdit.prototype.drawItem = function(index) {
   this.drawText(status, rect.x + rect.width, rect.y, statusWidth, 'right')
 }
 
-Window_DebugEdit.prototype.itemName = function(dataId) {
+Window_DebugEdit.prototype.itemName = function (dataId) {
   if (this._mode === 'switch') {
     return $dataSystem.switches[dataId]
   } else {
@@ -6686,7 +6725,7 @@ Window_DebugEdit.prototype.itemName = function(dataId) {
   }
 }
 
-Window_DebugEdit.prototype.itemStatus = function(dataId) {
+Window_DebugEdit.prototype.itemStatus = function (dataId) {
   if (this._mode === 'switch') {
     return $gameSwitches.value(dataId) ? '[ON]' : '[OFF]'
   } else {
@@ -6694,25 +6733,25 @@ Window_DebugEdit.prototype.itemStatus = function(dataId) {
   }
 }
 
-Window_DebugEdit.prototype.setMode = function(mode) {
+Window_DebugEdit.prototype.setMode = function (mode) {
   if (this._mode !== mode) {
     this._mode = mode
     this.refresh()
   }
 }
 
-Window_DebugEdit.prototype.setTopId = function(id) {
+Window_DebugEdit.prototype.setTopId = function (id) {
   if (this._topId !== id) {
     this._topId = id
     this.refresh()
   }
 }
 
-Window_DebugEdit.prototype.currentId = function() {
+Window_DebugEdit.prototype.currentId = function () {
   return this._topId + this.index()
 }
 
-Window_DebugEdit.prototype.update = function() {
+Window_DebugEdit.prototype.update = function () {
   Window_Selectable.prototype.update.call(this)
   if (this.active) {
     if (this._mode === 'switch') {
@@ -6723,7 +6762,7 @@ Window_DebugEdit.prototype.update = function() {
   }
 }
 
-Window_DebugEdit.prototype.updateSwitch = function() {
+Window_DebugEdit.prototype.updateSwitch = function () {
   if (Input.isRepeated('ok')) {
     var switchId = this.currentId()
     SoundManager.playCursor()
@@ -6732,7 +6771,7 @@ Window_DebugEdit.prototype.updateSwitch = function() {
   }
 }
 
-Window_DebugEdit.prototype.updateVariable = function() {
+Window_DebugEdit.prototype.updateVariable = function () {
   var variableId = this.currentId()
   var value = $gameVariables.value(variableId)
   if (typeof value === 'number') {

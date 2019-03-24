@@ -9,5 +9,6 @@ var $plugins =
 {"name":"DTextPicture","status":true,"description":"動的文字列ピクチャ生成プラグイン","parameters":{}},
 {"name":"OggOnly","status":true,"description":"音声ファイルの再生にoggファイルのみを使用します。","parameters":{"deleteM4a":"false"}},
 {"name":"stbvorbis","status":true,"description":"","parameters":{}},
-{"name":"stbvorbis_asm","status":true,"description":"","parameters":{}}
+{"name":"stbvorbis_asm","status":true,"description":"","parameters":{}},
+{"name":"setBonusItem","status":true,"description":"ボーナスアイテム設定","parameters":{}}
 ];
