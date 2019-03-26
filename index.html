@@ -8,35 +8,19 @@
     <meta name="viewport" content="user-scalable=no" />
     <link rel="icon" href="icon/icon.png" type="image/png" />
     <link rel="apple-touch-icon" href="icon/icon.png" />
+    <link href="css2.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" type="text/css" href="fonts/gamefont.css" />
+
     <title>りつねぇ！RPG</title>
-    <style type="text/css">
-      h1 {
-        color: #bbbbbb;
-      }
 
-      p,
-      li {
-        font-size: 60%;
-        color: #bbbbbb;
-      }
-
-      a {
-        text-decoration: none;
-        color: #bbbbbb;
-      }
-
-      body {
-        text-align: center;
-      }
-    </style>
   </head>
 
   <body style="background-color: black">
-    <div onclick>
-      <h1>■ りつねぇ！RPG <a href="./beta.html">■</a></h1>
-      <p>Internet Explolerだと動きません。他のブラウザで試してください(Chrome,Edge等)</p>
+    <header>
+      <h1>■ りつねぇ！RPG(BETA)</h1>
+    </header>
 
+    <div onclick>
       <div>
         <button id="fullscreenSwitch" onclick="goFS()">
           フルスクリーンにする
@@ -44,16 +28,22 @@
       </div>
       <div>
         <iframe id="ifr" class="GamePlayerCore" scrolling="no" allowfullscreen
-          src="https://umaaji298.github.io/rituRPG/game.html" frameborder="0" title="ゲーム画面" name="umami298のゲーム画面"
-          sandbox="allow-scripts allow-same-origin allow-pointer-lock allow-orientation-lock"
+          src="https://umaaji298.github.io/rituRPG/beta/rituRPG/www/index.html" frameborder="0" title="ゲーム画面"
+          name="umami298のゲーム画面" sandbox="allow-scripts allow-same-origin allow-pointer-lock allow-orientation-lock"
           allow="accelerometer; ambient-light-sensor; autoplay; camera; encrypted-media; fullscreen; geolocation; gyroscope; magnetometer; microphone; midi; speaker; vibrate; vr"
           style="width: 816px; height: 624px;"></iframe>
       </div>
+
+
       <p>Internet Explolerだと動きません。他のブラウザで試してください(Chrome,Edge等)</p>
 
       <form>
         <textarea cols=60 rows=3>
 更新
+2019/03/27 ver 2.0 公開 ろくにテストしてないver
+2019/03/27 ver 1.9 ヘルモード対応/全システム刷新
+2019/03/26 ver 1.5 情報画面対応
+2019/03/25 ver 1.4 セーブ対応
 2019/03/24 ver 1.3 クラスアップ(すぺしゃる）実装
 2019/03/24 ver 1.2 ヒント機能実装
 2019/03/24 ver 1.1 微修正/表示遅延対応
@@ -62,26 +52,31 @@
           </textarea>
       </form>
 
-      <p>素材画像の権利は画像制作者(手書きあき）に帰属します。</p>
-      <p>link : <a href=http://www.2chan.net>ふたば★ちゃんねる </a> </p> </div> <script>
-          var target = document.getElementsByClassName('GamePlayerCore')[0]
-          var btn = document.getElementById('fullscreenSwitch')
-
-          /*フルスクリーン実行用ファンクション*/
-          function goFS() {
-          if (target.webkitRequestFullscreen) {
-          target.webkitRequestFullscreen() //Chrome15+, Safari5.1+, Opera15+
-          } else if (target.mozRequestFullScreen) {
-          target.mozRequestFullScreen() //FF10+
-          } else if (target.msRequestFullscreen) {
-          target.msRequestFullscreen() //IE11+
-          } else if (target.requestFullscreen) {
-          target.requestFullscreen() // HTML5 Fullscreen API仕様
-          } else {
-          alert('ご利用のブラウザはフルスクリーン操作に対応していません')
-          return
-          } } </script>
     </div>
+
+    <footer>
+      <p>素材画像の権利は画像制作者(手書きあき）に帰属します。</p>
+      <a href=http://www.2chan.net>ふたば★ちゃんねる </a> </footer> <script>
+        var target = document.getElementsByClassName('GamePlayerCore')[0]
+        var btn = document.getElementById('fullscreenSwitch')
+
+        /*フルスクリーン実行用ファンクション*/
+        function goFS() {
+        if (target.webkitRequestFullscreen) {
+        target.webkitRequestFullscreen() //Chrome15+, Safari5.1+, Opera15+
+        } else if (target.mozRequestFullScreen) {
+        target.mozRequestFullScreen() //FF10+
+        } else if (target.msRequestFullscreen) {
+        target.msRequestFullscreen() //IE11+
+        } else if (target.requestFullscreen) {
+        target.requestFullscreen() // HTML5 Fullscreen API仕様
+        } else {
+        alert('ご利用のブラウザはフルスクリーン操作に対応していません')
+        return
+        }
+        }
+        </script>
+
   </body>
 
 </html>
