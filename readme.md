@@ -11,7 +11,8 @@ PC及びスマートフォン上のブラウザにて動作します。
 https://umaaji298.github.io/rituRPG/
 
 ## VS. 
-TBD
+- [壁越え - ケムリクサ](https://www.nicovideo.jp/watch/sm29583486)
+- [MSX風二次創作ゲーム「ケムリクサ」](https://freegame-mugen.jp/action/game_7672.html)
 
 ## Caution
 Internet Explolerでは動作しません。  

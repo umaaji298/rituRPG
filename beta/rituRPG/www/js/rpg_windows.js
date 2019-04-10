@@ -1303,14 +1303,15 @@ Window_Selectable.prototype.ensureCursorVisible = function () {
 }
 
 Window_Selectable.prototype.callUpdateHelp = function () {
-  if (this.active && this._helpWindow && this._helpWindow2) {
+  //if (this.active && this._helpWindow && this._helpWindow2) {
+  if (this.active && this._helpWindow) {
     this.updateHelp()
   }
 }
 
 Window_Selectable.prototype.updateHelp = function () {
   this._helpWindow.clear()
-  this._helpWindow2.clear()
+  if (this._helpWindow2 != null) this._helpWindow2.clear()
 }
 
 Window_Selectable.prototype.setHelpWindowItem = function (item) {
@@ -1605,7 +1606,192 @@ Window_Help2.prototype.initialize = function (x, y, width, height) {
   this._width = width
   this._height = height
   this._graphicName = 199
-  this.reversFilenameList = [10, 11, 12, 20, 21, 30, 31, 32, 40, 41, 50, 51, 52, 53, 60, 61, 70, 71, 72, 73, 80, 81, 90, 91, 100, 110, 120, 121, 130, 131, 132, 133, 140, 150, 151, 152, 160, 161, 162, 163, 170, 171, 172, 173, 180, 181, 182, 190, 191, 192, 200, 201, 210, 211, 212, 213, 220, 230, 231, 240, 241, 242, 250, 260, 261, 270, 280, 281, 290, 300, 310, 311, 312, 320, 321, 330, 340, 341, 342, 343, 350, 351, 352, 360, 361, 362, 370, 380, 390, 400, 401, 402, 403, 404, 405, 410, 420, 421, 430, 440, 441, 450, 460, 470, 480, 490, 500, 501, 510, 520, 530, 531, 540, 541, 550, 551, 560, 570, 571, 572, 573]
+  this.ItemFilenameRList = [10, 11, 12, 20, 21, 30, 31, 32, 40, 41, 50, 51, 52, 53, 60, 61, 70, 71, 72, 73, 80, 81, 90, 91, 100, 110, 120, 121, 130, 131, 132, 133, 140, 150, 151, 152, 160, 161, 162, 163, 170, 171, 172, 173, 180, 181, 182, 190, 191, 192, 200, 201, 210, 211, 212, 213, 220, 230, 231, 240, 241, 242, 250, 260, 261, 270, 280, 281, 290, 300, 310, 311, 312, 320, 321, 330, 340, 341, 342, 343, 350, 351, 352, 360, 361, 362, 370, 380, 390, 400, 401, 402, 403, 404, 405, 410, 420, 421, 430, 440, 441, 450, 460, 470, 480, 490, 500, 501, 510, 520, 530, 531, 540, 541, 550, 551, 560, 570, 571, 572, 573]
+
+  this.skillFilenameList = {
+    50: {
+      pattern: 3,
+      prefix: "crit_",
+      namelist: ["00", "01", "02"]
+    },
+    51: {
+      pattern: 3,
+      prefix: "gard_",
+      namelist: ["00", "01", "02"]
+    },
+    52: {
+      pattern: 1,
+      prefix: "skill_",
+      namelist: ["010", "", ""]
+    },
+    53: {
+      pattern: 1,
+      prefix: "skill_",
+      namelist: ["190", "", ""]
+    },
+    54: {
+      pattern: 2,
+      prefix: "skill_",
+      namelist: ["130", "131", ""]
+    },
+    55: {
+      pattern: 0,
+      prefix: "",
+      namelist: ["", "", ""]
+    },
+    56: {
+      pattern: 0,
+      prefix: "",
+      namelist: ["", "", ""]
+    },
+    57: {
+      pattern: 0,
+      prefix: "",
+      namelist: ["", "", ""]
+    },
+    58: {
+      pattern: 0,
+      prefix: "",
+      namelist: ["", "", ""]
+    },
+    59: {
+      pattern: 0,
+      prefix: "",
+      namelist: ["", "", ""]
+    },
+    60: {
+      pattern: 0,
+      prefix: "",
+      namelist: ["", "", ""]
+    },
+    61: {
+      pattern: 1,
+      prefix: "skill_",
+      namelist: ["180", "", ""]
+    },
+    62: {
+      pattern: 2,
+      prefix: "skill_",
+      namelist: ["140", "141", ""]
+    },
+    63: {
+      pattern: 1,
+      prefix: "skill_",
+      namelist: ["050", "", ""]
+    },
+    64: {
+      pattern: 2,
+      prefix: "skill_",
+      namelist: ["160", "161", ""]
+    },
+    65: {
+      pattern: 2,
+      prefix: "skill_",
+      namelist: ["020", "021", ""]
+    },
+    66: {
+      pattern: 2,
+      prefix: "skill_",
+      namelist: ["040", "041", ""]
+    },
+    67: {
+      pattern: 0,
+      prefix: "",
+      namelist: ["", "", ""]
+    },
+    68: {
+      pattern: 0,
+      prefix: "",
+      namelist: ["", "", ""]
+    },
+    69: {
+      pattern: 0,
+      prefix: "",
+      namelist: ["", "", ""]
+    },
+    70: {
+      pattern: 0,
+      prefix: "",
+      namelist: ["", "", ""]
+    },
+    71: {
+      pattern: 3,
+      prefix: "skill_",
+      namelist: ["030", "031", "032"]
+    },
+    72: {
+      pattern: 2,
+      prefix: "skill_",
+      namelist: ["070", "071", ""]
+    },
+    73: {
+      pattern: 3,
+      prefix: "skill_",
+      namelist: ["080", "081", "082"]
+    },
+    74: {
+      pattern: 1,
+      prefix: "skill_",
+      namelist: ["090", "", ""]
+    },
+    75: {
+      pattern: 2,
+      prefix: "skill_",
+      namelist: ["100", "101", ""]
+    },
+    76: {
+      pattern: 2,
+      prefix: "skill_",
+      namelist: ["110", "111", ""]
+    },
+    77: {
+      pattern: 1,
+      prefix: "skill_",
+      namelist: ["120", "", ""]
+    },
+    78: {
+      pattern: 0,
+      prefix: "",
+      namelist: ["", "", ""]
+    },
+    79: {
+      pattern: 0,
+      prefix: "",
+      namelist: ["", "", ""]
+    },
+    80: {
+      pattern: 0,
+      prefix: "",
+      namelist: ["", "", ""]
+    },
+    81: {
+      pattern: 1,
+      prefix: "skill_",
+      namelist: ["170", "", ""]
+    },
+    82: {
+      pattern: 1,
+      prefix: "skill_",
+      namelist: ["060", "", ""]
+    },
+    83: {
+      pattern: 1,
+      prefix: "skill_",
+      namelist: ["150", "", ""]
+    },
+    84: {
+      pattern: 0,
+      prefix: "",
+      namelist: ["", "", ""]
+    },
+    85: {
+      pattern: 0,
+      prefix: "",
+      namelist: ["", "", ""]
+    },
+  }
+
+
   //console.log('initialize ' + this._text, this._graphicName)
 }
 
@@ -1628,18 +1814,26 @@ Window_Help2.prototype.clear = function () {
 Window_Help2.prototype.setItem = function (item) {
   //console.log('setItem ' + this._text, this._graphicName)
   this.setText(item ? item.description : '')
-
+  console.log("item", item)
   if (item) {
     //カテゴリ判定
     if (DataManager.isWeapon(item)) {
       //specialかどうか
       this._graphicName = "sp_" + (item.id) // item id is 1 start  
-    } else {
+      this.drawSpecial(this._graphicName)
+    } else if (DataManager.isSkill(item)) {
+      var drawprop = this.skillFilenameList[item.id]
+      //console.log("drawprop", drawprop)
+      if (drawprop != null && drawprop.pattern > 0) {
+        var pictureno = Math.floor(Math.random() * drawprop.pattern)
+        this._graphicName = drawprop.prefix + drawprop.namelist[pictureno]
+        this.drawSpecial(this._graphicName)
+      }
+    } else if (DataManager.isItem(item)) {
       //通常アイテム
-      this._graphicName = this.reversFilenameList[item.id - 1] // item id is 1 start  
+      this._graphicName = this.ItemFilenameRList[item.id - 1] // item id is 1 start  
+      this.drawSpecial(this._graphicName)
     }
-
-    this.drawSpecial(this._graphicName)
     //console.log('draw end', this._graphicName)
   }
   //    else {
@@ -2221,16 +2415,18 @@ function Window_SkillType() {
   this.initialize.apply(this, arguments)
 }
 
-Window_SkillType.prototype = Object.create(Window_Command.prototype)
+//Window_SkillType.prototype = Object.create(Window_Command.prototype)
+Window_SkillType.prototype = Object.create(Window_HorzCommand.prototype)
 Window_SkillType.prototype.constructor = Window_SkillType
 
 Window_SkillType.prototype.initialize = function (x, y) {
-  Window_Command.prototype.initialize.call(this, x, y)
+  //Window_Command.prototype.initialize.call(this, x, y)
+  Window_HorzCommand.prototype.initialize.call(this, x, y)
   this._actor = null
 }
 
 Window_SkillType.prototype.windowWidth = function () {
-  return 240
+  return Graphics.boxWidth
 }
 
 Window_SkillType.prototype.setActor = function (actor) {
@@ -2241,8 +2437,8 @@ Window_SkillType.prototype.setActor = function (actor) {
   }
 }
 
-Window_SkillType.prototype.numVisibleRows = function () {
-  return 4
+Window_SkillType.prototype.maxCols = function () {
+  return 4;
 }
 
 Window_SkillType.prototype.makeCommandList = function () {
@@ -2350,7 +2546,7 @@ Window_SkillList.prototype.setStypeId = function (stypeId) {
 }
 
 Window_SkillList.prototype.maxCols = function () {
-  return 2
+  return 1
 }
 
 Window_SkillList.prototype.spacing = function () {
@@ -6515,13 +6711,14 @@ Window_TitleCommand.prototype.windowWidth = function () {
 
 Window_TitleCommand.prototype.updatePlacement = function () {
   this.x = (Graphics.boxWidth - this.width) / 2
-  this.y = Graphics.boxHeight - this.height - 96
+  //this.y = Graphics.boxHeight - this.height - 96
+  this.y = Graphics.boxHeight - this.height - 50
 }
 
 Window_TitleCommand.prototype.makeCommandList = function () {
   this.addCommand(TextManager.newGame, 'newGame')
   this.addCommand(TextManager.continue_, 'continue', this.isContinueEnabled())
-  this.addCommand(TextManager.options, 'options')
+  //this.addCommand(TextManager.options, 'options')
 }
 
 Window_TitleCommand.prototype.isContinueEnabled = function () {
