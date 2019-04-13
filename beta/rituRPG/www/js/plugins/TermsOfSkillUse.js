@@ -168,11 +168,9 @@ Imported['TermsOfSkillUse'] = 1.03;
                 if (item.scope === 11) {
                     user.setLastCond(item, false);
                     if (!this.checkUseCond([user, user, cond])) {
-                        console.log("isUsableCond ng")
                         return false
                     } else {
                         user.setLastCond(item, true);
-                        console.log("isUsableCond ok")
                     }
                 } else {
                     if (item.scope === 9 || item.scope === 10) {

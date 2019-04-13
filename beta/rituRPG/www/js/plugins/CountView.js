@@ -13,7 +13,7 @@
 
   var pluginName = 'CountView'
   //カウンター最大数 : 1枚しか同音がないものは0となる
-  var count_max = [2, 1, 2, 1, 3, 1, 3, 1, 1, 0, 0, 1, 3, 0, 2, 3, 3, 2, 2, 1, 3, 0, 1, 2, 0, 1, 0, 1, 0, 0, 2, 1, 0, 3, 2, 2, 0, 0, 0, 5, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 1, 0, 3]
+  var count_max = [6, 5, 2, 1, 5, 4, 6, 3, 1, 2, 1, 4, 4, 1, 4, 5, 3, 4, 2, 3, 5, 0, 2, 4, 1, 1, 0, 2, 0, 1, 5, 3, 0, 3, 5, 3, 0, 1, 1, 5, 0, 3, 1, 3, 0, 0, 1, 0, 2, 1, 0, 0, 2, 3, 3, 1, 4, 2, 0, 0, 0, 1]
 
 
   // プラグインコマンドの定義
@@ -23,12 +23,14 @@
     _Game_Interpreter_pluginCommand.call(this, command, args)
 
     if (command === pluginName) {
-      //var ishard = $gameVariables.value(19);
-      var story_advande = $gameVariables.value(80)
+      //ハード後半モードかどうか
+      var story_final = $gameVariables.value(80)
 
-      if ($gameVariables.value(80) > 0) {
+      if (story_final > 0) {
+        //画像表示回数をV[no+121]に記録する
         countCheck()
       } else {
+        //normalモードは単純に詰み防止乱数を消しこんで対応
         countCheck_normal()
 
       }
@@ -45,7 +47,7 @@
   function countCheck() {
     //スロット文字(no)取得
     var current_num = $gameVariables.value(1);
-    var counter_id = current_num + 21
+    var counter_id = current_num + 121
     //現在の重複カウント数取得
     var count = $gameVariables.value(counter_id);
     //個別最大カウント数取得
@@ -61,7 +63,7 @@
       if ($gameVariables.value(20) > 0) {
         console.log("debug next call")
         var next_s = current_num + 1
-        if (next_s > 56) {
+        if (next_s > 62) {
           next_s = 0
         }
         $gameVariables.setValue(1, next_s)
