@@ -3065,14 +3065,14 @@ Window_Options.prototype.makeCommandList = function () {
 }
 
 Window_Options.prototype.addGeneralOptions = function () {
-  this.addCommand(TextManager.alwaysDash, 'alwaysDash')
-  this.addCommand(TextManager.commandRemember, 'commandRemember')
+  //this.addCommand(TextManager.alwaysDash, 'alwaysDash')
+  //this.addCommand(TextManager.commandRemember, 'commandRemember')
 }
 
 Window_Options.prototype.addVolumeOptions = function () {
   this.addCommand(TextManager.bgmVolume, 'bgmVolume')
-  this.addCommand(TextManager.bgsVolume, 'bgsVolume')
-  this.addCommand(TextManager.meVolume, 'meVolume')
+  //this.addCommand(TextManager.bgsVolume, 'bgsVolume')
+  //this.addCommand(TextManager.meVolume, 'meVolume')
   this.addCommand(TextManager.seVolume, 'seVolume')
 }
 
@@ -6717,7 +6717,7 @@ Window_TitleCommand.prototype.updatePlacement = function () {
 Window_TitleCommand.prototype.makeCommandList = function () {
   this.addCommand(TextManager.newGame, 'newGame')
   this.addCommand(TextManager.continue_, 'continue', this.isContinueEnabled())
-  //this.addCommand(TextManager.options, 'options')
+  this.addCommand(TextManager.options, 'options')
 }
 
 Window_TitleCommand.prototype.isContinueEnabled = function () {
