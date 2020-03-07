@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-88680325-2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+
+      gtag('config', 'UA-88680325-2');
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="viewport" content="user-scalable=no" />
+    <link rel="icon" href="icon/icon.png" type="image/png" />
+    <link rel="apple-touch-icon" href="icon/icon.png" />
+    <link href="css2.css" rel="stylesheet" type="text/css">
+
+    <title>りつねぇ！RPG</title>
+
+  </head>
+
+  <body style="background-color: black">
+    <header>
+      <h1>■ りつねぇ！RPG</h1>
+    </header>
+
+    <div onclick>
+      <div>
+        <button id="fullscreenSwitch" onclick="goFS()">
+          フルスクリーンにする
+        </button>
+      </div>
+      <div>
+        <iframe id="ifr" class="GamePlayerCore" scrolling="no" allowfullscreen
+          src="https://umaaji298.github.io/rituRPG/beta/rituRPG/www/index.html" frameborder="0" title="ゲーム画面"
+          name="umami298のゲーム画面" sandbox="allow-scripts allow-same-origin allow-pointer-lock allow-orientation-lock"
+          allow="accelerometer; ambient-light-sensor; autoplay; camera; encrypted-media; fullscreen; geolocation; gyroscope; magnetometer; microphone; midi; speaker; vibrate; vr"
+          style="width: 816px; height: 624px;"></iframe>
+      </div>
+
+      <p>りつねえ！RPG3 (全🔥330姉🔥)</p>
+
+      <form>
+        <textarea cols=60 rows=3>
+更新
+2019/05/19 ver 3.3 タイトルにオプション(ボリューム調整)追加
+2019/04/14 ver 3.2 dataキャッシュブロック対応
+2019/04/14 ver 3.1 バグ修正
+2019/04/14 ver 3.00 公開 バグってても許してver
+2019/04/14 ver 3.0 りつ姉を大量に追加/ストーリーfix
+2019/04/11 ver 2.9 beta RPG搭載
+2019/03/27 ver 2.0 公開 ろくにテストしてないver
+2019/03/27 ver 1.9 ヘルモード対応/全システム刷新
+2019/03/26 ver 1.5 情報画面対応/ヒント削除
+2019/03/25 ver 1.4 セーブ対応
+2019/03/24 ver 1.3 クラスアップ(すぺしゃる）実装
+2019/03/24 ver 1.2 ヒント機能実装
+2019/03/24 ver 1.1 微修正/表示遅延対応
+2019/03/24 ver 1.0 公開 バグってたらすまんなver
+>2019/03/23 ver --
+          </textarea>
+      </form>
+
+    </div>
+
+    <footer>
+      <div>りつ姉とはケムリクサに出てくる姉です。</div>
+      <div>素材画像の権利は画像制作者(手書きあき）に帰属します。</div>
+      <a href=http://www.2chan.net>ふたば★ちゃんねる </a> </footer> <script>
+        var target = document.getElementsByClassName('GamePlayerCore')[0]
+        var btn = document.getElementById('fullscreenSwitch')
+
+        /*フルスクリーン実行用ファンクション*/
+        function goFS() {
+        if (target.webkitRequestFullscreen) {
+        target.webkitRequestFullscreen() //Chrome15+, Safari5.1+, Opera15+
+        } else if (target.mozRequestFullScreen) {
+        target.mozRequestFullScreen() //FF10+
+        } else if (target.msRequestFullscreen) {
+        target.msRequestFullscreen() //IE11+
+        } else if (target.requestFullscreen) {
+        target.requestFullscreen() // HTML5 Fullscreen API仕様
+        } else {
+        alert('ご利用のブラウザはフルスクリーン操作に対応していません')
+        return
+        }
+        }
+        </script>
+
+  </body>
+
+</html>
